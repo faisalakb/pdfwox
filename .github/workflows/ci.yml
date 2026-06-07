@@ -1,0 +1,141 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Install · typecheck · lint · build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10.34.1 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: app/pnpm-lock.yaml
+
+      - name: Install
+        working-directory: app
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        working-directory: app
+        run: pnpm typecheck
+
+      - name: Lint
+        working-directory: app
+        run: pnpm lint
+
+      - name: Format check
+        working-directory: app
+        run: pnpm format:check
+
+      - name: Build
+        working-directory: app
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://privpdf.example
+
+  test-unit:
+    name: Vitest + Sentry smoke + JSON-LD
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: verify
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10.34.1 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: app/pnpm-lock.yaml
+
+      - name: Install
+        working-directory: app
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate fixtures (deterministic)
+        working-directory: app
+        run: pnpm fixtures:gen
+
+      - name: Vitest
+        working-directory: app
+        run: pnpm test
+
+      - name: Sentry smoke
+        working-directory: app
+        run: pnpm sentry:smoke
+
+  test-e2e:
+    name: Playwright (Chromium on PR, full matrix on main)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: verify
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10.34.1 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: app/pnpm-lock.yaml
+
+      - name: Install
+        working-directory: app
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate fixtures
+        working-directory: app
+        run: pnpm fixtures:gen
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('app/pnpm-lock.yaml') }}
+
+      - name: Install Playwright (PR — Chromium only)
+        if: github.event_name == 'pull_request'
+        working-directory: app
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install Playwright (main — full matrix)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        working-directory: app
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+
+      - name: Run E2E (PR — Chromium)
+        if: github.event_name == 'pull_request'
+        working-directory: app
+        run: pnpm test:e2e
+        env:
+          CI: "1"
+
+      - name: Run E2E (main — full matrix)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        working-directory: app
+        run: pnpm test:e2e:full
+        env:
+          CI: "1"
+
+      - name: Upload Playwright traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: app/test-results
+
+  # Lighthouse-CI lands in Week 5 per Appendix B once Wave 1 tool pages
+  # are live and there is real CWV signal to assert against.

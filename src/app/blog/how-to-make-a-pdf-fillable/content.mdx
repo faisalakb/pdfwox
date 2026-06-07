@@ -1,0 +1,61 @@
+If you've ever been asked to "fill out this PDF and send it back," you know the dance: print, scribble, scan, hope nothing came out crooked. Or worse — open the PDF in something that lets you type on top, and the recipient gets a file where your answers are floating boxes a strong wind could blow off.
+
+There's a better way. Real PDF _form fields_ — the kind that work in any reader, look professional, and can't be moved by accident — take about a minute to add. Here's how, without paying for Adobe Acrobat and without uploading the PDF to a random site.
+
+## What "fillable" actually means
+
+A fillable PDF has named form fields baked into its structure. Those fields are part of a standard called AcroForm. When you open the PDF in Adobe Reader, Preview, or any modern PDF tool, the reader knows: "this rectangle is a text input, that one's a checkbox, this is a dropdown with these three options."
+
+That's different from typing on top of a PDF — a feature most readers call "annotation" or "comment". Annotations sit on top of the page like sticky notes. Form fields are part of the page.
+
+For most things — job applications, intake forms, contracts, school permission slips — you want real fields. They're cleaner, they're tabbable, and recipients can fill them on any device, including a phone.
+
+## How to make a PDF fillable in your browser
+
+1. **Open the [Create Fillable PDF tool](/create-fillable-pdf).** Drag the PDF you want to make fillable onto the page. Your file stays on your device — the page does the work locally, no upload happens.
+2. **Drag a rectangle where the first field goes.** A small panel appears on the right asking what type of field you'd like: text, checkbox, or signature.
+3. **Pick a type and give it a sensible name.** Use names you (or the recipient) will recognize: `full_name`, `email`, `agree_to_terms`. Spaces are fine, but underscores are conventional.
+4. **Add as many fields as the form needs.** Multi-page document? Use the Prev / Next buttons above the preview to switch pages. Each page can have its own fields.
+5. **Click "Save fillable PDF" and download.** That's it — the PDF now has real form fields. Open it in any reader to test.
+
+## Tips for fields that don't fight you later
+
+**Match the field to the visible cue.** If the original PDF has a printed line that says "Name:", draw the text field right on top of the blank space next to it. A reader will see your line, click it, and start typing. If your rectangle is even a few millimeters off, the form still works but it looks sloppy.
+
+**Don't make every field a text box.** Yes / no questions belong in checkboxes. A country picker belongs in a dropdown. Recipients fill the form faster, and you can validate the data more reliably.
+
+**Mark required fields.** A required field is a field a reader will flag if left empty. It's the difference between getting half-finished forms back and getting the data you actually asked for.
+
+**Test it.** Before you send the fillable PDF to anyone, open it in a fresh reader and fill it in yourself. Watch out for fields that overlap, fields that ended up on the wrong page, or text boxes too small to fit the answer.
+
+## Frequently asked questions
+
+### Do I need Adobe Acrobat to create a fillable PDF?
+
+No. Acrobat does it well, but it's $20/month and proprietary. Browser-based tools (including this one) generate the same AcroForm structure the spec defines, so the result is fully compatible with every reader Acrobat is.
+
+### Can I make a scanned PDF fillable?
+
+Yes. The Create Fillable PDF tool works on scans the same way it works on text-based PDFs — you're drawing rectangles where fields should go, and the underlying page doesn't need to be selectable text for the fields to function. If you also need the page's existing text to be selectable, run [OCR PDF](/ocr-pdf) first.
+
+### Will the form fields work on a phone?
+
+Yes. AcroForm fields work in mobile PDF readers (iOS Files, Android PDF Viewer, Adobe Reader Mobile, and so on). Test on the device you expect recipients to use most.
+
+### Can I add a real signature field?
+
+The current tool adds a signature _placeholder_ — a rectangle where the recipient draws or types their signature. Cryptographically signed PDFs (the kind banks and law firms require) are a different mechanism; we'll add those in a later release.
+
+### Is my PDF uploaded anywhere?
+
+No. The entire tool runs in your browser using WebAssembly. The PDF never crosses the network. Your draft fields, names, and the saved file are all on your device.
+
+### What if I make a mistake while placing a field?
+
+Use the "×" next to the field in the side panel to remove it. To redo placement, draw a new rectangle in the right spot.
+
+## When to just type on top instead
+
+If you need to fill out one PDF _once_ and send it back, you probably don't want to make it fillable — you want to type on it and be done. For that, use the [Fill PDF tool](/fill-pdf) (if the PDF already has form fields) or [Annotate PDF](/annotate-pdf) (to type on top of a flat scan).
+
+Making a PDF fillable is for documents you'll send to other people, where you want their answers in tidy named fields. That's where a 60-second up-front investment saves you hours of squinting at scanned scribbles later.

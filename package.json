@@ -1,26 +1,62 @@
 {
-  "name": "app",
+  "name": "privpdf",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.34.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test --project=chromium",
+    "test:e2e:full": "playwright test",
+    "fixtures:gen": "node scripts/generate-fixtures.mjs",
+    "sentry:smoke": "node scripts/sentry-smoke.mjs",
+    "wasm:copy": "node scripts/copy-wasm.mjs",
+    "postinstall": "node scripts/copy-wasm.mjs || true",
+    "reset": "rimraf .next node_modules && pnpm install"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@neslinesli93/qpdf-wasm": "^0.3.0",
+    "@next/mdx": "^15.5.0",
+    "@sentry/nextjs": "^9.0.0",
+    "@types/mdx": "^2.0.13",
+    "comlink": "^4.4.2",
+    "heic2any": "^0.0.4",
     "next": "16.2.7",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.10.38",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-dropzone": "^14.3.5",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^2.1.8",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.1.8"
   }
 }

@@ -1,0 +1,70 @@
+Most "remove PDF password" instructions online start with the same vague promise — *upload your file, get an unlocked one back* — and skip past the awkward parts. Let's not.
+
+This guide does two things: it explains what "removing a password" from a PDF *actually* means, and it walks you through doing it in your browser without uploading anything.
+
+## What "remove a password" really means
+
+PDFs have two different passwords, and they do very different jobs:
+
+- The **user password** (sometimes called the *open* password) is what you type to view the document. Without it, no part of the file is readable.
+- The **owner password** (sometimes called the *permissions* password) is what controls restrictions like "can't print", "can't copy text", and "can't modify". The file opens without it, but Adobe Reader greys out features you're not allowed to use.
+
+Removing either one means re-saving the PDF without that protection. **You can only remove a password you already have.** This tool, and any honest tool, cannot crack a password you don't know. Modern PDFs use AES-256 encryption, and brute-force is not a thing a webpage can do in a meaningful amount of time.
+
+If you forgot a password to a PDF you own, your best options are: check your password manager, retry obvious variations, or contact whoever sent it to you. There is no shortcut.
+
+## The 90-second method
+
+1. **Open the [Unlock PDF tool](/unlock-pdf).** Drag the password-protected PDF onto the page.
+2. **Type the password.** This is the same password you'd type if you opened the file in Adobe Reader, Preview, or any other PDF reader. The password is used locally in your browser and is never sent anywhere.
+3. **Click Unlock & download.** The output is the same PDF, with the password stripped. It opens immediately in any reader.
+
+That's it. The file never reaches our server. The decryption happens with a small WebAssembly library — built into the page — and runs entirely on your device.
+
+## What this can and can't do
+
+**Can:** strip the user password from a PDF you have the password for. Strip owner restrictions (no-print, no-copy) from the same kind of file. Produce a clean, ordinary PDF anyone can open.
+
+**Can't:** guess or crack a forgotten user password. Bypass a certificate-encrypted PDF (the kind some banks and government agencies issue, where the recipient's private key is required). Remove a flat watermark that's been rasterized into the page.
+
+If you're trying to remove a visible watermark rather than a password, our [Remove Watermark from PDF tool](/remove-watermark-from-pdf) is the right place to look — and it's similarly honest about what it can and can't do.
+
+## Why "files stay private" matters here
+
+When you upload a sensitive PDF to a generic web tool, you're trusting that tool's server, its storage, its retention policy, and its legal jurisdiction. Most are fine. Some are not. The browser-based approach removes that question entirely: there's nothing for a server to log because there's no upload.
+
+This matters more for password-protected PDFs than for, say, a vacation photo, because the files people protect with passwords tend to be the ones they care about — tax returns, contracts, medical records, scanned IDs.
+
+## Putting a password back on
+
+Sometimes you want the opposite: you've finished editing a PDF and want to send it with a password. Our [Protect PDF tool](/protect-pdf) does that. Pick an open password (the one the recipient will need to type), optionally restrict printing or copying, and download the encrypted file. AES-256, same standard the original encryption uses.
+
+## Frequently asked questions
+
+### Can you really not crack a forgotten password?
+
+Correct, we can't. Nobody can in a reasonable amount of time, with sensible passwords. People who promise otherwise are either using a guess list of common passwords (which only works if yours is on it) or are running you through an upload form to harvest the file.
+
+### Is my password sent anywhere when I unlock?
+
+No. The password is typed into the page and used by the in-browser WebAssembly module. There is no network call carrying it.
+
+### Does this work on every reader's password format?
+
+Yes — qpdf (the underlying library) supports every encryption variant the PDF specification defines, including AES-256, which is what modern readers produce by default.
+
+### What if I lost the password and the document is mine?
+
+If you're the original author and have it open somewhere — say, in Adobe Acrobat on a machine where it's saved — re-save it without a password from that machine instead. If you don't have a copy open anywhere and you don't know the password, the document is, for practical purposes, gone.
+
+### Will the unlocked output look exactly the same?
+
+Yes. Page content, fonts, embedded images, form fields, signatures — all unchanged. The only thing missing is the encryption envelope.
+
+### Do you keep my file?
+
+No. There's nothing to keep — your file is never uploaded.
+
+## The honest summary
+
+For a PDF you have the password for, removing the password takes about 90 seconds in a browser-based tool that doesn't see your file. For a PDF you don't have the password for, you're out of luck, and any tool that tells you otherwise is either wrong or worse.

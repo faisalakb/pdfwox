@@ -1,26 +1,145 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------- Design tokens ---------- */
+@theme {
+  /* Typography */
+  --font-sans:
+    var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-display: var(--font-display-face), Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace;
+
+  --text-xs: 0.78rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.3rem;
+  --text-2xl: 1.6rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.6rem;
+  --text-5xl: 3.4rem;
+  --text-6xl: 4.4rem;
+
+  /* Radius scale */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Semantic colors — warm ink + sage accent (trust, calm, non-SaaS) */
+  --color-canvas: #f7f4ee; /* warm off-white page */
+  --color-surface: #ffffff; /* cards */
+  --color-surface-muted: #efeae1; /* subtle bands */
+  --color-ink: #1a1a1f; /* primary text */
+  --color-ink-muted: #5a5a63; /* secondary text */
+  --color-ink-subtle: #8a8a93;
+  --color-line: #e5dfd3; /* borders */
+  --color-line-strong: #cbc4b4;
+
+  --color-accent: #1d6b54; /* deep sage — calm + trustworthy */
+  --color-accent-hover: #185a47;
+  --color-accent-soft: #e6efe9;
+  --color-accent-ink: #ffffff;
+
+  --color-danger: #b3261e;
+  --color-danger-soft: #fbe9e7;
+  --color-success: #1d6b54;
+  --color-warning: #a36a00;
+  --color-warning-soft: #fbf2e0;
+
+  /* Elevation */
+  --shadow-xs: 0 1px 0 rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 2px rgb(20 18 12 / 0.06), 0 1px 1px rgb(20 18 12 / 0.04);
+  --shadow-md: 0 4px 12px rgb(20 18 12 / 0.08), 0 1px 2px rgb(20 18 12 / 0.05);
+  --shadow-lg: 0 18px 40px rgb(20 18 12 / 0.1), 0 4px 12px rgb(20 18 12 / 0.06);
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 320ms;
+
+  /* Focus ring (used by .focus-ring) */
+  --ring-color: color-mix(in oklab, var(--color-accent) 55%, transparent);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Base ---------- */
+html {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw + 1rem, 3.6rem);
+  font-weight: 500;
+}
+h2 {
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.4rem);
+  font-weight: 500;
+}
+h3 {
+  font-size: var(--text-xl);
+  font-weight: 500;
+}
+
+a {
+  color: inherit;
+}
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* Focus ring utility — applied via class for consistent behavior */
+@utility focus-ring {
+  outline: none;
+  &:focus-visible {
+    box-shadow: 0 0 0 3px var(--ring-color);
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* Container utility */
+@utility container-px {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Reserve space for drop-zone-like elements to prevent CLS */
+.no-cls-min {
+  min-height: 280px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

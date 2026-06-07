@@ -1,0 +1,63 @@
+If you've ever tried to send an iPhone photo to a Windows colleague, you know the dance: you attach it, they reply "what's a HEIC file?", you go back into Photos, switch the format to JPEG, re-export, re-send. Multiply that by a stack of receipts or a child's permission slip and the morning is gone.
+
+There's a better path: combine the HEIC files directly into a single PDF, in your browser, in about a minute. No file conversion. No Acrobat. Nothing uploaded.
+
+## Why HEIC isn't friendly outside Apple
+
+HEIC (and its sibling HEIF) is the format Apple started using in iOS 11 to make photos smaller without losing quality. The catch is that everywhere else — Windows, most web tools, older Android phones, document scanners — HEIC isn't natively supported. So when you AirDrop or email those photos to anyone outside the Apple world, they get a file their device shrugs at.
+
+A PDF, by contrast, opens on every device built in the last twenty years. Combining HEIC images into a PDF is the universal "send this to someone" trick.
+
+## The 60-second method
+
+1. **Open the [HEIC to PDF tool](/heic-to-pdf).** Drag the HEIC photos onto the page — straight from Finder, the iOS Files app shared to your Mac, or wherever they live.
+2. **Reorder if needed.** Your photos appear as thumbnails. Drag any of them to a new position to change the order they'll appear in the PDF.
+3. **Pick a page size.** Choose A4 or Letter for a standard document feel, or "Fit to image" to make every page exactly the size of the photo it contains. For receipts and screenshots, "Fit to image" looks cleanest.
+4. **Pick a margin.** "None" is best when you want the photo to fill the page; "Narrow" or "Normal" leaves a tidy white border.
+5. **Click Make PDF and download.** The output is a single, ordinary, opens-anywhere PDF.
+
+Your photos never leave your device. The HEIC decoding runs in a small WebAssembly library inside the browser tab.
+
+## When to mix HEIC with regular JPGs or PNGs
+
+Some pages of your document might come from a non-iPhone source — a screenshot, a scanned receipt, a PNG export. You can drop those into the same tool. They'll be combined in the same order, on the same pages. If you need a JPG-only or PNG-only workflow without HEIC at all, use [JPG to PDF](/jpg-to-pdf) or [PNG to PDF](/png-to-pdf) — same engine, same options, simpler dropzone.
+
+## Tips for clean-looking results
+
+**Photograph documents straight on.** If you're shooting a paper receipt or form, take the photo from directly above and as flat as possible. Photos taken at an angle look skewed when printed, and "page size: Fit to image" can't fix that.
+
+**Crop before you drop, when it matters.** iPhone Photos has a built-in crop tool that's fast. If you're making a PDF of a long restaurant bill, crop out the table around it first so the receipt fills the frame.
+
+**Don't downscale prematurely.** The tool embeds your photos at full resolution by default. If file size becomes an issue, you can re-export the JPEGs at lower quality from Photos before dropping them in — but for most "send this email attachment" use cases, the default is fine.
+
+## Frequently asked questions
+
+### What's the difference between HEIC and HEIF?
+
+HEIC is Apple's name for files using the HEIF container with HEVC-encoded image data. In practice they're the same thing for most users, and our tool accepts both extensions.
+
+### Will the output PDF be smaller than the original photos?
+
+Usually yes for HEIC — when we decode HEIC to embed in the PDF, we re-encode as JPEG at high quality. JPEG of a photo is typically a bit larger than HEIC, but the *combined PDF* is generally smaller than the sum of the original HEICs because the PDF container deduplicates.
+
+### Does the PDF preserve photo metadata (date, GPS)?
+
+No. The PDF wraps the visible image only — EXIF metadata from the original photos isn't carried over. If you need the GPS coordinates, save the original HEIC alongside.
+
+### Can I add a cover page or a title?
+
+Not in this tool. For now, the first photo in your order becomes the first page. If you need a typed cover page, create one as an image first (Pages, Keynote, even a screenshot) and drop it in as page 1.
+
+### Is anything uploaded?
+
+No. The entire conversion — including the HEIC decode — happens in your browser using a WebAssembly library. Your photos never reach our server. There's no signup and no account.
+
+### What about Live Photos?
+
+We extract just the still image — the motion clip in a Live Photo is dropped. For a PDF, that's almost always what you want.
+
+## Working with the rest of the toolkit
+
+Once you have the PDF, you might want to do more with it. [Fill out a PDF form](/fill-pdf) you've just turned into one. [Add a signature](/sign-pdf) if it's a contract or invoice. [Protect it with a password](/protect-pdf) before emailing if it's a sensitive document.
+
+For the original-iPhone-photos-to-PDF flow, this one tool is usually all you need. About 60 seconds, browser-only, and the result opens on any device your recipient owns.
