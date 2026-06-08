@@ -1,0 +1,70 @@
+Most "remove watermark from PDF" articles promise something they can't deliver: a one-click button that strips any watermark from any PDF. The reality is more interesting and less universal — some watermarks come off easily, some can't be removed at all, and the difference is worth understanding before you try.
+
+This guide explains what category a watermark falls into, walks you through removing the ones that can be removed, and tells you what to do for the ones that can't.
+
+## Three kinds of watermark
+
+Every watermark in a PDF is one of these three types, and each one has different removability:
+
+- **Overlay text.** A text string drawn on top of the page content using PDF's standard text-drawing operators. You can select it in Adobe Reader with the text cursor. Examples: a "DRAFT" stamp from a recent Word export, "CONFIDENTIAL" added by another browser-based tool. **Removable: yes, with limits.**
+- **Overlay image.** A separate image object placed on top of the page (often a logo or stamp). Selectable as an image in Reader. **Removable: only in tools that surgically edit the page object list; not common for free tools.**
+- **Rasterized into the page.** The page itself is a single image, and the watermark is part of that image. Happens with scanned PDFs, "Print to PDF" output, and tools that flatten their output. **Removable: no, not without rebuilding the page from scratch.**
+
+A 30-second sanity check: open the PDF in Adobe Reader (or any other reader that lets you select text). Click and drag across the watermark. If you can highlight the watermark text and copy-paste it, it's overlay text. If you can't select it at all, it's rasterized.
+
+## The 90-second method for overlay text watermarks
+
+1. **Open the [Remove Watermark tool](/remove-watermark-from-pdf).** Drag your PDF onto the page. Your file stays on your device.
+2. **We scan the file for candidate watermark strings.** The scan looks for text that appears on most pages — the signature of a watermark. The list shows up on the right panel.
+3. **Pick the strings that look like watermarks.** Tick the ones you want removed. Untick anything that's part of normal document content (a recurring header is not a watermark).
+4. **Pick a cover color.** White works for most documents. Match it to your page background — a light blue document needs a light blue cover, for example.
+5. **Click "Cover & download".** Each occurrence of the selected text is covered with a solid-color rectangle in the matching color. The result opens in any reader.
+
+The word "cover" in the button is intentional. This is the most honest description of what's happening: we draw an opaque rectangle on top of the watermark text. From a reader's perspective, the watermark is gone — it can't be seen, can't be printed, can't be copy-pasted from the visible page.
+
+## What this approach can't do
+
+Two limits worth being explicit about:
+
+- **The underlying watermark text is still in the file.** A reader displays the cover rectangle, not the watermark. But a tool that inspects the raw PDF bytes will still find the original text. If you need *cryptographic absence* (no recovery, ever), use the [Redact PDF tool](/redact-pdf) — it rebuilds the affected pages as images, which is harsher but absolute.
+- **A bad cover color will look obviously wrong.** If your page is white and you cover with white, the result looks clean. If your page is cream and you cover with white, the cover rect shows. The tool lets you pick any color; pick the one closest to your page background.
+
+## What you can do for rasterized watermarks
+
+You can't remove them. You can replace the entire page with a fresh rendering of just the content you want — but that's a manual job in a full PDF editor, not a "drag and drop" tool. If the page is just a scan with a "CONFIDENTIAL" stamp baked in, your realistic options are:
+
+- **Live with the watermark.** If it doesn't hurt the reading experience too much, this is usually the best answer.
+- **Rescan or re-export the document without the watermark.** If you have access to the source.
+- **Pay for a professional PDF editor.** Adobe Acrobat and a few others have tools that try to inpaint rasterized watermarks, with mixed results.
+
+The remove tool tells you when it thinks you're dealing with a rasterized watermark — specifically, when the scan finds no text that appears on most pages. That's the signature of a flattened image.
+
+## Frequently asked questions
+
+### Why can't browsers just remove any watermark?
+
+Because watermarks aren't a uniform feature of the PDF format. They're text objects, image objects, or part of the page image — each requiring different surgery. "Remove watermark" is an umbrella term hiding three different jobs.
+
+### Are my files uploaded?
+
+No. The scan and the cover step both run in your browser tab. Verifiable in DevTools → Network.
+
+### Will the recipient know I removed the watermark?
+
+If the watermark is gone from the visible page, the recipient sees the page without the watermark. The raw bytes still contain the original text — anyone who runs `pdftotext` or a similar inspection on the file can find it. For "cryptographic absence", use redact.
+
+### What about watermarks that are images of text (e.g. a graphic that says "DRAFT")?
+
+If the graphic is a separate image object overlaid on the page, you can sometimes select and delete it in Adobe Acrobat. Our tool currently focuses on text-string watermarks; image-overlay support may come later.
+
+### What if my PDF is encrypted and I don't know the password?
+
+You can't remove a watermark from an encrypted PDF you can't open. If you have the password, run the [Unlock PDF tool](/unlock-pdf) first.
+
+### What's the most reliable way to add a watermark that can't be removed?
+
+Combine three things: tile the watermark diagonally (so it's not in one removable region), use overlapping rotation (so the text and watermark interlock visually), and use a font that exists naturally in the document (so the scan can't easily isolate the watermark string).
+
+## The short version
+
+If you can highlight the watermark text in Adobe Reader, our [Remove Watermark tool](/remove-watermark-from-pdf) can cover it. If you can't highlight it, no browser tool can remove it cleanly. We tell you which case you're in.

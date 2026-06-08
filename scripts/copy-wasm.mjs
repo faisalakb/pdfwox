@@ -15,17 +15,22 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 
+const QPDF_DIST = path.join(
+  ROOT,
+  "node_modules",
+  "@neslinesli93",
+  "qpdf-wasm",
+  "dist",
+);
+
 const ENTRIES = [
   {
-    from: path.join(
-      ROOT,
-      "node_modules",
-      "@neslinesli93",
-      "qpdf-wasm",
-      "dist",
-      "qpdf.wasm",
-    ),
+    from: path.join(QPDF_DIST, "qpdf.wasm"),
     to: path.join(ROOT, "public", "qpdf.wasm"),
+  },
+  {
+    from: path.join(QPDF_DIST, "qpdf.js"),
+    to: path.join(ROOT, "public", "qpdf.js"),
   },
 ];
 

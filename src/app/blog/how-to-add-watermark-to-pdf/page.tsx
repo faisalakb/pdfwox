@@ -8,7 +8,7 @@ import Content from "./content.mdx";
 
 export const dynamic = "force-static";
 
-const GUIDE = getGuide("how-to-remove-password-from-pdf")!;
+const GUIDE = getGuide("how-to-add-watermark-to-pdf")!;
 
 export const metadata: Metadata = {
   title: GUIDE.title,
@@ -24,41 +24,13 @@ export const metadata: Metadata = {
 };
 
 const HEADINGS = [
-  {
-    id: "what-remove-a-password-really-means",
-    text: "What 'remove a password' really means",
-    depth: 2 as const,
-  },
-  {
-    id: "the-90-second-method",
-    text: "The 90-second method",
-    depth: 2 as const,
-  },
-  {
-    id: "what-this-can-and-cant-do",
-    text: "What this can and can't do",
-    depth: 2 as const,
-  },
-  {
-    id: "why-files-stay-private-matters-here",
-    text: "Why 'files stay private' matters here",
-    depth: 2 as const,
-  },
-  {
-    id: "putting-a-password-back-on",
-    text: "Putting a password back on",
-    depth: 2 as const,
-  },
-  {
-    id: "frequently-asked-questions",
-    text: "Frequently asked questions",
-    depth: 2 as const,
-  },
-  {
-    id: "the-honest-summary",
-    text: "The honest summary",
-    depth: 2 as const,
-  },
+  { id: "the-five-choices-that-matter", text: "The five choices that matter", depth: 2 as const },
+  { id: "the-60-second-method", text: "The 60-second method", depth: 2 as const },
+  { id: "choosing-text-content", text: "Choosing text content", depth: 2 as const },
+  { id: "choosing-image-content", text: "Choosing image content", depth: 2 as const },
+  { id: "tiling-that-does-the-job", text: "Tiling that does the job", depth: 2 as const },
+  { id: "frequently-asked-questions", text: "Frequently asked questions", depth: 2 as const },
+  { id: "the-short-version", text: "The short version", depth: 2 as const },
 ];
 
 export default function GuidePage() {
@@ -75,8 +47,8 @@ export default function GuidePage() {
     >
       <Content />
       <Container size="sm" className="px-0">
-        <UseToolCta toolSlug="/unlock-pdf" />
-        <UseToolCta toolSlug="/protect-pdf" />
+        <UseToolCta toolSlug="/add-watermark-to-pdf" />
+        <UseToolCta toolSlug="/remove-watermark-from-pdf" />
       </Container>
     </MdxLayout>
   );

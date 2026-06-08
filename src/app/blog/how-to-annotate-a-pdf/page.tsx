@@ -8,7 +8,7 @@ import Content from "./content.mdx";
 
 export const dynamic = "force-static";
 
-const GUIDE = getGuide("how-to-remove-password-from-pdf")!;
+const GUIDE = getGuide("how-to-annotate-a-pdf")!;
 
 export const metadata: Metadata = {
   title: GUIDE.title,
@@ -25,28 +25,28 @@ export const metadata: Metadata = {
 
 const HEADINGS = [
   {
-    id: "what-remove-a-password-really-means",
-    text: "What 'remove a password' really means",
+    id: "the-five-annotation-modes-that-cover-almost-everything",
+    text: "The five annotation modes that cover almost everything",
     depth: 2 as const,
   },
   {
-    id: "the-90-second-method",
-    text: "The 90-second method",
+    id: "the-60-second-method",
+    text: "The 60-second method",
     depth: 2 as const,
   },
   {
-    id: "what-this-can-and-cant-do",
-    text: "What this can and can't do",
+    id: "highlight-vs-text-vs-rectangle-when-to-use-which",
+    text: "Highlight vs. text vs. rectangle: when to use which",
     depth: 2 as const,
   },
   {
-    id: "why-files-stay-private-matters-here",
-    text: "Why 'files stay private' matters here",
+    id: "annotations-that-bake-in-vs-annotations-that-dont",
+    text: "Annotations that bake in vs. annotations that don't",
     depth: 2 as const,
   },
   {
-    id: "putting-a-password-back-on",
-    text: "Putting a password back on",
+    id: "tips-that-save-time",
+    text: "Tips that save time",
     depth: 2 as const,
   },
   {
@@ -55,8 +55,8 @@ const HEADINGS = [
     depth: 2 as const,
   },
   {
-    id: "the-honest-summary",
-    text: "The honest summary",
+    id: "the-short-version",
+    text: "The short version",
     depth: 2 as const,
   },
 ];
@@ -75,8 +75,8 @@ export default function GuidePage() {
     >
       <Content />
       <Container size="sm" className="px-0">
-        <UseToolCta toolSlug="/unlock-pdf" />
-        <UseToolCta toolSlug="/protect-pdf" />
+        <UseToolCta toolSlug="/annotate-pdf" />
+        <UseToolCta toolSlug="/sign-pdf" />
       </Container>
     </MdxLayout>
   );

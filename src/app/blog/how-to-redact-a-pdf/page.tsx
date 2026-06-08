@@ -8,7 +8,7 @@ import Content from "./content.mdx";
 
 export const dynamic = "force-static";
 
-const GUIDE = getGuide("how-to-remove-password-from-pdf")!;
+const GUIDE = getGuide("how-to-redact-a-pdf")!;
 
 export const metadata: Metadata = {
   title: GUIDE.title,
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
 
 const HEADINGS = [
   {
-    id: "what-remove-a-password-really-means",
-    text: "What 'remove a password' really means",
+    id: "what-redacted-really-means",
+    text: "What 'redacted' really means",
     depth: 2 as const,
   },
   {
@@ -35,18 +35,18 @@ const HEADINGS = [
     depth: 2 as const,
   },
   {
-    id: "what-this-can-and-cant-do",
-    text: "What this can and can't do",
+    id: "how-to-verify-the-redaction-worked",
+    text: "How to verify the redaction worked",
     depth: 2 as const,
   },
   {
-    id: "why-files-stay-private-matters-here",
-    text: "Why 'files stay private' matters here",
+    id: "tips-for-clean-redactions",
+    text: "Tips for clean redactions",
     depth: 2 as const,
   },
   {
-    id: "putting-a-password-back-on",
-    text: "Putting a password back on",
+    id: "what-cant-be-redacted-cleanly",
+    text: "What can't be redacted (cleanly)",
     depth: 2 as const,
   },
   {
@@ -55,8 +55,8 @@ const HEADINGS = [
     depth: 2 as const,
   },
   {
-    id: "the-honest-summary",
-    text: "The honest summary",
+    id: "the-shortest-possible-summary",
+    text: "The shortest possible summary",
     depth: 2 as const,
   },
 ];
@@ -75,8 +75,8 @@ export default function GuidePage() {
     >
       <Content />
       <Container size="sm" className="px-0">
-        <UseToolCta toolSlug="/unlock-pdf" />
-        <UseToolCta toolSlug="/protect-pdf" />
+        <UseToolCta toolSlug="/redact-pdf" />
+        <UseToolCta toolSlug="/annotate-pdf" />
       </Container>
     </MdxLayout>
   );

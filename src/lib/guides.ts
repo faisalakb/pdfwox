@@ -40,6 +40,50 @@ export const guides: GuideMeta[] = [
       "HEIC is great on iPhone, painful everywhere else. Decode and combine into a clean multi-page PDF without uploading anything.",
   },
   {
+    slug: "how-to-add-watermark-to-pdf",
+    title: "How to add a watermark to a PDF — text, image, your choice",
+    description:
+      "Add a text or image watermark to every page of a PDF (or a specific page range), with control over opacity, position, rotation, and diagonal tiling. Browser-only.",
+    datePublished: "2026-06-09",
+    toolSlug: "/add-watermark-to-pdf",
+    primaryKeyword: "how to add watermark to pdf",
+    excerpt:
+      "DRAFT, CONFIDENTIAL, your logo — every option, baked into the file, all in your browser.",
+  },
+  {
+    slug: "how-to-remove-watermark-from-pdf",
+    title: "How to remove a watermark from a PDF (honestly)",
+    description:
+      "Some PDF watermarks can be removed, some can't. Here's the difference, the 60-second method for the ones that can, and what to do for the ones that can't.",
+    datePublished: "2026-06-09",
+    toolSlug: "/remove-watermark-from-pdf",
+    primaryKeyword: "how to remove watermark from pdf",
+    excerpt:
+      "Overlay text watermarks: removable. Flattened image watermarks: not really. Here's how to tell which is which.",
+  },
+  {
+    slug: "how-to-redact-a-pdf",
+    title: "How to redact a PDF — properly, so the text is actually gone",
+    description:
+      "A black box drawn on top of text is not redaction. Here's how to truly remove sensitive content from a PDF, and how to check that it worked.",
+    datePublished: "2026-06-09",
+    toolSlug: "/redact-pdf",
+    primaryKeyword: "how to redact a pdf",
+    excerpt:
+      "Most 'redact PDF' tools just draw a black box on top. The text underneath is still copyable. Here's the right way.",
+  },
+  {
+    slug: "how-to-annotate-a-pdf",
+    title: "How to annotate a PDF — highlight, type, sketch",
+    description:
+      "Highlight passages, type comments, draw shapes, or sketch by hand on any PDF. All in your browser, no signup.",
+    datePublished: "2026-06-09",
+    toolSlug: "/annotate-pdf",
+    primaryKeyword: "how to annotate a pdf",
+    excerpt:
+      "Five annotation modes, every popular reader compatible, nothing uploaded. The fast guide.",
+  },
+  {
     slug: "how-to-remove-password-from-pdf",
     title: "How to remove a password from a PDF (safely, in your browser)",
     description:

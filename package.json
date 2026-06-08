@@ -18,6 +18,7 @@
     "fixtures:gen": "node scripts/generate-fixtures.mjs",
     "sentry:smoke": "node scripts/sentry-smoke.mjs",
     "wasm:copy": "node scripts/copy-wasm.mjs",
+    "lh": "node scripts/lighthouse.mjs",
     "postinstall": "node scripts/copy-wasm.mjs || true",
     "reset": "rimraf .next node_modules && pnpm install"
   },
@@ -42,6 +43,8 @@
   "devDependencies": {
     "@playwright/test": "^1.49.0",
     "@tailwindcss/postcss": "^4",
+    "chrome-launcher": "^1.1.2",
+    "lighthouse": "^12.2.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",

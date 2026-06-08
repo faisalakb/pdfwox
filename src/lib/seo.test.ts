@@ -73,6 +73,30 @@ describe("JSON-LD builders (CI Rich-Results-Test stand-in)", () => {
     expect(parsed[1]?.["@type"]).toBe("HowTo");
   });
 
+  it("pillar page Article+FAQPage combo parses with correct types", () => {
+    const ld = jsonLdString(
+      articleLd({
+        headline: "Why a browser-based PDF tool is safer than an upload site",
+        description: "Threat model comparison.",
+        url: "https://x.test/why-browser-based",
+        datePublished: "2026-06-09",
+      }),
+      faqPageLd([
+        { q: "Q1", a: "A1" },
+        { q: "Q2", a: "A2" },
+        { q: "Q3", a: "A3" },
+        { q: "Q4", a: "A4" },
+        { q: "Q5", a: "A5" },
+        { q: "Q6", a: "A6" },
+      ]),
+    );
+    const parsed = JSON.parse(ld) as Array<Record<string, unknown>>;
+    expect(parsed[0]?.["@type"]).toBe("Article");
+    expect(parsed[0]?.datePublished).toBe("2026-06-09");
+    expect(parsed[1]?.["@type"]).toBe("FAQPage");
+    expect((parsed[1]?.mainEntity as unknown[] | undefined)?.length).toBe(6);
+  });
+
   it("every tool produces a valid combined LD block", () => {
     for (const t of tools) {
       const s = jsonLdString(

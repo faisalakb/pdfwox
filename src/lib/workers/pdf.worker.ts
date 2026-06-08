@@ -8,6 +8,10 @@ import { protect } from "@/lib/pdf/protect";
 import { fillForm } from "@/lib/pdf/fillForm";
 import { inspectForm } from "@/lib/pdf/inspect";
 import { addFields } from "@/lib/pdf/addFields";
+import { replacePages } from "@/lib/pdf/replacePages";
+import { drawAnnotations } from "@/lib/pdf/drawAnnotations";
+import { addWatermark } from "@/lib/pdf/addWatermark";
+import { coverWatermarks } from "@/lib/pdf/coverWatermarks";
 
 const api = {
   merge,
@@ -17,6 +21,10 @@ const api = {
   fillForm,
   inspectForm,
   addFields,
+  replacePages,
+  drawAnnotations,
+  addWatermark,
+  coverWatermarks,
 };
 
 export type PdfWorkerApi = typeof api;

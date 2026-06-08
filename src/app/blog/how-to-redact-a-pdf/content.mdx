@@ -1,0 +1,90 @@
+There's a story that gets told too many times: someone redacts a sensitive PDF by drawing black boxes over the bad parts, sends it off, and a journalist or a curious recipient selects the boxed area, copies it, and pastes the entire "redacted" passage into their email client. The black boxes were a visual filter only — they sat on top of the document while the original text continued to exist underneath, fully indexed and perfectly copyable.
+
+It happens to law firms. It happens to government agencies. It is the single most common PDF security failure in the wild.
+
+This guide walks you through how to redact a PDF _properly_ — so the underlying text is genuinely gone — and how to verify that it worked.
+
+## What "redacted" really means
+
+A redacted PDF should be one where the sensitive text is not only invisible, but unrecoverable. That means:
+
+- A reader can't see it.
+- A text-extraction tool can't extract it.
+- Copy-pasting from the redacted region returns nothing (or returns the redaction itself, not the original text).
+- The bytes of the original text are not present in the file.
+
+Drawing a black rectangle on top of text accomplishes only the first of those. The text is still there, still extractable, still in the file. Anyone who knows how PDFs work, or who runs even a free PDF inspector, can recover it in seconds.
+
+True redaction has to do something more invasive. The way our tool — and any honest redaction tool — does it: **replace the affected page with a rasterized image**, after painting the black boxes on top. Once the page is a single embedded image, there is no underlying text layer anymore. There's nothing for a text extractor to extract.
+
+## The 90-second method
+
+1. **Open the [Redact PDF tool](/redact-pdf).** Drag the PDF onto the page. Your file stays on your device.
+2. **Draw black boxes over the sensitive content.** Click and drag on each piece of text or each image you want gone. You can navigate between pages with the arrows above the preview.
+3. **Click "Apply redactions" and download.** Behind the scenes, every page you touched is re-rendered as a high-resolution image with the black boxes baked in. Pages you didn't touch stay vector so they keep their selectable text.
+
+## How to verify the redaction worked
+
+This is the test the tool we built passes — and it's the test you should run on any redacted PDF before you send it:
+
+1. Open the output PDF in any reader.
+2. Triple-click inside one of the black boxes to select that whole line.
+3. Press Cmd+C / Ctrl+C.
+4. Paste into a plain-text editor.
+
+If the original text appears, the redaction is broken — _do not send the file_. If the text comes out as nothing, or as an artifact unrelated to the original, the redaction worked.
+
+A more rigorous test for repeat use: open the file in any developer tool that exposes the raw PDF objects (qpdf has a CLI flag for this; pdftotext is another option). The original text should not appear anywhere in the file dump.
+
+## Tips for clean redactions
+
+**Redact whole lines, not just specific words.** A box that only covers "Social Security Number" but leaves the surrounding context can leak more than you think. When in doubt, redact the whole line.
+
+**Watch for metadata.** Document metadata (author, title, comments) can survive a redaction process if the tool doesn't also strip it. Our tool clears metadata on the output by default.
+
+**Print and re-scan if you're truly paranoid.** Printing a PDF and scanning it back is the most thorough redaction available — the result is an image of an image of the page, with no path back to the original. It's tedious, but for a one-off sensitive document, worth considering.
+
+**Don't redact a draft and call it done.** If an earlier version of the document is around (in your email, in a shared drive, in a backup), recipients with access to that version can compare and see what's missing.
+
+## What can't be redacted (cleanly)
+
+- **A vector PDF with structured content that has to stay structured.** Some workflows require the recipient to see selectable text in the non-redacted regions and also need the structure (e.g., tagged PDFs for accessibility). Page-level rasterization loses the structure on affected pages.
+- **A signed PDF that needs to keep its signature.** Replacing a page invalidates any cryptographic signature on the document. If the file has a signature you need to preserve, redact a copy and tell the recipient the signature is on the original.
+- **OCR'd scans where the text layer is approximate.** Sometimes the OCR layer doesn't exactly match the visible text. Redacting based on the visible position may miss text that the OCR placed elsewhere on the page. Run a text-extraction check after redaction to confirm.
+
+## Frequently asked questions
+
+### Does this mean every redacted PDF gets bigger?
+
+Only on the pages you redacted. Vector text is small; raster images are larger. Expect the file to grow by roughly the size of the rasterized pages — typically 100–500 KB per page at the resolution we use. For most documents this is fine; for very large ones, you'll see the difference.
+
+### Can the recipient still annotate the redacted page?
+
+Yes. The page is now an image, but readers can still highlight, comment, and add annotations on top.
+
+### Is my file uploaded?
+
+No. Both the original PDF and the redacted output stay in your browser tab. Verifiable in DevTools → Network.
+
+### What about printing? Does the redaction survive?
+
+Yes. The redacted page is now an image, so what you print is the image — black boxes and all. There's no hidden text layer to leak.
+
+### Can I redact a digital signature?
+
+You can redact the visual representation of one. The signature object itself can't be removed without invalidating the document's signed status.
+
+### How do I know the tool is honest?
+
+The repo includes a unit test that:
+
+1. Builds a PDF containing a known marker string.
+2. Verifies a text-extraction tool can find the marker before redaction.
+3. Redacts the page.
+4. Verifies the same tool returns no marker after redaction.
+
+That's the test that matters. The day this test starts failing is the day we don't ship.
+
+## The shortest possible summary
+
+Drawing black boxes on top of text isn't redaction; it's a sticker. To actually redact, you have to replace the underlying page content. Browser-based, in 90 seconds, on a tool you can test. Use the [Redact PDF tool](/redact-pdf) and verify with copy-paste before you send.

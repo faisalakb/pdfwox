@@ -9,6 +9,10 @@ import type {
 } from "@/lib/pdf/types";
 import type { InspectedField } from "@/lib/pdf/inspect";
 import type { NewFieldSpec } from "@/lib/pdf/addFields";
+import type { PageReplacement } from "@/lib/pdf/replacePages";
+import type { AnnotationSpec } from "@/lib/pdf/drawAnnotations";
+import type { AddWatermarkSpec } from "@/lib/pdf/addWatermark";
+import type { CoverRect, CoverWatermarksOptions } from "@/lib/pdf/coverWatermarks";
 
 /**
  * Main-thread Comlink wrapper. Lazy singleton — the Worker (and pdf-lib
@@ -27,6 +31,17 @@ export interface PdfApi {
   ): Promise<PdfBytes>;
   inspectForm(file: PdfBytes): Promise<InspectedField[]>;
   addFields(file: PdfBytes, fields: NewFieldSpec[]): Promise<PdfBytes>;
+  replacePages(
+    file: PdfBytes,
+    replacements: PageReplacement[],
+  ): Promise<PdfBytes>;
+  drawAnnotations(file: PdfBytes, items: AnnotationSpec[]): Promise<PdfBytes>;
+  addWatermark(file: PdfBytes, spec: AddWatermarkSpec): Promise<PdfBytes>;
+  coverWatermarks(
+    file: PdfBytes,
+    rects: CoverRect[],
+    opts?: CoverWatermarksOptions,
+  ): Promise<PdfBytes>;
 }
 
 let cached: Remote<PdfApi> | null = null;

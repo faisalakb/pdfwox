@@ -29,7 +29,11 @@ const HEADINGS = [
     text: "Why HEIC isn't friendly outside Apple",
     depth: 2 as const,
   },
-  { id: "the-60-second-method", text: "The 60-second method", depth: 2 as const },
+  {
+    id: "the-60-second-method",
+    text: "The 60-second method",
+    depth: 2 as const,
+  },
   {
     id: "when-to-mix-heic-with-regular-jpgs-or-pngs",
     text: "When to mix HEIC with regular JPGs or PNGs",

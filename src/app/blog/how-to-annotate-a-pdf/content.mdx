@@ -1,0 +1,87 @@
+Annotating a PDF used to mean either printing the document, marking it up in pen, and scanning it back — or paying for a full PDF editor. Both options are slow, and neither was great. Modern browsers can do the same job in under a minute, with results that work in every PDF reader.
+
+Here's how, plus the few things to know about which annotation type fits which job.
+
+## The five annotation modes that cover almost everything
+
+Most PDF annotation needs fall into five categories. The [Annotate PDF tool](/annotate-pdf) ships with one mode for each:
+
+- **Highlight** — a semi-transparent rectangle over text. Best for picking out the important sentence in a contract or the answer in a textbook.
+- **Text** — typed comments anchored to a point on the page. Best for "see footnote", "this is incorrect", or any short note you want the recipient to read.
+- **Rectangle** — an outlined box, no fill. Best for grouping items, calling out a chart region, or drawing attention to a specific table cell.
+- **Ellipse** — same as rectangle but round. Best for circling a face in a photo, a number in a column, or anywhere a rectangle would feel too formal.
+- **Pen** — freehand drawing. Best for signatures, sketches, or sketching a workflow on top of a flow chart.
+
+You pick a tool, pick a color, click and drag on the page. Save when done. Every reader can open the result.
+
+## The 60-second method
+
+1. **Open the [Annotate PDF tool](/annotate-pdf).** Drag your PDF onto the page. Your file stays on your device.
+2. **Pick a tool from the right-side palette.** Highlight is selected by default — it's the most common.
+3. **Pick a color.** Yellow for highlights (universal), red for "wrong" or "important", green for "approved", blue for "comment", black for outlines and sketches. These are conventions, not rules; pick whatever's clearest.
+4. **Drag on the page.** For highlight, rectangle, ellipse: drag a rectangle. For text: click where you want the text, type, press Enter. For pen: drag freehand.
+5. **Navigate pages with the arrows above the preview.** Each page can have its own annotations.
+6. **Click "Save annotations" and download.** The annotations bake into the page content — they survive printing, they survive being opened in any reader, they don't depend on the reader supporting annotation comments.
+
+## Highlight vs. text vs. rectangle: when to use which
+
+These three overlap and choosing between them is the most common annotation question.
+
+- **Highlight** is for _content already on the page_. "This sentence right here." It tells the recipient: read this part more carefully.
+- **Text** is for _new content you're adding_. "I disagree with this number." It tells the recipient: here's what I think.
+- **Rectangle** is for _grouping or pointing_. "These three rows belong together." It tells the recipient: look at this region as a unit.
+
+If you find yourself drawing a rectangle around text and also adding a text annotation next to it, you can probably collapse to one or the other.
+
+## Annotations that bake in vs. annotations that don't
+
+Some PDF tools save annotations as a separate layer in the file — readers that understand annotations can hide them, edit them, or delete them. That's useful for collaborative review, where you want a "track changes" feel.
+
+Our tool **bakes annotations into the page content directly**. The tradeoff is intentional:
+
+- The annotation looks the same in every reader, including older ones that don't render the annotation layer correctly.
+- The annotation prints correctly without any reader-specific setting.
+- The annotation can't be hidden, edited, or accidentally deleted by the recipient.
+- The tradeoff: the recipient can't easily "remove" the annotation if they want to see the original page underneath.
+
+If you need reversible annotations for a review workflow, you'll want a tool that saves AcroAnnotations — that's a feature we'll add later. For "mark this PDF up and send it", baked-in is what you want.
+
+## Tips that save time
+
+**Use the keyboard for text annotations.** Click where you want the text, type the comment, press Enter. Escape cancels without committing. There's no need to reach for the mouse to "confirm".
+
+**Pen mode is wider than you think.** Hold the mouse button down while drawing — every twist counts. Two short strokes that don't connect read as two annotations, which can be removed independently.
+
+**Re-color before you draw, not after.** Each annotation locks in the color it was drawn with. To change a color, delete and re-draw.
+
+**Multi-page documents are easy.** The "Annotations" panel on the right shows everything you've added, tagged by page. Clicking the "×" next to an annotation removes it.
+
+## Frequently asked questions
+
+### Will my annotations show up in Adobe Reader?
+
+Yes. Annotations are drawn into the page content via the standard PDF drawing primitives — text, rectangle, ellipse, line. Every PDF reader since Adobe Reader 5 knows how to display these.
+
+### Can I annotate a scanned PDF?
+
+Yes. Scanned PDFs are just image pages from the tool's perspective. You drag annotations on top exactly the same way.
+
+### Are my annotations searchable?
+
+Text annotations are. The text you type is part of the page's text content after saving, so a reader's search will find it.
+
+### Can I undo?
+
+Delete is per-annotation, in the side panel. Drawing a rectangle and then deciding it should have been an ellipse means removing the rectangle and drawing the ellipse — there's no in-place conversion.
+
+### Is my file uploaded?
+
+No. The annotation editor and the save step run entirely in your browser tab. Verifiable in DevTools → Network.
+
+### Can I export annotations only?
+
+Not in this tool. The output is always a complete PDF with annotations baked in. For an "annotations-only" export (e.g., XFDF), that's a separate feature that hasn't landed yet.
+
+## The short version
+
+Five tools (highlight, text, rectangle, ellipse, pen), five colors, click and drag, save. Annotations bake into the page so they look right in every reader, including print. The whole thing runs in your browser, in under a minute. Open the [Annotate PDF tool](/annotate-pdf) when you need it.

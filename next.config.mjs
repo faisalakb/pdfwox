@@ -1,8 +1,6 @@
 import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
-import path from "path";
-
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   turbopack: {

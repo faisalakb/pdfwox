@@ -49,9 +49,8 @@ export function ImagesToPdfShell({
   const [phase, setPhase] = React.useState<Phase>("empty");
   const [entries, setEntries] = React.useState<ImageEntry[]>([]);
   const [pageSize, setPageSize] = React.useState<PageSize>("Fit");
-  const [margin, setMargin] = React.useState<ImagesToPdfOptions["margin"]>(
-    "narrow",
-  );
+  const [margin, setMargin] =
+    React.useState<ImagesToPdfOptions["margin"]>("narrow");
   const [filename, setFilename] = React.useState(defaultFilename);
   const [downloadUrl, setDownloadUrl] = React.useState<string | null>(null);
   const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
@@ -321,9 +320,7 @@ export function ImagesToPdfShell({
           <a
             href={downloadUrl}
             download={filename}
-            onClick={() =>
-              track({ type: "download_clicked", tool: toolSlug })
-            }
+            onClick={() => track({ type: "download_clicked", tool: toolSlug })}
             className="focus-ring inline-flex h-11 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 text-base font-medium text-[var(--color-accent-ink)] transition-colors hover:bg-[var(--color-accent-hover)]"
           >
             Download

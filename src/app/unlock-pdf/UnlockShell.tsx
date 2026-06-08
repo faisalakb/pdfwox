@@ -166,9 +166,7 @@ export function UnlockShell() {
           <a
             href={downloadUrl}
             download={filename}
-            onClick={() =>
-              track({ type: "download_clicked", tool: TOOL_SLUG })
-            }
+            onClick={() => track({ type: "download_clicked", tool: TOOL_SLUG })}
             className="focus-ring inline-flex h-11 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 text-base font-medium text-[var(--color-accent-ink)] transition-colors hover:bg-[var(--color-accent-hover)]"
           >
             Download

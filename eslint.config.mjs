@@ -19,6 +19,19 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  {
+    // Long-form prose pages — disable the stylistic apostrophe escaping
+    // so the source stays readable for content edits. JSX still escapes
+    // values at render time, so this isn't a correctness or XSS concern.
+    files: [
+      "src/app/about/page.tsx",
+      "src/app/privacy/page.tsx",
+      "src/app/why-browser-based/page.tsx",
+    ],
+    rules: {
+      "react/no-unescaped-entities": "off",
+    },
+  },
   globalIgnores([
     ".next/**",
     "out/**",
@@ -26,6 +39,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "test-results/**",
     "playwright-report/**",
+    "public/qpdf.js",
   ]),
 ]);
 

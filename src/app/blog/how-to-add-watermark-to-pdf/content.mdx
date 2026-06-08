@@ -1,0 +1,85 @@
+Watermarks are the polite way to say "this document has a status." A DRAFT stamp tells the recipient not to act on it yet. A CONFIDENTIAL stamp tells them not to share it. A company logo in the corner gives the file an owner without needing to print a header on every page. None of these are revolutionary, but they do their job quietly — which is exactly what a watermark should do.
+
+This guide covers how to add a watermark to a PDF in your browser, in about 60 seconds, with full control over what it looks like and where it goes.
+
+## The five choices that matter
+
+Every watermark you add to a PDF is the answer to five questions. Most tools obscure these behind a wizard; the [Add Watermark tool](/add-watermark-to-pdf) puts them on one panel:
+
+- **Text or image?** Text watermarks ("DRAFT", "CONFIDENTIAL", your name) are fast and look intentional. Image watermarks (your logo, a stamp graphic) carry brand identity.
+- **What opacity?** Strong watermarks (50% and up) make a statement; subtle ones (15–25%) sit out of the way of the underlying text. Pick the one that matches your intent.
+- **Where on the page?** Nine positions: corners, edges, center. Center is the most "watermark-y"; corners are the most "noted-and-filed".
+- **Tiled or single?** A single watermark is direct: one statement per page. A tiled watermark covers the page diagonally — what you want when you're trying to make the document hard to crop into something usable.
+- **All pages or a range?** Sometimes only the cover page should be stamped; sometimes every page. Pick the range.
+
+## The 60-second method
+
+1. **Open the [Add Watermark tool](/add-watermark-to-pdf).** Drag your PDF onto the page. Your file stays on your device.
+2. **Choose Text or Image at the top of the right-side panel.** For Text, type the words and pick a color and size. For Image, pick a PNG or JPG and a width.
+3. **Tune the look.** Drag the Opacity slider until it feels right. Set a rotation if you want it diagonal (45° is the classic look). Tick "Tile diagonally" if you want a repeating pattern.
+4. **Pick a position.** Tap one of the nine cells in the position grid. If "Tile" is on, the position is ignored.
+5. **(Optional) Limit to a page range.** Tick the box and enter from/to pages.
+6. **Click Save & download.** The watermark bakes into every selected page. It survives in any reader and prints exactly as you see it.
+
+The live preview on the left updates as you tweak. You're seeing the actual output, not an approximation.
+
+## Choosing text content
+
+Words that work well as watermarks tend to share three traits: short (1–2 words), uppercase, and meaningful at a glance. Some classics:
+
+- **DRAFT** — pre-finalisation, not for forwarding.
+- **CONFIDENTIAL** — handle carefully.
+- **COPY** — original is elsewhere.
+- **SAMPLE** — placeholder or template.
+- **NOT FOR DISTRIBUTION** — narrower than CONFIDENTIAL.
+
+For internal-only documents, your team or company name works too. Avoid full sentences — they're hard to read at watermark opacity.
+
+## Choosing image content
+
+If you're using a logo, two things matter most:
+
+- **PNG with a transparent background, please.** A JPG logo has a white box around it that will fight your page color. PNG with transparency reads clean over anything.
+- **Square or wide?** A square logo works in any of the nine positions. A wide one is best in the corners and edges. Avoid putting a wide logo in center unless you want it dominant.
+
+Width is in PDF points (1pt = 1/72"). For a typical A4 page, a logo width of 100–200 pt feels right; smaller in corners, larger in center.
+
+## Tiling that does the job
+
+A tiled watermark — the kind that repeats across the page diagonally — has one job: make the page useless as a free-floating screenshot. If a recipient screenshots a small region, the watermark text is in the region too; their crop reveals nothing usable.
+
+The classic configuration: a short word (DRAFT, CONFIDENTIAL) at low opacity (15–20%), rotated 30°. Cover spacing handles itself; the tool spaces tiles ~1.5× the watermark's larger dimension so it's noticeable but not solid.
+
+## Frequently asked questions
+
+### Does the watermark survive when the recipient prints?
+
+Yes. It's part of the page content, not a reader-side annotation. Whatever they see on screen is what comes out of the printer.
+
+### Can I have a different watermark on each page?
+
+The current tool applies one watermark configuration per save. To have different watermarks per page, save once with the first watermark, then re-open the result and watermark a different page range.
+
+### Will the watermark prevent the recipient from extracting text underneath?
+
+No. The watermark is drawn on top; the underlying text is unchanged. If you need to truly hide content, use the [Redact PDF tool](/redact-pdf) — that's a different operation that genuinely removes content.
+
+### Are my files uploaded?
+
+No. The watermarking happens entirely in your browser tab using pdf-lib running on WebAssembly. Verifiable in DevTools → Network.
+
+### Can the recipient remove the watermark?
+
+If the watermark is text and they have the right tool, sometimes yes. Our companion [Remove Watermark tool](/remove-watermark-from-pdf) is honest about which kinds of watermarks come off cleanly and which don't. If you want a watermark that can't be removed, save with rotation, tiling, and overlap with the page content — these traits make automatic removal much less reliable.
+
+### What's the largest PDF I can watermark?
+
+Limited by your device memory. We've tested 100-page PDFs at typical content density without issue. For documents with embedded videos or hundreds of high-resolution images, watch your browser's memory monitor.
+
+### Can I use a custom font?
+
+Currently the tool uses Helvetica (regular or bold) — the standard sans-serif font baked into every PDF reader. Custom fonts add complexity and file size; we'll add them when there's clear demand.
+
+## The short version
+
+Five controls (source, opacity, position, rotation, tiling), one page-range picker, one save button. Watermark bakes into the PDF so it works in any reader and prints clean. Open the [Add Watermark tool](/add-watermark-to-pdf) when a document needs a status, a stamp, or an owner.

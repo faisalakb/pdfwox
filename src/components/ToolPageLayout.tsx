@@ -26,7 +26,7 @@ export interface ToolPageLayoutProps {
  * FAQ accordion, related tools, privacy line, and combined JSON-LD.
  */
 export function ToolPageLayout({ tool, children, intro }: ToolPageLayoutProps) {
-  const related = relatedTools(tool.slug);
+  const related = relatedTools(tool.slug, 5);
   const breadcrumbs = [
     { name: "Home", url: SITE.url },
     {
