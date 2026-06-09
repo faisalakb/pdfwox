@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import nextDynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTool, tools } from "@/lib/tools";
 import { SITE } from "@/lib/site";
 import { WorkerPrewarm } from "@/components/WorkerPrewarm";
+import { EmbedShellClient } from "./EmbedShellClient";
 
 export const dynamic = "force-static";
 
@@ -28,68 +28,28 @@ export async function generateMetadata({
   };
 }
 
-// Dynamically imported shells — each is a named export from its route folder
-// or the shared ImagesToPdfShell. We load only the one needed.
-const shellMap: Record<string, () => Promise<{ default: React.ComponentType }>> = {
-  "/fill-pdf": () =>
-    import("@/app/fill-pdf/FillShell").then((m) => ({ default: m.FillShell })),
-  "/create-fillable-pdf": () =>
-    import("@/app/create-fillable-pdf/CreateShell").then((m) => ({
-      default: m.CreateShell,
-    })),
-  "/sign-pdf": () =>
-    import("@/app/sign-pdf/SignShell").then((m) => ({ default: m.SignShell })),
-  "/annotate-pdf": () =>
-    import("@/app/annotate-pdf/AnnotateShell").then((m) => ({
-      default: m.AnnotateShell,
-    })),
-  "/redact-pdf": () =>
-    import("@/app/redact-pdf/RedactShell").then((m) => ({
-      default: m.RedactShell,
-    })),
-  "/protect-pdf": () =>
-    import("@/app/protect-pdf/ProtectShell").then((m) => ({
-      default: m.ProtectShell,
-    })),
-  "/unlock-pdf": () =>
-    import("@/app/unlock-pdf/UnlockShell").then((m) => ({
-      default: m.UnlockShell,
-    })),
-  "/ocr-pdf": () =>
-    import("@/app/ocr-pdf/OcrPdfShell").then((m) => ({
-      default: m.OcrPdfShell,
-    })),
-  "/pdf-to-text": () =>
-    import("@/app/pdf-to-text/PdfToTextShell").then((m) => ({
-      default: m.PdfToTextShell,
-    })),
-  "/add-watermark-to-pdf": () =>
-    import("@/app/add-watermark-to-pdf/AddWatermarkShell").then((m) => ({
-      default: m.AddWatermarkShell,
-    })),
-  "/remove-watermark-from-pdf": () =>
-    import("@/app/remove-watermark-from-pdf/RemoveWatermarkShell").then(
-      (m) => ({ default: m.RemoveWatermarkShell }),
-    ),
-};
+const supportedDedicatedSlugs = new Set([
+  "/fill-pdf",
+  "/create-fillable-pdf",
+  "/sign-pdf",
+  "/annotate-pdf",
+  "/redact-pdf",
+  "/protect-pdf",
+  "/unlock-pdf",
+  "/ocr-pdf",
+  "/pdf-to-text",
+  "/add-watermark-to-pdf",
+  "/remove-watermark-from-pdf",
+]);
 
-// Image converter tools share one shell component with props
-const imageMimeMap: Record<string, string[]> = {
-  "/heic-to-pdf": ["image/heic", "image/heif"],
-  "/jpg-to-pdf": ["image/jpeg"],
-  "/png-to-pdf": ["image/png"],
-  "/webp-to-pdf": ["image/webp"],
-  "/bmp-to-pdf": ["image/bmp"],
-  "/gif-to-pdf": ["image/gif"],
-};
-
-const ImageShell = nextDynamic(
-  () =>
-    import("@/components/ImagesToPdfShell").then((m) => ({
-      default: m.ImagesToPdfShell,
-    })),
-  { ssr: false },
-);
+const supportedImageSlugs = new Set([
+  "/heic-to-pdf",
+  "/jpg-to-pdf",
+  "/png-to-pdf",
+  "/webp-to-pdf",
+  "/bmp-to-pdf",
+  "/gif-to-pdf",
+]);
 
 export default async function EmbedPage({
   params,
@@ -101,16 +61,9 @@ export default async function EmbedPage({
   const tool = getTool(toolSlug);
   if (!tool || tool.status !== "live") notFound();
 
-  const isImageConverter = toolSlug in imageMimeMap;
-  const hasDedicatedShell = toolSlug in shellMap;
-
-  if (!isImageConverter && !hasDedicatedShell) notFound();
-
-  const DedicatedShell = hasDedicatedShell
-    ? nextDynamic(shellMap[toolSlug]!, { ssr: false })
-    : null;
-
-  const imageMimes = imageMimeMap[toolSlug];
+  if (!supportedDedicatedSlugs.has(toolSlug) && !supportedImageSlugs.has(toolSlug)) {
+    notFound();
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--color-canvas)]">
@@ -133,18 +86,7 @@ export default async function EmbedPage({
 
       {/* Tool */}
       <main className="flex-1 p-4">
-        {DedicatedShell && <DedicatedShell />}
-        {isImageConverter && (
-          <ImageShell
-            toolSlug={toolSlug}
-            accepts={imageMimes}
-            enableHeic={toolSlug === "/heic-to-pdf"}
-            enableCanvasDecode={["/webp-to-pdf", "/bmp-to-pdf", "/gif-to-pdf"].includes(toolSlug)}
-            defaultFilename={`${slug}.pdf`}
-            dropzoneLabel={`Drop your ${tool.name.replace(" to PDF", "")} files`}
-            dropzoneHint="Files stay on your device."
-          />
-        )}
+        <EmbedShellClient toolSlug={toolSlug} slug={slug} toolName={tool.name} />
       </main>
 
       {/* Resize postMessage (parent page can listen to adjust iframe height) */}

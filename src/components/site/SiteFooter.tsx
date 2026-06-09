@@ -7,39 +7,56 @@ export function SiteFooter() {
   const byCat = toolsByCategory();
 
   return (
-    <footer className="mt-24 border-t border-[var(--color-line)] bg-[var(--color-surface-muted)]">
+    <footer
+      className="mt-24 border-t"
+      style={{ background: "#0B0F1F", borderColor: "#1E2640" }}
+    >
       <Container className="py-14">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6">
+          {/* Brand column */}
           <div className="col-span-2">
             <Link
               href="/"
-              className="focus-ring font-display inline-flex items-center gap-2 text-lg"
+              className="focus-ring font-display inline-flex items-center gap-2.5 text-lg"
             >
               <span
                 aria-hidden="true"
-                className="inline-flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--color-accent)] text-xs font-bold text-[var(--color-accent-ink)]"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] text-xs font-bold"
+                style={{ background: "#E2553D", color: "#fff" }}
               >
-                P
+                W
               </span>
-              {SITE.shortName}
+              <span style={{ color: "#F7F2E8" }}>{SITE.shortName}</span>
             </Link>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[var(--color-ink-muted)]">
+            <p
+              className="mt-3 max-w-sm text-sm leading-relaxed"
+              style={{ color: "#6B7494" }}
+            >
               {SITE.description}
             </p>
-            <p className="mt-4 inline-flex items-center gap-1.5 rounded-[var(--radius-full)] border border-[var(--color-line-strong)] bg-[var(--color-surface)] px-3 py-1 text-xs text-[var(--color-ink-muted)]">
+            <p
+              className="mt-4 inline-flex items-center gap-1.5 rounded-[var(--radius-full)] border px-3 py-1 text-xs"
+              style={{ borderColor: "#3A4368", color: "#9AA3C4" }}
+            >
               <span
                 aria-hidden="true"
-                className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]"
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: "#E2553D" }}
               />
               {SITE.tagline}
             </p>
           </div>
+
+          {/* Category columns */}
           {allCategories.map((c) => {
             const list = byCat[c];
             if (!list.length) return null;
             return (
               <div key={c}>
-                <h4 className="text-xs font-semibold tracking-wider text-[var(--color-ink)] uppercase">
+                <h4
+                  className="text-xs font-semibold tracking-wider uppercase"
+                  style={{ color: "#C9B87F" }}
+                >
                   {categoryMeta[c].label}
                 </h4>
                 <ul className="mt-3 space-y-2">
@@ -47,7 +64,8 @@ export function SiteFooter() {
                     <li key={t.slug}>
                       <Link
                         href={t.slug}
-                        className="focus-ring text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)]"
+                        className="focus-ring text-sm transition-colors hover:text-white"
+                        style={{ color: "#6B7494" }}
                       >
                         {t.name}
                       </Link>
@@ -59,51 +77,31 @@ export function SiteFooter() {
           })}
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-[var(--color-line)] pt-6 text-xs text-[var(--color-ink-muted)] md:flex-row md:items-center md:justify-between">
+        {/* Bottom bar */}
+        <div
+          className="mt-10 flex flex-col gap-3 border-t pt-6 text-xs md:flex-row md:items-center md:justify-between"
+          style={{ borderColor: "#1E2640", color: "#4A5070" }}
+        >
           <p>
             © {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            <li>
-              <Link
-                href="/about"
-                className="focus-ring hover:text-[var(--color-ink)]"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/privacy"
-                className="focus-ring hover:text-[var(--color-ink)]"
-              >
-                Privacy
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/why-browser-based"
-                className="focus-ring hover:text-[var(--color-ink)]"
-              >
-                Why browser-based
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/blog"
-                className="focus-ring hover:text-[var(--color-ink)]"
-              >
-                Guides
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/changelog"
-                className="focus-ring hover:text-[var(--color-ink)]"
-              >
-                Changelog
-              </Link>
-            </li>
+            {[
+              { href: "/about", label: "About" },
+              { href: "/privacy", label: "Privacy" },
+              { href: "/why-browser-based", label: "Why browser-based" },
+              { href: "/blog", label: "Guides" },
+              { href: "/changelog", label: "Changelog" },
+            ].map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="focus-ring transition-colors hover:text-white"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </Container>

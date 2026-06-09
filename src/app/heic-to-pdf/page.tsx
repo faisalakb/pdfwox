@@ -1,17 +1,9 @@
-import nextDynamic from "next/dynamic";
 import { ToolPageLayout } from "@/components/ToolPageLayout";
 import { buildMetadata } from "@/lib/seo";
 import { getTool } from "@/lib/tools";
+import { ImagesToPdfShellLazy } from "@/components/ImagesToPdfShellLazy";
 
 export const dynamic = "force-static";
-
-const ImagesToPdfShell = nextDynamic(
-  () =>
-    import("@/components/ImagesToPdfShell").then((m) => ({
-      default: m.ImagesToPdfShell,
-    })),
-  { ssr: false },
-);
 
 const TOOL = getTool("/heic-to-pdf")!;
 
@@ -20,7 +12,7 @@ export const metadata = buildMetadata(TOOL);
 export default function HeicToPdfPage() {
   return (
     <ToolPageLayout tool={TOOL}>
-      <ImagesToPdfShell
+      <ImagesToPdfShellLazy
         toolSlug={TOOL.slug}
         accepts={["image/heic", "image/heif"]}
         enableHeic

@@ -40,19 +40,20 @@
   --radius-2xl: 32px;
   --radius-full: 9999px;
 
-  /* Semantic colors — warm ink + sage accent (trust, calm, non-SaaS) */
-  --color-canvas: #f7f4ee; /* warm off-white page */
-  --color-surface: #ffffff; /* cards */
-  --color-surface-muted: #efeae1; /* subtle bands */
-  --color-ink: #1a1a1f; /* primary text */
-  --color-ink-muted: #5a5a63; /* secondary text */
-  --color-ink-subtle: #8a8a93;
-  --color-line: #e5dfd3; /* borders */
-  --color-line-strong: #cbc4b4;
+  /* Semantic colors — warm paper canvas + red-orange accent */
+  --color-canvas: #F7F2E8;          /* warm off-white page */
+  --color-surface: #ffffff;          /* cards */
+  --color-surface-muted: #F0EBE0;   /* subtle bands */
+  --color-ink: #1A1C26;              /* primary text — near-navy */
+  --color-ink-muted: #5A5F78;       /* secondary text */
+  --color-ink-subtle: #8A8FA8;
+  --color-line: #E5DFD3;
+  --color-line-strong: #CBC4B4;
 
-  --color-accent: #1d6b54; /* deep sage — calm + trustworthy */
-  --color-accent-hover: #185a47;
-  --color-accent-soft: #e6efe9;
+  /* Brand accent — red-orange from the 3D hero */
+  --color-accent: #E2553D;
+  --color-accent-hover: #C94430;
+  --color-accent-soft: #FDECEA;
   --color-accent-ink: #ffffff;
 
   --color-danger: #b3261e;
@@ -60,6 +61,14 @@
   --color-success: #1d6b54;
   --color-warning: #a36a00;
   --color-warning-soft: #fbf2e0;
+
+  /* Hero dark palette (used in PdfHero3D and nav when on hero) */
+  --color-hero-bg: #10152A;
+  --color-hero-surface: #1A2140;
+  --color-hero-ink: #F7F2E8;
+  --color-hero-ink-muted: #9AA3C4;
+  --color-hero-gold: #C9B87F;
+  --color-hero-line: #3A4368;
 
   /* Elevation */
   --shadow-xs: 0 1px 0 rgb(0 0 0 / 0.04);
@@ -73,7 +82,7 @@
   --duration-normal: 200ms;
   --duration-slow: 320ms;
 
-  /* Focus ring (used by .focus-ring) */
+  /* Focus ring */
   --ring-color: color-mix(in oklab, var(--color-accent) 55%, transparent);
 }
 
@@ -122,7 +131,7 @@ a {
   color: var(--color-accent-ink);
 }
 
-/* Focus ring utility — applied via class for consistent behavior */
+/* Focus ring utility */
 @utility focus-ring {
   outline: none;
   &:focus-visible {

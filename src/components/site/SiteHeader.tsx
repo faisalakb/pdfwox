@@ -12,22 +12,25 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-[var(--color-line)] bg-[color-mix(in_oklab,var(--color-canvas)_82%,transparent)] backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-[var(--color-hero-line)] bg-[var(--color-hero-bg)]/90 backdrop-blur-md">
         <Container className="flex h-16 items-center justify-between gap-6">
+          {/* Logo */}
           <Link
             href="/"
-            className="focus-ring font-display inline-flex items-center gap-2 text-lg tracking-tight"
+            className="focus-ring font-display inline-flex items-center gap-2.5 text-lg tracking-tight"
             onClick={() => setMenuOpen(false)}
           >
             <span
               aria-hidden="true"
-              className="inline-flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--color-accent)] text-xs font-bold text-[var(--color-accent-ink)]"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] text-xs font-bold"
+              style={{ background: "#E2553D", color: "#fff" }}
             >
-              P
+              W
             </span>
-            {SITE.shortName}
+            <span style={{ color: "#F7F2E8" }}>{SITE.shortName}</span>
           </Link>
 
+          {/* Desktop nav */}
           <nav aria-label="Primary" className="hidden md:block">
             <ul className="flex items-center gap-1 text-sm">
               {allCategories.map((c) => {
@@ -37,7 +40,8 @@ export function SiteHeader() {
                   <li key={c} className="group relative">
                     <button
                       type="button"
-                      className="focus-ring inline-flex h-9 items-center gap-1 rounded-[var(--radius-sm)] px-3 text-[var(--color-ink-muted)] transition-colors hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)]"
+                      className="focus-ring inline-flex h-9 items-center gap-1 rounded-[var(--radius-sm)] px-3 transition-colors hover:bg-white/8"
+                      style={{ color: "#9AA3C4" }}
                       aria-haspopup="true"
                     >
                       {categoryMeta[c].label}
@@ -56,9 +60,19 @@ export function SiteHeader() {
                         />
                       </svg>
                     </button>
+                    {/* Dropdown */}
                     <div className="invisible absolute top-full left-0 pt-2 opacity-0 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                      <div className="min-w-[260px] rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-surface)] p-2 shadow-[var(--shadow-md)]">
-                        <p className="px-3 py-1.5 text-xs tracking-wider text-[var(--color-ink-subtle)] uppercase">
+                      <div
+                        className="min-w-[260px] rounded-[var(--radius-lg)] border p-2 shadow-[var(--shadow-md)]"
+                        style={{
+                          background: "#1A2140",
+                          borderColor: "#3A4368",
+                        }}
+                      >
+                        <p
+                          className="px-3 py-1.5 text-xs tracking-wider uppercase"
+                          style={{ color: "#C9B87F" }}
+                        >
                           {categoryMeta[c].label}
                         </p>
                         <ul>
@@ -66,7 +80,8 @@ export function SiteHeader() {
                             <li key={t.slug}>
                               <Link
                                 href={t.slug}
-                                className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2 text-sm transition-colors hover:bg-[var(--color-surface-muted)]"
+                                className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2 text-sm transition-colors hover:bg-white/8"
+                                style={{ color: "#D8DCEE" }}
                               >
                                 {t.name}
                               </Link>
@@ -81,7 +96,8 @@ export function SiteHeader() {
               <li>
                 <Link
                   href="/blog"
-                  className="focus-ring inline-flex h-9 items-center rounded-[var(--radius-sm)] px-3 text-[var(--color-ink-muted)] transition-colors hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)]"
+                  className="focus-ring inline-flex h-9 items-center rounded-[var(--radius-sm)] px-3 text-sm transition-colors hover:bg-white/8"
+                  style={{ color: "#9AA3C4" }}
                 >
                   Guides
                 </Link>
@@ -92,7 +108,8 @@ export function SiteHeader() {
           <div className="flex items-center gap-3">
             <Link
               href="/why-browser-based"
-              className="focus-ring hidden h-9 items-center gap-1 rounded-[var(--radius-sm)] px-3 text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] sm:inline-flex"
+              className="focus-ring hidden h-9 items-center gap-1.5 rounded-[var(--radius-sm)] px-3 text-sm transition-colors hover:text-white sm:inline-flex"
+              style={{ color: "#9AA3C4" }}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -111,10 +128,11 @@ export function SiteHeader() {
               Why browser-based
             </Link>
 
-            {/* Hamburger — mobile only */}
+            {/* Hamburger — mobile */}
             <button
               type="button"
-              className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-ink-muted)] transition-colors hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-ink)] md:hidden"
+              className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] transition-colors hover:bg-white/8 md:hidden"
+              style={{ color: "#9AA3C4" }}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
@@ -133,22 +151,25 @@ export function SiteHeader() {
         </Container>
       </header>
 
-      {/* Mobile drawer — full-width panel below the header */}
+      {/* Mobile drawer */}
       {menuOpen && (
         <div
-          className="fixed inset-0 top-16 z-20 overflow-y-auto bg-[var(--color-canvas)] md:hidden"
+          className="fixed inset-0 top-16 z-20 overflow-y-auto md:hidden"
+          style={{ background: "#10152A" }}
           onClick={(e) => {
             if (e.target === e.currentTarget) setMenuOpen(false);
           }}
         >
           <nav aria-label="Mobile navigation" className="p-4">
-            {/* Tool categories */}
             {allCategories.map((c) => {
               const list = byCat[c];
               if (!list.length) return null;
               return (
                 <div key={c} className="mb-6">
-                  <p className="mb-2 px-2 text-xs font-medium tracking-wider text-[var(--color-ink-subtle)] uppercase">
+                  <p
+                    className="mb-2 px-2 text-xs font-medium tracking-wider uppercase"
+                    style={{ color: "#C9B87F" }}
+                  >
                     {categoryMeta[c].label}
                   </p>
                   <ul className="space-y-0.5">
@@ -156,7 +177,8 @@ export function SiteHeader() {
                       <li key={t.slug}>
                         <Link
                           href={t.slug}
-                          className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2.5 text-sm text-[var(--color-ink)] transition-colors hover:bg-[var(--color-surface-muted)]"
+                          className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2.5 text-sm transition-colors hover:bg-white/8"
+                          style={{ color: "#D8DCEE" }}
                           onClick={() => setMenuOpen(false)}
                         >
                           {t.name}
@@ -167,14 +189,13 @@ export function SiteHeader() {
                 </div>
               );
             })}
-
-            {/* Static links */}
-            <div className="border-t border-[var(--color-line)] pt-4">
+            <div className="border-t pt-4" style={{ borderColor: "#3A4368" }}>
               <ul className="space-y-0.5">
                 <li>
                   <Link
                     href="/blog"
-                    className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2.5 text-sm text-[var(--color-ink)] transition-colors hover:bg-[var(--color-surface-muted)]"
+                    className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2.5 text-sm transition-colors hover:bg-white/8"
+                    style={{ color: "#D8DCEE" }}
                     onClick={() => setMenuOpen(false)}
                   >
                     Guides
@@ -183,7 +204,8 @@ export function SiteHeader() {
                 <li>
                   <Link
                     href="/why-browser-based"
-                    className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2.5 text-sm text-[var(--color-ink)] transition-colors hover:bg-[var(--color-surface-muted)]"
+                    className="focus-ring block rounded-[var(--radius-sm)] px-3 py-2.5 text-sm transition-colors hover:bg-white/8"
+                    style={{ color: "#D8DCEE" }}
                     onClick={() => setMenuOpen(false)}
                   >
                     Why browser-based
