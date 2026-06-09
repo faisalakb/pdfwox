@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Accordion } from "@/components/ui/Accordion";
-import { articleLd, faqPageLd, jsonLdString } from "@/lib/seo";
+import { articleLd, breadcrumbListLd, faqPageLd, jsonLdString } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import { TableOfContents, type Heading } from "./TableOfContents";
 
@@ -42,6 +42,11 @@ export function MdxLayout({
       datePublished: meta.datePublished,
       dateModified: meta.dateModified,
     }),
+    breadcrumbListLd([
+      { name: "Home", url: SITE.url },
+      { name: "Guides", url: `${SITE.url}/blog` },
+      { name: meta.title, url },
+    ]),
     ...(faqs && faqs.length > 0 ? [faqPageLd(faqs)] : []),
   );
 

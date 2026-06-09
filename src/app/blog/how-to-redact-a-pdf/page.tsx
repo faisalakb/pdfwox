@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { MdxLayout } from "@/components/blog/MdxLayout";
+import { MdxLayout, type MdxFaq } from "@/components/blog/MdxLayout";
+import { RelatedGuides } from "@/components/blog/RelatedGuides";
 import { UseToolCta } from "@/components/blog/UseToolCta";
 import { Container } from "@/components/ui/Container";
 import { getGuide } from "@/lib/guides";
@@ -61,6 +62,33 @@ const HEADINGS = [
   },
 ];
 
+const FAQS: MdxFaq[] = [
+  {
+    q: "Doesn't a black box drawn on top count as redaction?",
+    a: "No. A box drawn on top hides text visually but leaves it in the file — still selectable, still copyable, still extractable by any PDF inspector. True redaction replaces the affected page content so the original text is gone from the file entirely.",
+  },
+  {
+    q: "Does this mean every redacted PDF gets bigger?",
+    a: "Only on the pages you redacted. Vector text is small; raster images are larger. Expect roughly 100–500 KB of growth per redacted page. For most documents this is acceptable.",
+  },
+  {
+    q: "Does the redaction survive printing?",
+    a: "Yes. The redacted page is now a flat image, so what you print is the image — black boxes and all. There's no hidden text layer that could reappear.",
+  },
+  {
+    q: "Is my file uploaded?",
+    a: "No. Both the original PDF and the redacted output stay in your browser tab. Verifiable in DevTools → Network.",
+  },
+  {
+    q: "Can I redact a digitally signed PDF?",
+    a: "You can redact the visual representation of a signature. The cryptographic signature object itself can't be removed without invalidating the document's signed status — redact a copy and note that the original signature is on the unredacted version.",
+  },
+  {
+    q: "How do I verify the redaction actually worked?",
+    a: "Open the output PDF, triple-click inside one of the black boxes to select that line, copy, and paste into a plain-text editor. If the original text appears, the redaction failed — do not send that file.",
+  },
+];
+
 export default function GuidePage() {
   return (
     <MdxLayout
@@ -72,11 +100,13 @@ export default function GuidePage() {
         toolSlug: GUIDE.toolSlug,
       }}
       headings={HEADINGS}
+      faqs={FAQS}
     >
       <Content />
       <Container size="sm" className="px-0">
         <UseToolCta toolSlug="/redact-pdf" />
         <UseToolCta toolSlug="/annotate-pdf" />
+        <RelatedGuides slug={GUIDE.slug} />
       </Container>
     </MdxLayout>
   );

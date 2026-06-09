@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { MdxLayout } from "@/components/blog/MdxLayout";
+import { MdxLayout, type MdxFaq } from "@/components/blog/MdxLayout";
+import { RelatedGuides } from "@/components/blog/RelatedGuides";
 import { UseToolCta } from "@/components/blog/UseToolCta";
 import { Container } from "@/components/ui/Container";
 import { getGuide } from "@/lib/guides";
@@ -61,6 +62,33 @@ const HEADINGS = [
   },
 ];
 
+const FAQS: MdxFaq[] = [
+  {
+    q: "Will my annotations show up in Adobe Reader?",
+    a: "Yes. Annotations are drawn into the page content via standard PDF drawing primitives — text, rectangle, ellipse, line. Every PDF reader since Adobe Reader 5 knows how to display these.",
+  },
+  {
+    q: "Can I annotate a scanned PDF?",
+    a: "Yes. Scanned PDFs are just image pages from the tool's perspective. You drag annotations on top exactly the same way as on a text-based PDF.",
+  },
+  {
+    q: "Are my annotations searchable?",
+    a: "Text annotations are. The text you type becomes part of the page's text content after saving, so a reader's search will find it.",
+  },
+  {
+    q: "Is my file uploaded?",
+    a: "No. The annotation editor and the save step run entirely in your browser tab. Verifiable in DevTools → Network.",
+  },
+  {
+    q: "Can I undo an annotation?",
+    a: "Delete is per-annotation in the side panel. Drawing a rectangle and then deciding it should have been an ellipse means removing the rectangle and drawing the ellipse — there's no in-place conversion.",
+  },
+  {
+    q: "Can I export annotations only?",
+    a: "Not in this tool. The output is always a complete PDF with annotations baked in. For an annotations-only export (e.g. XFDF), that's a separate feature that hasn't landed yet.",
+  },
+];
+
 export default function GuidePage() {
   return (
     <MdxLayout
@@ -72,11 +100,13 @@ export default function GuidePage() {
         toolSlug: GUIDE.toolSlug,
       }}
       headings={HEADINGS}
+      faqs={FAQS}
     >
       <Content />
       <Container size="sm" className="px-0">
         <UseToolCta toolSlug="/annotate-pdf" />
         <UseToolCta toolSlug="/sign-pdf" />
+        <RelatedGuides slug={GUIDE.slug} />
       </Container>
     </MdxLayout>
   );

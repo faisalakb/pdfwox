@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { MdxLayout } from "@/components/blog/MdxLayout";
+import { MdxLayout, type MdxFaq } from "@/components/blog/MdxLayout";
+import { RelatedGuides } from "@/components/blog/RelatedGuides";
 import { UseToolCta } from "@/components/blog/UseToolCta";
 import { Container } from "@/components/ui/Container";
 import { getGuide } from "@/lib/guides";
@@ -61,6 +62,33 @@ const HEADINGS = [
   },
 ];
 
+const FAQS: MdxFaq[] = [
+  {
+    q: "Can you crack a forgotten PDF password?",
+    a: "No. Nobody can in a reasonable amount of time with sensible passwords. Modern PDFs use AES-256. Tools that promise otherwise are either running a guess list of common passwords (which only works if yours is on it) or harvesting your file.",
+  },
+  {
+    q: "Is my password sent anywhere when I unlock?",
+    a: "No. The password is typed into the page and used by the in-browser WebAssembly module. There is no network call carrying it — verifiable in DevTools → Network.",
+  },
+  {
+    q: "Will the unlocked output look exactly the same?",
+    a: "Yes. Page content, fonts, embedded images, form fields, and signatures are all unchanged. The only thing removed is the encryption envelope.",
+  },
+  {
+    q: "Do you keep my file?",
+    a: "No. There's nothing to keep — your file is never uploaded. The decryption runs entirely in your browser tab.",
+  },
+  {
+    q: "What if I lost the password to a document I own?",
+    a: "If you have the PDF open somewhere (Acrobat, Preview), re-save it without a password from that app. If you don't have a copy open anywhere and don't know the password, the document is, for practical purposes, gone.",
+  },
+  {
+    q: "What's the difference between a user password and an owner password?",
+    a: "A user password (open password) prevents anyone from viewing the file without typing it. An owner password controls restrictions like 'can't print' or 'can't copy text' — the file opens without it, but readers enforce those limits. This tool removes both.",
+  },
+];
+
 export default function GuidePage() {
   return (
     <MdxLayout
@@ -72,11 +100,13 @@ export default function GuidePage() {
         toolSlug: GUIDE.toolSlug,
       }}
       headings={HEADINGS}
+      faqs={FAQS}
     >
       <Content />
       <Container size="sm" className="px-0">
         <UseToolCta toolSlug="/unlock-pdf" />
         <UseToolCta toolSlug="/protect-pdf" />
+        <RelatedGuides slug={GUIDE.slug} />
       </Container>
     </MdxLayout>
   );

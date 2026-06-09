@@ -1,9 +1,14 @@
+import nextDynamic from "next/dynamic";
 import { ToolPageLayout } from "@/components/ToolPageLayout";
 import { buildMetadata } from "@/lib/seo";
 import { getTool } from "@/lib/tools";
-import { AnnotateShell } from "./AnnotateShell";
 
 export const dynamic = "force-static";
+
+const AnnotateShell = nextDynamic(
+  () => import("./AnnotateShell").then((m) => ({ default: m.AnnotateShell })),
+  { ssr: false },
+);
 
 const TOOL = getTool("/annotate-pdf")!;
 

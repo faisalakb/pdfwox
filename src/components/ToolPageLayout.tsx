@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { WorkerPrewarm } from "@/components/WorkerPrewarm";
+import { EmbedSnippet } from "@/components/EmbedSnippet";
 import { Container } from "@/components/ui/Container";
 import { Accordion } from "@/components/ui/Accordion";
 import { Card } from "@/components/ui/Card";
@@ -45,6 +47,7 @@ export function ToolPageLayout({ tool, children, intro }: ToolPageLayoutProps) {
 
   return (
     <>
+      <WorkerPrewarm />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: ld }}
@@ -163,6 +166,23 @@ export function ToolPageLayout({ tool, children, intro }: ToolPageLayoutProps) {
           </Container>
         </section>
       )}
+
+      {/* Embed this tool */}
+      <section className="py-12">
+        <Container size="lg">
+          <Card>
+            <h2 className="text-xl font-semibold">Embed this tool</h2>
+            <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
+              Let your visitors use <strong>{tool.name}</strong> without leaving
+              your site. Paste the snippet below into any HTML page. Files stay
+              private — everything runs in the visitor's browser.
+            </p>
+            <div className="mt-4">
+              <EmbedSnippet toolSlug={tool.slug} />
+            </div>
+          </Card>
+        </Container>
+      </section>
 
       {/* Guide CTA */}
       {tool.guideSlug && (

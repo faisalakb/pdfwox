@@ -1,9 +1,17 @@
+import nextDynamic from "next/dynamic";
 import { ToolPageLayout } from "@/components/ToolPageLayout";
 import { buildMetadata } from "@/lib/seo";
 import { getTool } from "@/lib/tools";
-import { AddWatermarkShell } from "./AddWatermarkShell";
 
 export const dynamic = "force-static";
+
+const AddWatermarkShell = nextDynamic(
+  () =>
+    import("./AddWatermarkShell").then((m) => ({
+      default: m.AddWatermarkShell,
+    })),
+  { ssr: false },
+);
 
 const TOOL = getTool("/add-watermark-to-pdf")!;
 

@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
+import { guides } from "@/lib/guides";
 import { SITE } from "@/lib/site";
 import { tools } from "@/lib/tools";
 
-const STATIC_PATHS = ["/", "/about", "/privacy", "/why-browser-based"];
+const STATIC_PATHS = ["/", "/about", "/privacy", "/why-browser-based", "/blog"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -22,14 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Blog guide stubs (registry-driven).
-  const guideSlugs = Array.from(
-    new Set(
-      tools.map((t) => t.guideSlug).filter((g): g is string => Boolean(g)),
-    ),
-  );
-  const guideEntries: MetadataRoute.Sitemap = guideSlugs.map((slug) => ({
-    url: `${base}/blog/${slug}`,
+  // All blog guides — driven by the guides registry so none are missed.
+  const guideEntries: MetadataRoute.Sitemap = guides.map((g) => ({
+    url: `${base}/blog/${g.slug}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.6,

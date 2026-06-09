@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { MdxLayout } from "@/components/blog/MdxLayout";
+import { MdxLayout, type MdxFaq } from "@/components/blog/MdxLayout";
+import { RelatedGuides } from "@/components/blog/RelatedGuides";
 import { UseToolCta } from "@/components/blog/UseToolCta";
 import { Container } from "@/components/ui/Container";
 import { getGuide } from "@/lib/guides";
@@ -56,6 +57,33 @@ const HEADINGS = [
   },
 ];
 
+const FAQS: MdxFaq[] = [
+  {
+    q: "What's the difference between HEIC and HEIF?",
+    a: "HEIC is Apple's name for files using the HEIF container with HEVC-encoded image data. In practice they're the same thing for most users, and the tool accepts both extensions.",
+  },
+  {
+    q: "Will the output PDF be smaller than the original photos?",
+    a: "Usually yes for HEIC — we decode HEIC and re-encode as JPEG at high quality. JPEG is typically a bit larger than HEIC per photo, but the combined PDF is generally smaller than the sum of the originals because the PDF container deduplicates shared data.",
+  },
+  {
+    q: "Does the PDF preserve photo metadata (date, GPS)?",
+    a: "No. The PDF wraps the visible image only — EXIF metadata from the original photos isn't carried over. Save the original HEIC files alongside the PDF if you need GPS coordinates or timestamps.",
+  },
+  {
+    q: "Is anything uploaded?",
+    a: "No. The entire conversion — including HEIC decoding — happens in your browser using a WebAssembly library. Your photos never reach our server. No signup and no account required.",
+  },
+  {
+    q: "What about Live Photos?",
+    a: "We extract just the still image — the motion clip in a Live Photo is dropped. For a PDF, that's almost always what you want.",
+  },
+  {
+    q: "Can I add photos from non-iPhone sources in the same PDF?",
+    a: "Yes. You can mix HEIC files with regular JPGs or PNGs in the same drop zone. They'll be combined in the order you arrange them. For a JPG-only workflow, the JPG to PDF tool has the same engine with a simpler interface.",
+  },
+];
+
 export default function GuidePage() {
   return (
     <MdxLayout
@@ -67,11 +95,13 @@ export default function GuidePage() {
         toolSlug: GUIDE.toolSlug,
       }}
       headings={HEADINGS}
+      faqs={FAQS}
     >
       <Content />
       <Container size="sm" className="px-0">
         <UseToolCta toolSlug="/heic-to-pdf" />
         <UseToolCta toolSlug="/jpg-to-pdf" />
+        <RelatedGuides slug={GUIDE.slug} />
       </Container>
     </MdxLayout>
   );

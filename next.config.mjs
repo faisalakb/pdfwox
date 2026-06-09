@@ -3,6 +3,33 @@ import createMDX from "@next/mdx";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
+  experimental: {
+    optimizePackageImports: ["react-dropzone", "comlink"],
+  },
+  async headers() {
+    return [
+      {
+        // Embed routes: allow framing by any origin (the whole point of embeds)
+        source: "/embed/:path*",
+        headers: [
+          { key: "Content-Security-Policy", value: "frame-ancestors *" },
+          // X-Frame-Options cannot express "any origin" — omit it for embed routes
+          // so the CSP frame-ancestors directive takes precedence.
+        ],
+      },
+      {
+        // Everything else: only allow framing by same origin (clickjacking protection)
+        source: "/((?!embed).*)",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          {
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self'",
+          },
+        ],
+      },
+    ];
+  },
   turbopack: {
     resolve: {
       alias: {

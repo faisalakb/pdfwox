@@ -64,6 +64,14 @@ export async function getPdfApi(): Promise<Remote<PdfApi>> {
   return cached;
 }
 
+/**
+ * Pre-warm the worker so it's ready before the user drops a file.
+ * Call in a useEffect on tool page mount — fire-and-forget.
+ */
+export function warmPdfWorker(): void {
+  void getPdfApi();
+}
+
 /** Terminate the worker. Useful for tests and reset paths. */
 export function terminatePdfApi(): void {
   worker?.terminate();

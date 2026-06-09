@@ -1,9 +1,14 @@
+import nextDynamic from "next/dynamic";
 import { ToolPageLayout } from "@/components/ToolPageLayout";
 import { buildMetadata } from "@/lib/seo";
 import { getTool } from "@/lib/tools";
-import { CreateShell } from "./CreateShell";
 
 export const dynamic = "force-static";
+
+const CreateShell = nextDynamic(
+  () => import("./CreateShell").then((m) => ({ default: m.CreateShell })),
+  { ssr: false },
+);
 
 const TOOL = getTool("/create-fillable-pdf")!;
 

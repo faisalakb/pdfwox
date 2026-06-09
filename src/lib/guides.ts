@@ -29,6 +29,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to make a pdf fillable",
     excerpt:
       "Drag rectangles onto the page to add text fields, checkboxes, and signature spots. Save once — recipients fill it anywhere.",
+    relatedGuideSlugs: [
+      "how-to-fill-a-pdf-on-iphone",
+      "how-to-add-signature-to-pdf",
+      "how-to-annotate-a-pdf",
+    ],
   },
   {
     slug: "how-to-turn-iphone-photos-into-a-pdf",
@@ -40,6 +45,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to turn iphone photos into a pdf",
     excerpt:
       "HEIC is great on iPhone, painful everywhere else. Decode and combine into a clean multi-page PDF without uploading anything.",
+    relatedGuideSlugs: [
+      "how-to-scan-documents-to-pdf",
+      "how-to-fill-a-pdf-on-iphone",
+      "how-to-add-signature-to-pdf",
+    ],
   },
   {
     slug: "how-to-scan-documents-to-pdf",
@@ -51,6 +61,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to scan documents to pdf",
     excerpt:
       "From paper to searchable PDF in one minute, all in your browser. Includes the tips that actually move quality.",
+    relatedGuideSlugs: [
+      "how-to-turn-iphone-photos-into-a-pdf",
+      "how-to-extract-images-from-a-pdf",
+      "how-to-edit-a-pdf",
+    ],
   },
   {
     slug: "how-to-add-signature-to-pdf",
@@ -62,6 +77,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to add signature to pdf",
     excerpt:
       "Three signature modes, one drag to place, save to reuse on the same device. Nothing uploaded.",
+    relatedGuideSlugs: [
+      "how-to-fill-a-pdf-on-iphone",
+      "how-to-annotate-a-pdf",
+      "how-to-make-a-pdf-fillable",
+    ],
   },
   {
     slug: "how-to-add-watermark-to-pdf",
@@ -73,6 +93,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to add watermark to pdf",
     excerpt:
       "DRAFT, CONFIDENTIAL, your logo — every option, baked into the file, all in your browser.",
+    relatedGuideSlugs: [
+      "how-to-remove-watermark-from-pdf",
+      "how-to-redact-a-pdf",
+      "how-to-edit-a-pdf",
+    ],
   },
   {
     slug: "how-to-remove-watermark-from-pdf",
@@ -84,6 +109,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to remove watermark from pdf",
     excerpt:
       "Overlay text watermarks: removable. Flattened image watermarks: not really. Here's how to tell which is which.",
+    relatedGuideSlugs: [
+      "how-to-add-watermark-to-pdf",
+      "how-to-redact-a-pdf",
+      "how-to-remove-password-from-pdf",
+    ],
   },
   {
     slug: "how-to-redact-a-pdf",
@@ -95,6 +125,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to redact a pdf",
     excerpt:
       "Most 'redact PDF' tools just draw a black box on top. The text underneath is still copyable. Here's the right way.",
+    relatedGuideSlugs: [
+      "how-to-edit-a-pdf",
+      "how-to-remove-watermark-from-pdf",
+      "how-to-annotate-a-pdf",
+    ],
   },
   {
     slug: "how-to-annotate-a-pdf",
@@ -106,6 +141,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to annotate a pdf",
     excerpt:
       "Five annotation modes, every popular reader compatible, nothing uploaded. The fast guide.",
+    relatedGuideSlugs: [
+      "how-to-edit-a-pdf",
+      "how-to-redact-a-pdf",
+      "how-to-add-signature-to-pdf",
+    ],
   },
   {
     slug: "how-to-remove-password-from-pdf",
@@ -117,6 +157,11 @@ export const guides: GuideMeta[] = [
     primaryKeyword: "how to remove password from pdf",
     excerpt:
       "Strip the password from a PDF you can already open, including owner restrictions like 'can't print' or 'can't copy'.",
+    relatedGuideSlugs: [
+      "how-to-edit-a-pdf",
+      "how-to-redact-a-pdf",
+      "how-to-make-a-pdf-fillable",
+    ],
   },
 
   /* ─────────────── Week 10: cluster expansion ─────────────── */

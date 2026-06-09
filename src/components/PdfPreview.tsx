@@ -138,7 +138,18 @@ export function PdfPreview({
         </div>
       )}
       <div className="relative inline-block overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]">
-        <canvas ref={canvasRef} className="block max-w-full" />
+        {/* Skeleton reserves space while the canvas renders, preventing CLS. */}
+        {bytes && !meta && (
+          <div
+            className="w-full animate-pulse bg-[var(--color-surface-muted)]"
+            style={{ aspectRatio: "1 / 1.414", minWidth: 280 }}
+          />
+        )}
+        <canvas
+          ref={canvasRef}
+          className="block max-w-full"
+          style={{ display: meta ? "block" : "none" }}
+        />
         {overlay && meta && (
           <div
             className="pointer-events-auto absolute inset-0"

@@ -96,6 +96,14 @@ export function SiteFooter() {
                 Guides
               </Link>
             </li>
+            <li>
+              <Link
+                href="/changelog"
+                className="focus-ring hover:text-[var(--color-ink)]"
+              >
+                Changelog
+              </Link>
+            </li>
           </ul>
         </div>
       </Container>

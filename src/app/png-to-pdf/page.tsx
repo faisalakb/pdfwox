@@ -1,9 +1,17 @@
+import nextDynamic from "next/dynamic";
 import { ToolPageLayout } from "@/components/ToolPageLayout";
-import { ImagesToPdfShell } from "@/components/ImagesToPdfShell";
 import { buildMetadata } from "@/lib/seo";
 import { getTool } from "@/lib/tools";
 
 export const dynamic = "force-static";
+
+const ImagesToPdfShell = nextDynamic(
+  () =>
+    import("@/components/ImagesToPdfShell").then((m) => ({
+      default: m.ImagesToPdfShell,
+    })),
+  { ssr: false },
+);
 
 const TOOL = getTool("/png-to-pdf")!;
 

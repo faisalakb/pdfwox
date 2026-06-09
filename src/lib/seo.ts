@@ -59,9 +59,10 @@ export function softwareApplicationLd(tool: Tool): JsonLd {
     "@type": "SoftwareApplication",
     name: tool.name,
     url: `${SITE.url}${tool.slug}`,
-    applicationCategory: "Utility",
-    operatingSystem: "Any (web browser)",
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Web",
     description: tool.description,
+    featureList: tool.howTo.map((s) => s.name).join(", "),
     offers: {
       "@type": "Offer",
       price: "0",
