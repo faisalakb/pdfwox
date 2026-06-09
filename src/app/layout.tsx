@@ -57,7 +57,7 @@ export default function RootLayout({
       lang="en"
       className={`${body.variable} ${display.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className="theme-hero-dark flex min-h-full flex-col">
         <ToastProvider>
           <SiteHeader />
           <main id="main" className="flex-1">

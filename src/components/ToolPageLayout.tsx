@@ -199,7 +199,7 @@ export function ToolPageLayout({ tool, children, intro }: ToolPageLayoutProps) {
               </div>
               <Link
                 href={`/blog/${tool.guideSlug}`}
-                className="focus-ring inline-flex h-11 items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-ink)] px-4 text-sm font-medium text-[var(--color-canvas)] transition-opacity hover:opacity-90"
+                className="focus-ring inline-flex h-11 items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 text-sm font-semibold text-[var(--color-accent-ink)] transition-all hover:scale-105 hover:brightness-110"
               >
                 Open the guide
                 <span aria-hidden="true">→</span>

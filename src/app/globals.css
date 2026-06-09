@@ -138,12 +138,28 @@ a {
 }
 
 /* ---------- Hero-dark theme scope ----------
- * Sections inside .theme-hero-dark live in the PdfHero3D world:
- * deep navy canvas, warm paper ink, gold eyebrows. Used on the
- * homepage so the page below the 3D hero is one continuous design. */
+ * Applied globally (body) so every page lives in the dark world.
+ * All semantic tokens are remapped so components using var(--color-surface),
+ * var(--color-ink-muted) etc. automatically get dark equivalents without
+ * any per-component changes. */
 .theme-hero-dark {
   background: var(--color-hero-bg);
   color: var(--color-hero-ink-muted);
+
+  /* Remap light-world semantic tokens → dark equivalents */
+  --color-canvas: #10152A;
+  --color-surface: #1A2140;
+  --color-surface-muted: #161B35;
+  --color-ink: #F7F2E8;
+  --color-ink-muted: #9AA3C4;
+  --color-ink-subtle: #6B7494;
+  --color-line: #3A4368;
+  --color-line-strong: #4A5480;
+
+  /* Badge variants that look right on dark */
+  --color-accent-soft: rgba(226, 85, 61, 0.16);
+  --color-warning: #C9B87F;
+  --color-warning-soft: rgba(201, 184, 127, 0.14);
 }
 .theme-hero-dark h1,
 .theme-hero-dark h2,
