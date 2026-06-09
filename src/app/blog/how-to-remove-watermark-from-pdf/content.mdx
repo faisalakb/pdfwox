@@ -26,7 +26,7 @@ The word "cover" in the button is intentional. This is the most honest descripti
 
 Two limits worth being explicit about:
 
-- **The underlying watermark text is still in the file.** A reader displays the cover rectangle, not the watermark. But a tool that inspects the raw PDF bytes will still find the original text. If you need *cryptographic absence* (no recovery, ever), use the [Redact PDF tool](/redact-pdf) — it rebuilds the affected pages as images, which is harsher but absolute.
+- **The underlying watermark text is still in the file.** A reader displays the cover rectangle, not the watermark. But a tool that inspects the raw PDF bytes will still find the original text. If you need _cryptographic absence_ (no recovery, ever), use the [Redact PDF tool](/redact-pdf) — it rebuilds the affected pages as images, which is harsher but absolute.
 - **A bad cover color will look obviously wrong.** If your page is white and you cover with white, the result looks clean. If your page is cream and you cover with white, the cover rect shows. The tool lets you pick any color; pick the one closest to your page background.
 
 ## What you can do for rasterized watermarks

@@ -12,7 +12,11 @@ import type { NewFieldSpec } from "@/lib/pdf/addFields";
 import type { PageReplacement } from "@/lib/pdf/replacePages";
 import type { AnnotationSpec } from "@/lib/pdf/drawAnnotations";
 import type { AddWatermarkSpec } from "@/lib/pdf/addWatermark";
-import type { CoverRect, CoverWatermarksOptions } from "@/lib/pdf/coverWatermarks";
+import type {
+  CoverRect,
+  CoverWatermarksOptions,
+} from "@/lib/pdf/coverWatermarks";
+import type { SignaturePlacement } from "@/lib/pdf/placeSignature";
 
 /**
  * Main-thread Comlink wrapper. Lazy singleton — the Worker (and pdf-lib
@@ -41,6 +45,10 @@ export interface PdfApi {
     file: PdfBytes,
     rects: CoverRect[],
     opts?: CoverWatermarksOptions,
+  ): Promise<PdfBytes>;
+  placeSignature(
+    file: PdfBytes,
+    placements: SignaturePlacement[],
   ): Promise<PdfBytes>;
 }
 

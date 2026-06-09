@@ -10,6 +10,7 @@ import { ErrorState } from "@/components/ui/States";
 import { useToast } from "@/components/ui/Toast";
 import { bucketBytes, detectBrowser, track } from "@/lib/analytics";
 import { heicToJpeg } from "@/lib/pdf/heicDecode";
+import { decodeToJpeg } from "@/lib/pdf/canvasDecode";
 import type { ImagesToPdfOptions, PageSize } from "@/lib/pdf/types";
 import { getPdfApi } from "@/lib/workers/pdfClient";
 
@@ -23,6 +24,8 @@ export interface ImagesToPdfShellProps {
   defaultFilename?: string;
   /** Whether to decode HEIC items via heic2any before embedding. */
   enableHeic?: boolean;
+  /** Decode unsupported MIME types (WebP, BMP, GIF, ...) via canvas → JPEG. */
+  enableCanvasDecode?: boolean;
   dropzoneLabel?: React.ReactNode;
   dropzoneHint?: React.ReactNode;
 }
@@ -42,6 +45,7 @@ export function ImagesToPdfShell({
   accepts,
   defaultFilename = "images.pdf",
   enableHeic = false,
+  enableCanvasDecode = false,
   dropzoneLabel,
   dropzoneHint,
 }: ImagesToPdfShellProps) {
@@ -142,6 +146,9 @@ export function ImagesToPdfShell({
           items.push({ bytes: jpeg, mime: "image/jpeg" });
         } else if (e.mime === "image/png" || e.mime === "image/jpeg") {
           items.push({ bytes: buf, mime: e.mime });
+        } else if (enableCanvasDecode && e.mime.startsWith("image/")) {
+          const jpeg = await decodeToJpeg(buf, e.mime);
+          items.push({ bytes: jpeg, mime: "image/jpeg" });
         } else {
           throw new Error(`Unsupported file type: ${e.mime || e.file.name}`);
         }
@@ -177,7 +184,15 @@ export function ImagesToPdfShell({
         reason,
       });
     }
-  }, [entries, pageSize, margin, enableHeic, toolSlug, toast]);
+  }, [
+    entries,
+    pageSize,
+    margin,
+    enableHeic,
+    enableCanvasDecode,
+    toolSlug,
+    toast,
+  ]);
 
   if (phase === "empty") {
     return (

@@ -144,11 +144,7 @@ export async function addWatermark(
     imageHeight = (image.height / image.width) * imageWidth;
   }
 
-  const drawOne = (
-    page: import("pdf-lib").PDFPage,
-    x: number,
-    y: number,
-  ) => {
+  const drawOne = (page: import("pdf-lib").PDFPage, x: number, y: number) => {
     if (spec.source.kind === "text" && font) {
       const [r, g, b] = parseHex(spec.source.color);
       page.drawText(spec.source.text, {

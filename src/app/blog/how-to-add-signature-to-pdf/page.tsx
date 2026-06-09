@@ -8,7 +8,7 @@ import Content from "./content.mdx";
 
 export const dynamic = "force-static";
 
-const GUIDE = getGuide("how-to-remove-watermark-from-pdf")!;
+const GUIDE = getGuide("how-to-add-signature-to-pdf")!;
 
 export const metadata: Metadata = {
   title: GUIDE.title,
@@ -25,23 +25,28 @@ export const metadata: Metadata = {
 
 const HEADINGS = [
   {
-    id: "three-kinds-of-watermark",
-    text: "Three kinds of watermark",
+    id: "three-ways-to-make-a-signature",
+    text: "Three ways to make a signature",
     depth: 2 as const,
   },
   {
-    id: "the-90-second-method-for-overlay-text-watermarks",
-    text: "The 90-second method for overlay text watermarks",
+    id: "the-60-second-method",
+    text: "The 60-second method",
     depth: 2 as const,
   },
   {
-    id: "what-this-approach-cant-do",
-    text: "What this approach can't do",
+    id: "save-this-signature-on-this-device",
+    text: "'Save this signature on this device'",
     depth: 2 as const,
   },
   {
-    id: "what-you-can-do-for-rasterized-watermarks",
-    text: "What you can do for rasterized watermarks",
+    id: "when-you-should-not-use-this",
+    text: "When you should not use this",
+    depth: 2 as const,
+  },
+  {
+    id: "tips-for-clean-placement",
+    text: "Tips for clean placement",
     depth: 2 as const,
   },
   {
@@ -49,7 +54,11 @@ const HEADINGS = [
     text: "Frequently asked questions",
     depth: 2 as const,
   },
-  { id: "the-short-version", text: "The short version", depth: 2 as const },
+  {
+    id: "the-shortest-version",
+    text: "The shortest version",
+    depth: 2 as const,
+  },
 ];
 
 export default function GuidePage() {
@@ -66,8 +75,8 @@ export default function GuidePage() {
     >
       <Content />
       <Container size="sm" className="px-0">
-        <UseToolCta toolSlug="/remove-watermark-from-pdf" />
-        <UseToolCta toolSlug="/redact-pdf" />
+        <UseToolCta toolSlug="/sign-pdf" />
+        <UseToolCta toolSlug="/fill-pdf" />
       </Container>
     </MdxLayout>
   );

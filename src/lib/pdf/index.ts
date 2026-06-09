@@ -28,12 +28,7 @@ export {
   type CoverRect,
   type CoverWatermarksOptions,
 } from "./coverWatermarks";
-export {
-  redact,
-  annotate,
-  addWatermark,
-  removeWatermark,
-  sign,
-  pdfToText,
-  ocrPdf,
-} from "./stubs";
+export { placeSignature, type SignaturePlacement } from "./placeSignature";
+export { extractText, type ExtractedPdfText } from "./extractText";
+export { ocrSandwich, type OcrProgress } from "./ocrSandwich";
+export { sign, pdfToText, ocrPdf } from "./stubs";

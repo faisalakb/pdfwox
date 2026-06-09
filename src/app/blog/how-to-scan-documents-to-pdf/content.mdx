@@ -1,0 +1,92 @@
+Scanning a paper document and turning it into a PDF used to require a scanner. Now your phone is the scanner — and so is your browser. This guide covers the full path: capture a clean image of the document, turn it into a searchable PDF, and walk away with a file you can email or upload anywhere.
+
+## The two stages, made explicit
+
+Every "scan to searchable PDF" workflow is actually two operations stacked together:
+
+1. **Capture.** Get a clean image of each page. Quality here determines everything that follows.
+2. **OCR.** Read the text out of the image and embed it under the page in your PDF, so it's searchable and copy-pastable.
+
+People conflate these because most apps do both. If you're doing it manually — phone camera plus a separate browser tool — knowing they're separate helps you fix problems at the right layer.
+
+## Capture: phone or scanner?
+
+On a phone, the built-in camera works fine. Apps like Apple's Notes ("Scan Documents") and Google Drive's "Scan" feature also work and add automatic edge detection. They produce JPGs or PDFs.
+
+For best results, capture each page like this:
+
+- **Flat surface, good light.** Place the page on a contrasting background (the desk shouldn't blend with the paper). Even daylight is the friend of OCR; harsh shadows are the enemy.
+- **Camera directly overhead.** Tilt distorts the rectangle and confuses OCR. Hold the phone parallel to the page.
+- **Fill the frame.** Get as close as you can while keeping all corners visible. The more pixels per character, the better OCR works.
+- **One page per shot.** Multi-page captures save time but multiply errors. Single pages are simpler.
+
+If you have a real scanner, use it. Set the DPI to 300 — higher is overkill for OCR; lower starts hurting accuracy.
+
+## From captured images to a PDF
+
+If your camera gave you JPGs:
+
+1. Open the [JPG to PDF tool](/jpg-to-pdf), drop your captures in, set the page size to "Fit to image" so there's no extra white border, and save.
+
+If you captured directly to a PDF (Notes app, Google Drive Scan, etc.), you already have a PDF. Skip to OCR.
+
+## OCR: making the text searchable
+
+A "PDF" of a scan is just images. Until you OCR it, you can't select text, search for words, or paste a quote. The fix is the [OCR PDF tool](/ocr-pdf):
+
+1. Drop your scan PDF onto the page.
+2. Wait. The first run downloads a ~3 MB English language model; on a modern laptop, that's a few seconds. Subsequent runs reuse the cached model.
+3. The tool renders each page, runs OCR locally in your browser, and bakes an invisible text layer behind the page image.
+4. Download the result. It looks identical to the input. Open it in any reader; you can now select, search, and copy.
+
+The output is what's called a "sandwich PDF" — the original page on top (visible), the recognised text underneath (invisible but selectable). It's the standard format every modern PDF reader knows how to use.
+
+## Tips for better OCR
+
+**Skew kills accuracy.** If the page tilts more than ~5°, OCR errors multiply. Most phone scanning apps auto-deskew; if yours doesn't, the [Crop Documents](https://example.com/crop) tool or a manual rotate fixes this.
+
+**Contrast matters more than resolution.** A 150 DPI scan of a sharp black-on-white page outperforms a 300 DPI scan of a washed-out one. If the result is poor, try increasing your scanner's contrast setting and rescanning.
+
+**One language at a time.** Tesseract.js can OCR in different languages, but the current tool uses English by default. For mixed-language documents, the result is best on the dominant language.
+
+**Tables don't always survive.** OCR reads text top-to-bottom, left-to-right. Tables can come out as one long list rather than structured rows. For tables, consider snipping out the table region as a separate image and processing it in dedicated table OCR.
+
+## When OCR isn't enough
+
+Some documents need more than OCR: handwriting (Tesseract.js does poorly on cursive), high-density text (a 4pt footnote isn't really readable by anyone), or text in unusual fonts.
+
+For these, a cloud OCR service (Google Vision, AWS Textract) gives substantially better results — at the cost of uploading the file to a third party. The [/api/ocr](/api/ocr) endpoint in our codebase is the place that connects to those services if you choose to enable them. The default in-browser path doesn't.
+
+## Frequently asked questions
+
+### Does the OCR really run in my browser?
+
+Yes. Tesseract.js is a JavaScript/WebAssembly port of the Tesseract OCR engine. After the one-time model download, everything happens locally in your browser tab.
+
+### How long does OCR take?
+
+About 5–10 seconds per page on a modern laptop. A long document takes proportionally longer. There's a progress indicator so you can see what's happening.
+
+### Are my files uploaded?
+
+No. The image of the scan, the OCR processing, and the resulting searchable PDF all stay in your browser. Verifiable in DevTools → Network — you'll see the model download on first use, but no upload of your file.
+
+### Does it work in different languages?
+
+The current tool uses the English model. If you need French, Spanish, German, or another language, drop us a line — we'll add multi-language support if there's demand.
+
+### Will it run on my phone?
+
+Yes, on a modern mobile browser. Performance is slower than on a laptop but acceptable for short documents. iOS Safari is fast; Chrome on Android is roughly comparable.
+
+### What about handwriting?
+
+Tesseract is trained on printed text. Handwriting recognition is hit-or-miss. For handwritten notes you really need searchable, a cloud service designed for handwriting (or a dedicated app like GoodNotes) will outperform browser OCR.
+
+### Can I edit the recognised text?
+
+The [PDF to Text tool](/pdf-to-text) extracts the recognised text as a `.txt` file you can edit. The searchable PDF itself is fixed — to edit the visible page, you'd need to re-typeset the document.
+
+## The shortest version
+
+Capture → [JPG to PDF](/jpg-to-pdf) (if needed) → [OCR PDF](/ocr-pdf) → searchable PDF. All in your browser, no upload, about a minute per page.

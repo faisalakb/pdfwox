@@ -87,7 +87,12 @@ export function AddWatermarkShell() {
     }
     if (!imageBytes) return null;
     return {
-      source: { kind: "image", bytes: imageBytes, mime: imageMime, width: imageWidth },
+      source: {
+        kind: "image",
+        bytes: imageBytes,
+        mime: imageMime,
+        width: imageWidth,
+      },
       opacity,
       position,
       tile,
@@ -117,10 +122,7 @@ export function AddWatermarkShell() {
   React.useEffect(() => {
     if (!bytes || phase === "empty" || phase === "processing") return;
     const spec = buildSpec();
-    if (!spec) {
-      setPreviewBytes(bytes);
-      return;
-    }
+    if (!spec) return; // preview stays at the last good frame
     const seq = ++previewSeqRef.current;
     const handle = setTimeout(async () => {
       try {
@@ -244,8 +246,8 @@ export function AddWatermarkShell() {
             />
           ) : null}
           <p className="mt-3 text-sm text-[var(--color-ink-muted)]">
-            Live preview — your change appears in the page above as you
-            tweak the controls.
+            Live preview — your change appears in the page above as you tweak
+            the controls.
           </p>
         </div>
 
@@ -290,7 +292,10 @@ export function AddWatermarkShell() {
                       value={size}
                       onChange={(e) =>
                         setSize(
-                          Math.max(8, Math.min(144, Number(e.target.value) || 0)),
+                          Math.max(
+                            8,
+                            Math.min(144, Number(e.target.value) || 0),
+                          ),
                         )
                       }
                     />
@@ -405,9 +410,7 @@ export function AddWatermarkShell() {
                 </button>
               ))}
             </div>
-            {tile && (
-              <HelpText>Position is disabled while tiling.</HelpText>
-            )}
+            {tile && <HelpText>Position is disabled while tiling.</HelpText>}
           </Card>
 
           <Card variant="muted">

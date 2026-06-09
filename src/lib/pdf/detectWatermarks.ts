@@ -34,9 +34,8 @@ export async function detectWatermarks(
   opts: { coverageThreshold?: number } = {},
 ): Promise<WatermarkCandidate[]> {
   const threshold = opts.coverageThreshold ?? 0.6;
-  const pdfjs = (await import(
-    "pdfjs-dist/legacy/build/pdf.mjs"
-  )) as typeof import("pdfjs-dist");
+  const pdfjs =
+    (await import("pdfjs-dist/legacy/build/pdf.mjs")) as typeof import("pdfjs-dist");
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     "pdfjs-dist/legacy/build/pdf.worker.mjs",
     import.meta.url,
@@ -52,10 +51,7 @@ export async function detectWatermarks(
     width: number;
     height: number;
   };
-  const byText = new Map<
-    string,
-    { pages: Set<number>; occurrences: Occ[] }
-  >();
+  const byText = new Map<string, { pages: Set<number>; occurrences: Occ[] }>();
 
   for (let i = 0; i < pageCount; i++) {
     const page = await doc.getPage(i + 1);

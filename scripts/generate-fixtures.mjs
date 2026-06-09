@@ -38,11 +38,30 @@ async function makeFormPdf() {
   return doc.save();
 }
 
+async function makeTextPdf() {
+  const { StandardFonts } = await import("pdf-lib");
+  const doc = await PDFDocument.create();
+  doc.setTitle("fixture-text");
+  doc.setCreationDate(new Date(0));
+  doc.setModificationDate(new Date(0));
+  const font = await doc.embedFont(StandardFonts.Helvetica);
+  const page = doc.addPage([400, 400]);
+  page.drawText("TestSentinelText12345", { x: 40, y: 350, size: 14, font });
+  page.drawText("This is a test PDF used by the pdf-to-text E2E suite.", {
+    x: 40,
+    y: 320,
+    size: 10,
+    font,
+  });
+  return doc.save();
+}
+
 async function main() {
   await mkdir(OUT, { recursive: true });
   await writeFile(path.join(OUT, "two-page.pdf"), await makePdf(2));
   await writeFile(path.join(OUT, "three-page.pdf"), await makePdf(3));
   await writeFile(path.join(OUT, "form.pdf"), await makeFormPdf());
+  await writeFile(path.join(OUT, "text.pdf"), await makeTextPdf());
 
   // 1x1 PNG (red pixel) — minimal valid PNG.
   const onePxPng = Buffer.from(

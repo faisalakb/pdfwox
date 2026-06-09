@@ -12,6 +12,7 @@ import { replacePages } from "@/lib/pdf/replacePages";
 import { drawAnnotations } from "@/lib/pdf/drawAnnotations";
 import { addWatermark } from "@/lib/pdf/addWatermark";
 import { coverWatermarks } from "@/lib/pdf/coverWatermarks";
+import { placeSignature } from "@/lib/pdf/placeSignature";
 
 const api = {
   merge,
@@ -25,6 +26,7 @@ const api = {
   drawAnnotations,
   addWatermark,
   coverWatermarks,
+  placeSignature,
 };
 
 export type PdfWorkerApi = typeof api;

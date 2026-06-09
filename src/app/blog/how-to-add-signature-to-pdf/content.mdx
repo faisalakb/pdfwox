@@ -1,0 +1,81 @@
+For most everyday agreements — a rental form, a school permission slip, a vendor contract — an electronic signature is what the recipient wants and expects. You don't need a certificate authority, a notary, or specialized software. You need to put your signature image on a specific spot on a specific page, and you need to be done with it in under a minute.
+
+That's what the [Sign PDF tool](/sign-pdf) is for. Here's how to use it, and how to choose between the three signature creation modes.
+
+## Three ways to make a signature
+
+The tool gives you three tabs for creating your signature, and the right choice depends on the device you're on and what you want it to look like.
+
+- **Draw.** Best on a touchscreen or with a stylus. Drag your finger or pen across the canvas to draw a signature; this captures your actual signature shape. Works on mouse too, but mouse-drawn signatures tend to look stilted.
+- **Type.** Best when you don't have a touchscreen or just want it done fast. Type your name and we render it in a handwriting-style font. The result looks like a signature without you having to draw one. It won't match your real handwriting, but for everyday e-signatures, it does the job.
+- **Upload.** Best if you already have a high-quality scan of your signature. Take a clean photo or scan of your handwritten signature on white paper, save as PNG with a transparent background, and upload. The PNG transparency keeps the page visible behind your signature strokes.
+
+You can switch modes any time. Whichever you save last is the one that gets placed on the page.
+
+## The 60-second method
+
+1. **Open the [Sign PDF tool](/sign-pdf).** Drag your PDF onto the page.
+2. **Pick a tab.** Draw, Type, or Upload. Create your signature.
+3. **Click "Save signature".** The signature appears in the right-hand panel. Tick "Remember this signature on this device" if you'd like to skip step 2 next time.
+4. **Click on the page** where you want the signature to go. The signature appears centered on your click point at a reasonable default size. Add as many as you need; switch pages with the arrows.
+5. **Click "Sign & download".** The signature bakes into the page content. Open the result in any reader — it shows your signature on every page you placed it.
+
+## "Save this signature on this device"
+
+The tool can store a copy of your signature in your browser's local storage. The next time you visit the tool on this same browser, the signature is already loaded — you can skip straight to placement.
+
+The signature is stored locally. It doesn't sync to a server or to other devices. If you clear your browser data, the saved signature goes with it.
+
+To remove the saved signature without clearing the rest of your browser data, click "Forget saved" in the signature panel.
+
+## When you should _not_ use this
+
+Electronic signatures (the kind this tool produces) are accepted for most everyday agreements in most jurisdictions. They are typically _not_ sufficient for:
+
+- **Documents that require notarisation.** A notary's certification is different from your signature.
+- **Documents that require a digital signature with a cryptographic certificate.** Some banks, governments, and large enterprises require a real X.509-based signature with a CA-issued certificate. That's a separate workflow; this tool doesn't do it.
+- **Wills, trusts, real estate transfers in some jurisdictions.** Local rules vary; check before relying on a typed signature for high-stakes legal documents.
+
+If your recipient asks for a "digital signature" specifically, ask whether they mean an electronic signature image (what we produce) or a cryptographic one (we don't do that). Often the answer is the former.
+
+## Tips for clean placement
+
+**Use the page navigation buttons.** Above the preview, "Prev" and "Next" let you switch pages. You can place a signature on the cover page and your initials on every interior page in one session.
+
+**Sign over the line, not under it.** Most contract signature lines have a thin underline. Place your signature so the strokes sit above (and touching) the line, not below it. This looks like a real handwritten signature.
+
+**Pick a transparent PNG for uploads.** A JPG signature has a white box around it that will fight your page color. If you're scanning your handwritten signature, use a scanner that supports background removal, or open the result in any image editor and export as PNG with transparency.
+
+## Frequently asked questions
+
+### Will the recipient see this as a "real" signature?
+
+It will look like a real signature in any reader and in any printout. Whether it's legally binding depends on the document and your jurisdiction. For most everyday agreements (employment, residential rental, small contracts), yes.
+
+### Are my files uploaded?
+
+No. The PDF, the signature image, and the placement step all run in your browser. Verifiable in DevTools → Network.
+
+### What if I want to use a different signature for a different document?
+
+Sign one document, then click "Forget saved" before signing the next. Or just hit "Change" in the right-hand panel each time.
+
+### Can I undo a placement?
+
+Yes. Each placement appears in the right-hand list with an "×" to remove it.
+
+### What's a "PNG with transparency"?
+
+A PNG image where the area around the signature strokes is transparent rather than white. When placed on a page with content underneath, the page content shows through. Most modern scanners and image editors can produce one.
+
+### Can I rotate the signature?
+
+Not in v1. The signature is placed at the angle it was drawn in. If you need it rotated, rotate the source image before uploading.
+
+### What if I'm on a phone?
+
+Drag your finger across the canvas to draw. The result is captured at high resolution. Works in any mobile browser; iOS Safari is particularly good because of the precise capacitive touch.
+
+## The shortest version
+
+Draw, type, or upload a signature → click "Save signature" → click on the page → click "Sign & download". 60 seconds, browser-only, signed PDF.

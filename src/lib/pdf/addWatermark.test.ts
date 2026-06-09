@@ -67,7 +67,12 @@ describe("addWatermark", () => {
 
   it("image watermark embeds without throwing and produces a parseable PDF", async () => {
     const out = await addWatermark(pdf, {
-      source: { kind: "image", bytes: ONE_PX_PNG, mime: "image/png", width: 100 },
+      source: {
+        kind: "image",
+        bytes: ONE_PX_PNG,
+        mime: "image/png",
+        width: 100,
+      },
       position: "bottom-right",
       opacity: 0.5,
     });

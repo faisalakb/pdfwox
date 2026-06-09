@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Tailwind v4's auto-detection picks up files inside .next/cache that
+ * contain React Server Component payload chunks. Those chunks split
+ * arbitrary-value class strings at chunk boundaries, producing junk
+ * candidates like `text-[var(--color-in"])</script>...`. Explicitly
+ * exclude build artifacts so the parser only sees real source. */
+@source not "../../.next/**";
+@source not "../../node_modules/**";
+@source not "../../public/**";
+@source not "../../test-results/**";
+@source not "../../playwright-report/**";
+
 /* ---------- Design tokens ---------- */
 @theme {
   /* Typography */

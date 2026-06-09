@@ -71,7 +71,8 @@ export function RemoveWatermarkShell() {
       const found = await detectWatermarks(buf);
       // Get page count for the honesty message.
       const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
-      const doc = await pdfjs.getDocument({ data: new Uint8Array(buf) }).promise;
+      const doc = await pdfjs.getDocument({ data: new Uint8Array(buf) })
+        .promise;
       setPageCount(doc.numPages);
       setCandidates(found);
       setPhase("ready");
@@ -100,11 +101,15 @@ export function RemoveWatermarkShell() {
       for (const c of candidates) {
         if (!selected.has(c.text)) continue;
         for (const occ of c.occurrences) {
+          // pdf.js sometimes reports width=0 for short strings; estimate
+          // ~6pt per char as a safe fallback so the cover rect still hides
+          // the visible glyphs.
+          const estimatedWidth = c.text.length * 6;
           rects.push({
             page: occ.page,
             x: occ.x,
             y: occ.y - occ.height * 0.2,
-            width: occ.width || occ.text?.length || 100,
+            width: occ.width > 0 ? occ.width : estimatedWidth,
             height: occ.height * 1.4,
             padding: 2,
           });
@@ -176,14 +181,12 @@ export function RemoveWatermarkShell() {
     <div className="space-y-5">
       <Card variant="muted">
         <p className="text-sm text-[var(--color-ink)]">
-          <strong>What we can do:</strong> if a watermark is overlay text
-          (the kind you can select in Adobe Reader), we cover each
-          occurrence with a solid-color rectangle in the matching
-          background color.{" "}
-          <strong>What we can&apos;t do:</strong> remove watermarks
-          baked into a page image (scanned PDFs, flattened exports).
-          Those need the page itself rebuilt — a manual job for a real
-          editor.
+          <strong>What we can do:</strong> if a watermark is overlay text (the
+          kind you can select in Adobe Reader), we cover each occurrence with a
+          solid-color rectangle in the matching background color.{" "}
+          <strong>What we can&apos;t do:</strong> remove watermarks baked into a
+          page image (scanned PDFs, flattened exports). Those need the page
+          itself rebuilt — a manual job for a real editor.
         </p>
       </Card>
 

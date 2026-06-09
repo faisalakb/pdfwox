@@ -8,7 +8,7 @@ import Content from "./content.mdx";
 
 export const dynamic = "force-static";
 
-const GUIDE = getGuide("how-to-remove-watermark-from-pdf")!;
+const GUIDE = getGuide("how-to-scan-documents-to-pdf")!;
 
 export const metadata: Metadata = {
   title: GUIDE.title,
@@ -25,23 +25,29 @@ export const metadata: Metadata = {
 
 const HEADINGS = [
   {
-    id: "three-kinds-of-watermark",
-    text: "Three kinds of watermark",
+    id: "the-two-stages-made-explicit",
+    text: "The two stages, made explicit",
     depth: 2 as const,
   },
   {
-    id: "the-90-second-method-for-overlay-text-watermarks",
-    text: "The 90-second method for overlay text watermarks",
+    id: "capture-phone-or-scanner",
+    text: "Capture: phone or scanner?",
     depth: 2 as const,
   },
   {
-    id: "what-this-approach-cant-do",
-    text: "What this approach can't do",
+    id: "from-captured-images-to-a-pdf",
+    text: "From captured images to a PDF",
     depth: 2 as const,
   },
   {
-    id: "what-you-can-do-for-rasterized-watermarks",
-    text: "What you can do for rasterized watermarks",
+    id: "ocr-making-the-text-searchable",
+    text: "OCR: making the text searchable",
+    depth: 2 as const,
+  },
+  { id: "tips-for-better-ocr", text: "Tips for better OCR", depth: 2 as const },
+  {
+    id: "when-ocr-isnt-enough",
+    text: "When OCR isn't enough",
     depth: 2 as const,
   },
   {
@@ -49,7 +55,11 @@ const HEADINGS = [
     text: "Frequently asked questions",
     depth: 2 as const,
   },
-  { id: "the-short-version", text: "The short version", depth: 2 as const },
+  {
+    id: "the-shortest-version",
+    text: "The shortest version",
+    depth: 2 as const,
+  },
 ];
 
 export default function GuidePage() {
@@ -66,8 +76,8 @@ export default function GuidePage() {
     >
       <Content />
       <Container size="sm" className="px-0">
-        <UseToolCta toolSlug="/remove-watermark-from-pdf" />
-        <UseToolCta toolSlug="/redact-pdf" />
+        <UseToolCta toolSlug="/ocr-pdf" />
+        <UseToolCta toolSlug="/pdf-to-text" />
       </Container>
     </MdxLayout>
   );

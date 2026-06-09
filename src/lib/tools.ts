@@ -49,8 +49,12 @@ export interface Tool {
 const CLIENT_PRIVACY =
   "Files are processed entirely in your browser. Nothing is uploaded to any server.";
 
-const SERVER_PRIVACY =
+// Kept for the future cloud-OCR opt-in (see Week 9 / Appendix F). Until
+// a tool is flagged runtime: "server", no live tool references it; the
+// underscore prefix marks it intentionally unused for ESLint.
+const _SERVER_PRIVACY =
   "Files are processed on our server and deleted immediately after the result is returned. We don't store or share your data.";
+void _SERVER_PRIVACY;
 
 export const tools: Tool[] = [
   /* ─────────────── WAVE 1 ─────────────── */
@@ -590,7 +594,7 @@ export const tools: Tool[] = [
     shortDescription: "Add your signature to any PDF.",
     category: "sign",
     runtime: "client",
-    status: "soon",
+    status: "live",
     wave: 3,
     accepts: ["application/pdf"],
     primaryKeyword: "sign pdf",
@@ -637,11 +641,11 @@ export const tools: Tool[] = [
     h1: "Extract text from a PDF",
     title: "PDF to Text — Extract Text Free",
     description:
-      "Extract clean plain text from any PDF, including scans. We delete your file immediately after returning the result.",
+      "Pull clean plain text out of any PDF in your browser. Text PDFs extract instantly; scanned PDFs go through in-browser OCR.",
     shortDescription: "Extract clean text — works on scans too.",
     category: "ocr",
-    runtime: "server",
-    status: "soon",
+    runtime: "client",
+    status: "live",
     wave: 3,
     accepts: ["application/pdf"],
     primaryKeyword: "pdf to text",
@@ -651,33 +655,36 @@ export const tools: Tool[] = [
       { name: "Upload PDF", text: "Drop or pick the PDF." },
       {
         name: "We extract text",
-        text: "Text-based PDFs are parsed; scanned PDFs go through OCR.",
+        text: "Text-based PDFs are parsed instantly. Scanned PDFs go through OCR in your browser.",
       },
       {
-        name: "Copy or download",
-        text: "Copy the text or download a .txt file.",
+        name: "Edit & download",
+        text: "Clean up artifacts if you want, then download a .txt file.",
       },
     ],
     faqs: [
       {
-        q: "What about my privacy?",
-        a: "Your file is processed on our server and deleted immediately after the response. We don't store or share it.",
+        q: "Is my file uploaded?",
+        a: "No. Extraction and the OCR fallback both run in your browser tab. Verifiable in DevTools → Network.",
       },
       {
-        q: "Why not run OCR in the browser?",
-        a: "Cloud OCR is significantly more accurate. A browser-side fallback is available for the free tier.",
+        q: "How does OCR work in the browser?",
+        a: "Tesseract.js runs a WebAssembly OCR engine in a Web Worker. The first run downloads a ~3 MB English model; subsequent runs are fast.",
       },
       {
-        q: "Languages supported?",
-        a: "100+ languages including English, Spanish, French, German, Arabic, Chinese, Japanese.",
+        q: "Will it work on a poorly scanned PDF?",
+        a: "Quality depends on the scan. Clean, straight, high-contrast scans give the best results; faded or skewed scans return lower-quality text.",
       },
-      { q: "Max file size?", a: "50 MB per file." },
+      {
+        q: "Max file size?",
+        a: "Bounded by your device memory; we've tested up to 50 MB.",
+      },
       {
         q: "Will it preserve layout?",
         a: "Plain text loses layout. For a searchable PDF that keeps the original page, use OCR PDF.",
       },
     ],
-    privacyLine: SERVER_PRIVACY,
+    privacyLine: CLIENT_PRIVACY,
   },
   {
     slug: "/ocr-pdf",
@@ -685,11 +692,11 @@ export const tools: Tool[] = [
     h1: "Make a scanned PDF searchable (OCR)",
     title: "OCR PDF — Make a Scan Searchable & Selectable",
     description:
-      "Run OCR on a scanned PDF to add an invisible text layer. You can then select, copy, and search the text.",
+      "Run OCR on a scanned PDF in your browser to add an invisible text layer. You can then select, copy, and search the text.",
     shortDescription: "Make scans searchable & selectable.",
     category: "ocr",
-    runtime: "server",
-    status: "soon",
+    runtime: "client",
+    status: "live",
     wave: 3,
     accepts: ["application/pdf"],
     primaryKeyword: "ocr pdf",
@@ -699,7 +706,7 @@ export const tools: Tool[] = [
       { name: "Upload PDF", text: "Drop the scanned PDF." },
       {
         name: "We OCR each page",
-        text: "An invisible text layer is added behind the page image.",
+        text: "Tesseract.js runs in your browser; an invisible text layer is added behind the page image.",
       },
       {
         name: "Download searchable PDF",
@@ -711,10 +718,9 @@ export const tools: Tool[] = [
         q: "Will the page look different?",
         a: "No — visually it's the same. We add an invisible text layer underneath.",
       },
-      { q: "Languages?", a: "100+ languages, auto-detected per page." },
       {
-        q: "Privacy?",
-        a: "File processed server-side and deleted immediately after the response.",
+        q: "Does this run on your server?",
+        a: "No. The OCR runs in your browser via Tesseract.js + WebAssembly. The first run downloads a ~3 MB English model; subsequent runs are fast.",
       },
       {
         q: "Editable text?",
@@ -722,10 +728,151 @@ export const tools: Tool[] = [
       },
       {
         q: "How accurate is OCR?",
-        a: "Typically 95%+ on clean scans, less for low-resolution or skewed images.",
+        a: "Typically 90%+ on clean scans, less for low-resolution or skewed images.",
+      },
+      {
+        q: "How long does it take?",
+        a: "About 5–10 seconds per page on a modern laptop, plus the one-time model download.",
       },
     ],
-    privacyLine: SERVER_PRIVACY,
+    privacyLine: CLIENT_PRIVACY,
+  },
+
+  /* ─────────────── WAVE 3 long-tail converters ─────────────── */
+  {
+    slug: "/webp-to-pdf",
+    name: "WebP to PDF",
+    h1: "Convert WebP images to PDF",
+    title: "WebP to PDF Online Free — No Signup",
+    description:
+      "Combine WebP images into a single PDF in your browser. Reorder, choose page size, no upload required.",
+    shortDescription: "Combine WebP images into one PDF.",
+    category: "convert",
+    runtime: "client",
+    status: "live",
+    wave: 3,
+    accepts: ["image/webp"],
+    primaryKeyword: "webp to pdf",
+    relatedSlugs: ["/png-to-pdf", "/jpg-to-pdf", "/heic-to-pdf", "/bmp-to-pdf"],
+    guideSlug: "how-to-turn-iphone-photos-into-a-pdf",
+    howTo: [
+      { name: "Drop WebPs", text: "Pick one or many WebP files." },
+      { name: "Order pages", text: "Drag to reorder. Set the page size." },
+      { name: "Download PDF", text: "Click Make PDF to download." },
+    ],
+    faqs: [
+      {
+        q: "Are my files uploaded?",
+        a: "No. Conversion runs entirely in your browser.",
+      },
+      {
+        q: "Does this preserve quality?",
+        a: "Modern WebPs are decoded losslessly by your browser, then embedded as JPEG (visually identical for photos; lossless WebPs see minor recompression).",
+      },
+      {
+        q: "Can I mix WebP with JPG or PNG?",
+        a: "Yes — drop them all in.",
+      },
+      {
+        q: "Page size?",
+        a: "Choose A4, Letter, or fit-to-image.",
+      },
+      {
+        q: "Animated WebP?",
+        a: "Only the first frame is used.",
+      },
+    ],
+    privacyLine: CLIENT_PRIVACY,
+  },
+  {
+    slug: "/bmp-to-pdf",
+    name: "BMP to PDF",
+    h1: "Convert BMP images to PDF",
+    title: "BMP to PDF Online Free — No Signup",
+    description:
+      "Combine BMP bitmaps into a single PDF in your browser. Reorder, choose page size, no upload required.",
+    shortDescription: "Combine BMP images into one PDF.",
+    category: "convert",
+    runtime: "client",
+    status: "live",
+    wave: 3,
+    accepts: ["image/bmp"],
+    primaryKeyword: "bmp to pdf",
+    relatedSlugs: ["/png-to-pdf", "/jpg-to-pdf", "/webp-to-pdf", "/gif-to-pdf"],
+    guideSlug: "how-to-turn-iphone-photos-into-a-pdf",
+    howTo: [
+      { name: "Drop BMPs", text: "Pick one or many BMP files." },
+      { name: "Order pages", text: "Drag to reorder. Set the page size." },
+      { name: "Download PDF", text: "Click Make PDF to download." },
+    ],
+    faqs: [
+      {
+        q: "Are my files uploaded?",
+        a: "No. Conversion runs in your browser.",
+      },
+      {
+        q: "Why is BMP rare?",
+        a: "BMP is uncompressed. Files are large, but the decode is exact — every pixel survives.",
+      },
+      {
+        q: "Page size?",
+        a: "Choose A4, Letter, or fit-to-image.",
+      },
+      {
+        q: "Compression after conversion?",
+        a: "BMPs are converted to JPEG inside the PDF for reasonable file size.",
+      },
+      {
+        q: "Mix with other formats?",
+        a: "Yes — JPG, PNG, WebP, GIF all in one PDF.",
+      },
+    ],
+    privacyLine: CLIENT_PRIVACY,
+  },
+  {
+    slug: "/gif-to-pdf",
+    name: "GIF to PDF",
+    h1: "Convert GIF images to PDF",
+    title: "GIF to PDF Online Free — No Signup",
+    description:
+      "Combine GIF images into a single PDF in your browser. Reorder, choose page size, no upload required.",
+    shortDescription: "Combine GIF images into one PDF.",
+    category: "convert",
+    runtime: "client",
+    status: "live",
+    wave: 3,
+    accepts: ["image/gif"],
+    primaryKeyword: "gif to pdf",
+    relatedSlugs: ["/png-to-pdf", "/jpg-to-pdf", "/webp-to-pdf", "/bmp-to-pdf"],
+    guideSlug: "how-to-turn-iphone-photos-into-a-pdf",
+    howTo: [
+      { name: "Drop GIFs", text: "Pick one or many GIF files." },
+      { name: "Order pages", text: "Drag to reorder. Set the page size." },
+      { name: "Download PDF", text: "Click Make PDF to download." },
+    ],
+    faqs: [
+      {
+        q: "Animated GIFs?",
+        a: "We use the first frame. PDFs don't natively support animation; for animated content, screen-record and use the resulting MP4.",
+      },
+      {
+        q: "Are my files uploaded?",
+        a: "No.",
+      },
+      {
+        q: "Transparency?",
+        a: "PDF pages don't have transparency — transparent pixels are composited onto white.",
+      },
+      {
+        q: "Page size?",
+        a: "Choose A4, Letter, or fit-to-image.",
+      },
+      {
+        q: "Mix with other formats?",
+        a: "Yes.",
+      },
+    ],
+    privacyLine: CLIENT_PRIVACY,
   },
 ];
 

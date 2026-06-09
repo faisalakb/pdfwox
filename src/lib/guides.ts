@@ -40,6 +40,28 @@ export const guides: GuideMeta[] = [
       "HEIC is great on iPhone, painful everywhere else. Decode and combine into a clean multi-page PDF without uploading anything.",
   },
   {
+    slug: "how-to-scan-documents-to-pdf",
+    title: "How to scan documents to a searchable PDF",
+    description:
+      "Turn a paper document into a searchable PDF: scan or photograph it, then run OCR in your browser. No upload. Works on iPhone, Android, and laptop.",
+    datePublished: "2026-06-09",
+    toolSlug: "/ocr-pdf",
+    primaryKeyword: "how to scan documents to pdf",
+    excerpt:
+      "From paper to searchable PDF in one minute, all in your browser. Includes the tips that actually move quality.",
+  },
+  {
+    slug: "how-to-add-signature-to-pdf",
+    title: "How to add a signature to a PDF — draw, type, or upload",
+    description:
+      "Three ways to sign a PDF in your browser: draw with a mouse or finger, type your name in a handwriting font, or upload a signature image. All baked into the file.",
+    datePublished: "2026-06-09",
+    toolSlug: "/sign-pdf",
+    primaryKeyword: "how to add signature to pdf",
+    excerpt:
+      "Three signature modes, one drag to place, save to reuse on the same device. Nothing uploaded.",
+  },
+  {
     slug: "how-to-add-watermark-to-pdf",
     title: "How to add a watermark to a PDF — text, image, your choice",
     description:

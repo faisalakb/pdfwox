@@ -24,12 +24,36 @@ export const metadata: Metadata = {
 };
 
 const HEADINGS = [
-  { id: "the-five-choices-that-matter", text: "The five choices that matter", depth: 2 as const },
-  { id: "the-60-second-method", text: "The 60-second method", depth: 2 as const },
-  { id: "choosing-text-content", text: "Choosing text content", depth: 2 as const },
-  { id: "choosing-image-content", text: "Choosing image content", depth: 2 as const },
-  { id: "tiling-that-does-the-job", text: "Tiling that does the job", depth: 2 as const },
-  { id: "frequently-asked-questions", text: "Frequently asked questions", depth: 2 as const },
+  {
+    id: "the-five-choices-that-matter",
+    text: "The five choices that matter",
+    depth: 2 as const,
+  },
+  {
+    id: "the-60-second-method",
+    text: "The 60-second method",
+    depth: 2 as const,
+  },
+  {
+    id: "choosing-text-content",
+    text: "Choosing text content",
+    depth: 2 as const,
+  },
+  {
+    id: "choosing-image-content",
+    text: "Choosing image content",
+    depth: 2 as const,
+  },
+  {
+    id: "tiling-that-does-the-job",
+    text: "Tiling that does the job",
+    depth: 2 as const,
+  },
+  {
+    id: "frequently-asked-questions",
+    text: "Frequently asked questions",
+    depth: 2 as const,
+  },
   { id: "the-short-version", text: "The short version", depth: 2 as const },
 ];
 
