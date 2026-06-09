@@ -14,6 +14,8 @@ export interface GuideMeta {
   toolSlug?: string; // optional CTA target
   primaryKeyword?: string;
   excerpt: string;
+  /** Other guides this one funnels into / belongs alongside in a cluster. */
+  relatedGuideSlugs?: string[];
 }
 
 export const guides: GuideMeta[] = [
@@ -116,8 +118,96 @@ export const guides: GuideMeta[] = [
     excerpt:
       "Strip the password from a PDF you can already open, including owner restrictions like 'can't print' or 'can't copy'.",
   },
+
+  /* ─────────────── Week 10: cluster expansion ─────────────── */
+  {
+    slug: "how-to-edit-a-pdf",
+    title: "How to edit a PDF — a practical, honest map of your options",
+    description:
+      "'Edit a PDF' means five different things. Here's which one you actually need, and the right tool for each — all in your browser.",
+    datePublished: "2026-06-09",
+    primaryKeyword: "how to edit a pdf",
+    excerpt:
+      "Filling, annotating, redacting, signing, watermarking — each is a different operation. The honest breakdown plus the tool for each.",
+    relatedGuideSlugs: [
+      "how-to-make-a-pdf-fillable",
+      "how-to-annotate-a-pdf",
+      "how-to-redact-a-pdf",
+      "how-to-add-signature-to-pdf",
+    ],
+  },
+  {
+    slug: "how-to-extract-images-from-a-pdf",
+    title: "How to extract images from a PDF — three reliable methods",
+    description:
+      "Pull the embedded images out of a PDF and save them as PNG or JPG. Three methods compared, no signup, browser-only when possible.",
+    datePublished: "2026-06-09",
+    primaryKeyword: "how to extract images from a pdf",
+    excerpt:
+      "The fast path, the surgical path, and the path for tricky PDFs. Plus when 'extract' is the wrong question entirely.",
+    relatedGuideSlugs: [
+      "how-to-scan-documents-to-pdf",
+      "how-to-turn-iphone-photos-into-a-pdf",
+      "how-to-edit-a-pdf",
+    ],
+  },
+  {
+    slug: "how-to-rotate-pages-in-a-pdf",
+    title: "How to rotate pages in a PDF (single page or all)",
+    description:
+      "Rotate a single page, a range, or every page in a PDF — in your browser, with the rotation baked in so it survives in every reader.",
+    datePublished: "2026-06-09",
+    primaryKeyword: "how to rotate pages in a pdf",
+    excerpt:
+      "Three rotation paths depending on what you have and what you need. Including the case where rotation is hiding a different problem.",
+    relatedGuideSlugs: [
+      "how-to-edit-a-pdf",
+      "how-to-scan-documents-to-pdf",
+      "how-to-annotate-a-pdf",
+    ],
+  },
+  {
+    slug: "how-to-fill-a-pdf-on-iphone",
+    title: "How to fill out a PDF on iPhone (Safari only, no app needed)",
+    description:
+      "Fill out a PDF form on iPhone without installing an app. Three approaches; the one most people miss is the fastest.",
+    datePublished: "2026-06-09",
+    toolSlug: "/fill-pdf",
+    primaryKeyword: "how to fill a pdf on iphone",
+    excerpt:
+      "Mobile Safari is more capable than people realize. Here's the 60-second method for iPhone, no app store required.",
+    relatedGuideSlugs: [
+      "how-to-make-a-pdf-fillable",
+      "how-to-add-signature-to-pdf",
+      "how-to-turn-iphone-photos-into-a-pdf",
+    ],
+  },
+  {
+    slug: "pdf-vs-docx-which-to-send",
+    title: "PDF vs DOCX — which format to send (a practical guide)",
+    description:
+      "PDF for fidelity, DOCX for collaboration. The full decision tree, including the cases nobody talks about — and how to convert cleanly when you change your mind.",
+    datePublished: "2026-06-09",
+    primaryKeyword: "pdf vs docx",
+    excerpt:
+      "When PDF is the wrong choice. When DOCX is the wrong choice. The three workflows most people get wrong.",
+    relatedGuideSlugs: [
+      "how-to-edit-a-pdf",
+      "how-to-make-a-pdf-fillable",
+      "how-to-add-signature-to-pdf",
+    ],
+  },
 ];
 
 export function getGuide(slug: string): GuideMeta | undefined {
   return guides.find((g) => g.slug === slug);
+}
+
+export function relatedGuides(slug: string, max = 3): GuideMeta[] {
+  const guide = getGuide(slug);
+  if (!guide?.relatedGuideSlugs) return [];
+  return guide.relatedGuideSlugs
+    .map(getGuide)
+    .filter((g): g is GuideMeta => Boolean(g))
+    .slice(0, max);
 }

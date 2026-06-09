@@ -1,0 +1,42 @@
+A PDF that arrives in your inbox often has the one image you actually want — a logo, a chart, a scanned photo — embedded in the middle of the page. Selecting it like text doesn't work. Right-clicking sometimes does nothing. The 'save as image' option is grayed out. So how do you get the picture out?
+
+This guide covers three reliable methods, when to use each, and the common trap that makes "extract images" the wrong question to ask.
+
+## The three reliable methods
+
+**Method 1: Screenshot the page region.** Open the PDF in your reader, zoom in until the image looks sharp, take a screenshot of just the image. On Mac: Cmd+Shift+4 then drag. On Windows: Win+Shift+S. This is the fastest method, works on any PDF, and gives you a result indistinguishable from the original for most uses. The cost: you lose resolution if the PDF is showing the image smaller than it actually is.
+
+**Method 2: Use a dedicated extractor that pulls embedded images at original resolution.** A browser-based image-extraction tool reads the PDF's internal object table and pulls out the image objects untouched. You get the same bytes the PDF was carrying. This is the right method when image quality matters — print work, archival use, anything where you need the original pixels.
+
+**Method 3: For PDFs that are _themselves_ an image of a scan, use OCR + crop.** Scanned PDFs aren't really PDFs with embedded images — they're a single image per page, sometimes with an OCR text layer on top. To extract a region, run the page through [OCR PDF](/ocr-pdf) so you can see the text layer, then screenshot the region you care about.
+
+## When "extract images" is the wrong question
+
+A surprising number of "extract images from PDF" searches are people who actually want one of these:
+
+- **Convert the entire PDF to JPGs.** You want every page as a separate JPG. That's a "PDF to JPG" workflow, not image extraction. Look for a PDF-to-image tool.
+- **Take a single piece of text out as an image.** You want to grab a quote or a paragraph for use in a presentation. Method 1 (screenshot) is right for this.
+- **Save the page as it appears, formatted exactly.** You want a PNG of the page that includes the text and the image together. Same as the above; Method 1.
+- **OCR the image (extract the text from the image).** You don't actually want the image — you want the text inside it. Use [PDF to Text](/pdf-to-text); it'll OCR any image-only pages.
+
+If you fall in one of these cases, don't extract images; do the operation you actually want.
+
+## What about copyright?
+
+Worth mentioning: a PDF arrived in your inbox doesn't mean you have the right to redistribute the image inside it. Especially for stock photos, illustrations from books, or branded assets. Extracting is a technical operation; what you do with the extracted image is a legal one.
+
+## Tips for cleaner extraction
+
+**Use the original PDF, not a print-to-PDF re-export.** Re-exporting a PDF often re-encodes images at lower quality. If you can, work from the original.
+
+**Check for hidden alpha.** Some PDFs include images with transparency that doesn't render in the PDF reader but is preserved in the embedded image. A dedicated extractor pulls these correctly; screenshots flatten them.
+
+**Match the format to the use.** PNG for icons and screenshots, JPG for photos. The PDF stores whichever was originally embedded — you usually don't get to choose at extraction time.
+
+## Frequently asked questions
+
+The FAQ block below covers the most common follow-up questions. If yours isn't there, the full step-by-step is in the methods section above.
+
+## In one sentence
+
+For most use cases, screenshotting the region you care about is faster, gives you the result you need, and avoids the rabbit hole of dedicated extractor tools. Reach for a dedicated extractor when quality and original pixels actually matter.

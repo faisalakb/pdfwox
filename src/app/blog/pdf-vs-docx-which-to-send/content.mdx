@@ -1,0 +1,59 @@
+A common source of professional friction: you send someone a Word document, they ask for a PDF; you send a PDF, they ask for Word. The reason isn't pedantry — each format is built for a different purpose, and the wrong one in the wrong context creates real problems.
+
+Here's the practical decision guide: when to send each, when to send both, and how to convert cleanly when you change your mind.
+
+## What each format is actually for
+
+**PDF (Portable Document Format)** is a _fixed-layout_ format. The document you send looks identical on every device, every operating system, every printer. The recipient cannot accidentally re-flow your paragraphs, change your fonts, or shift your tables.
+
+**DOCX (Word's document format)** is an _editable_ format. The recipient can rewrite anything. Track changes work. Comments work. Two people can collaborate over time.
+
+That's the entire foundation. Every other decision follows from "do I want this to be edited, or do I want it to stay exactly how it is?"
+
+## When PDF is the right choice
+
+- **Anything you're signing or being asked to sign.** PDF freezes the wording so neither party can claim the contract changed.
+- **Anything for print.** PDF is designed for paper output; DOCX often shifts page breaks when printed from a different machine.
+- **Invoices, receipts, statements.** Financial documents are sent to be filed, not edited.
+- **Final-form deliverables.** A finished report, a published whitepaper, a portfolio piece.
+- **Anything you want to look identical on the recipient's screen.** Resumes, applications, presentations meant to be viewed not edited.
+
+## When DOCX is the right choice
+
+- **Any document being collaboratively edited.** Drafts, work-in-progress reports, articles being reviewed.
+- **Anything the recipient needs to update with their own info.** Templates, intake forms (when not real PDF forms), questionnaires.
+- **Source documents you'll re-export later.** Keep the DOCX as your master copy; export PDF for distribution.
+- **Track-changes / comments workflows.** Word's review tools are built into DOCX.
+
+## When you should send both
+
+It feels indecisive, but it's often correct. Two specific cases:
+
+- **A contract you want signed.** Send the PDF (the official version), but include the DOCX so the lawyer or counterparty can mark up changes for re-export.
+- **A document for someone who might want to reuse it.** A report to a colleague who'll cite it in their own work — they want both to read and to extract from.
+
+If you do send both, name them clearly so the recipient knows which is canonical: `Contract-v3-FINAL.pdf` and `Contract-v3-FINAL-source.docx`.
+
+## When PDF is the wrong choice (and people send it anyway)
+
+- **Resumes you want hiring managers to filter into an ATS.** Applicant tracking systems handle DOCX reliably; PDF parsing is hit-or-miss. Use DOCX for ATS, PDF for the cover-letter PDF version sent to a human.
+- **Job applications you fill out and the company wants editable.** Some company HR processes specifically request DOCX; check the instructions.
+- **Drafts under review.** If your team needs to comment, send DOCX. The "let's mark up the PDF" workflow is slower and less complete than Word's track changes.
+
+## When DOCX is the wrong choice (and people send it anyway)
+
+- **Anything where the layout matters.** Receipts, certificates, formal letters. The first thing the recipient may do is unintentionally re-flow your paragraphs by editing.
+- **Documents sent to mobile users.** DOCX rendering on phones is inconsistent. PDF renders predictably everywhere.
+- **Anything you've signed.** A signed DOCX has no meaningful proof of integrity; a signed PDF (especially a cryptographically signed one) does.
+
+## Converting between formats
+
+Converting DOCX to PDF is reliable: open the DOCX in Word, choose "Save As" → PDF. The output preserves layout exactly.
+
+Converting PDF to DOCX is unreliable for anything beyond plain prose. Tables come out broken, columns merge, footnotes go missing. If you have the source DOCX, use it; the PDF should be treated as the published artefact, not as an interchange format.
+
+There's a related family of "PDF editor" tools — including [our own annotate](/annotate-pdf) and [fill](/fill-pdf) tools — that let you mark up a PDF directly without round-tripping through Word. For most "I need to add a note to this PDF" cases, that's the right path.
+
+## In one sentence
+
+Send PDF when you want the document to stay still; send DOCX when you want it to be moved. Send both when the recipient might want both. Almost every confusion about which to send comes from someone not knowing which of those three columns their use case is in.

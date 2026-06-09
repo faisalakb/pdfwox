@@ -97,6 +97,31 @@ describe("JSON-LD builders (CI Rich-Results-Test stand-in)", () => {
     expect((parsed[1]?.mainEntity as unknown[] | undefined)?.length).toBe(6);
   });
 
+  it("guide-style Article+FAQPage combo parses correctly", () => {
+    const guideFaqs = [
+      { q: "Q1", a: "A1" },
+      { q: "Q2", a: "A2" },
+      { q: "Q3", a: "A3" },
+      { q: "Q4", a: "A4" },
+      { q: "Q5", a: "A5" },
+    ];
+    const ld = jsonLdString(
+      articleLd({
+        headline: "Example guide",
+        description: "An example guide for Week 10.",
+        url: "https://x.test/blog/example",
+        datePublished: "2026-06-09",
+      }),
+      faqPageLd(guideFaqs),
+    );
+    const parsed = JSON.parse(ld) as Array<Record<string, unknown>>;
+    expect(parsed[0]?.["@type"]).toBe("Article");
+    expect(parsed[1]?.["@type"]).toBe("FAQPage");
+    expect((parsed[1]?.mainEntity as unknown[] | undefined)?.length).toBe(
+      guideFaqs.length,
+    );
+  });
+
   it("every tool produces a valid combined LD block", () => {
     for (const t of tools) {
       const s = jsonLdString(

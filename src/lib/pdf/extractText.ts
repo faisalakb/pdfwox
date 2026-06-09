@@ -20,14 +20,19 @@ export interface ExtractedPdfText {
 export async function extractText(file: PdfBytes): Promise<ExtractedPdfText> {
   const pdfjs =
     (await import("pdfjs-dist/legacy/build/pdf.mjs")) as typeof import("pdfjs-dist");
-  try {
+  // Set workerSrc only in real browsers. Under Node/jsdom the ESM loader
+  // can't fetch the worker URL; pdf.js's fake-worker fallback handles
+  // getTextContent fine without one.
+  const inNode =
+    typeof process !== "undefined" &&
+    Boolean(
+      (process as unknown as { versions?: { node?: string } }).versions?.node,
+    );
+  if (!inNode) {
     pdfjs.GlobalWorkerOptions.workerSrc = new URL(
       "pdfjs-dist/legacy/build/pdf.worker.mjs",
       import.meta.url,
     ).toString();
-  } catch {
-    // jsdom test env can't resolve the worker URL; pdf.js's fake-worker
-    // fallback handles getTextContent fine in that case.
   }
 
   const doc = await pdfjs.getDocument({ data: new Uint8Array(file) }).promise;

@@ -1,0 +1,45 @@
+Phone scans are almost always sideways. Combined PDFs sometimes have one page upside-down. A document that came from a fax (yes, still) might be rotated 90 degrees from where it should be. Rotating pages in a PDF is one of those "should be a one-button operation" tasks that often involves more clicks than it should.
+
+This guide covers when to rotate, how to rotate, and the case that looks like a rotation problem but is actually a different problem.
+
+## Two kinds of rotation, only one is useful
+
+Some PDF readers (Adobe Reader, Preview) have a "rotate view" button that turns the page sideways for reading. **Viewing rotation doesn't persist.** Close the file, reopen it, and the page is back to its original orientation. If you email a "rotated" PDF after using view-only rotation, the recipient sees the original orientation.
+
+What you actually want is **embedded rotation** — a change to the PDF's stored page orientation that survives saving, sharing, and printing. That's the kind we'll do.
+
+## The 60-second method
+
+We don't ship a dedicated "rotate PDF" tool yet (it's on the roadmap), but every page rotation can be done via the existing tools combined with the right input. The two reliable approaches:
+
+**Approach 1: Rotate the source images, then re-build the PDF.** If your PDF came from photos or scans, this is the cleanest path:
+
+1. Open the original images. Rotate each one (Photos on Mac, the Photos app on iPhone, any image editor on Windows).
+2. Open [JPG to PDF](/jpg-to-pdf), [PNG to PDF](/png-to-pdf), or [HEIC to PDF](/heic-to-pdf) depending on your source format.
+3. Drop the rotated images, reorder, save.
+
+Result: a clean PDF with every page in the right orientation, no fuss.
+
+**Approach 2: For an existing multi-page PDF you don't have the source for, use the OCR PDF tool.** Counterintuitively, [OCR PDF](/ocr-pdf) does an automatic skew-correction pass before recognising text. For mildly rotated pages (a few degrees of tilt from a quick phone scan), this can be enough. For fully sideways pages, it doesn't help — you'll need approach 1.
+
+A dedicated browser-based rotation tool ships in a later release. Until then, the two approaches above cover virtually every real-world case.
+
+## When rotation isn't the answer
+
+Some "rotation" problems are actually different problems wearing a costume:
+
+- **Pages don't match each other in size/orientation.** You combined a portrait letter with a landscape spreadsheet, and the result is jarring. Rotation won't fix the underlying inconsistency — what you need is to consistently use one orientation per document.
+- **The PDF was saved with rotation metadata that some readers respect and others don't.** Older readers sometimes ignore the rotation flag and show the original orientation anyway. The fix is to bake the rotation into the page content rather than rely on metadata.
+- **The page is upside-down because the scanner picked up the page backward.** The text is now mirrored, not just rotated. Rotation doesn't un-mirror; you'd need to rescan or flip horizontally with an image editor.
+
+## When you'd want to rotate every page
+
+A document that came from a sideways scanner — many older multi-function devices feed pages in landscape orientation by default. The whole document is 90° off. Approach 1 above handles this well: re-export each page as an image, rotate as a batch, rebuild.
+
+## Frequently asked questions
+
+The FAQs below cover the most common follow-up questions. If you can't find your case, [email us](mailto:hello@privpdf.example) — we'll add an answer or build a dedicated rotation tool if there's enough demand.
+
+## The shortest version
+
+Most rotation problems are scan-shaped. Rotate the source images and rebuild the PDF — it's faster and cleaner than wrestling with after-the-fact rotation. For mildly-tilted scans, our OCR tool's deskew pass might be enough.

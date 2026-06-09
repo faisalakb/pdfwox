@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
-import { articleLd, jsonLdString } from "@/lib/seo";
+import { Accordion } from "@/components/ui/Accordion";
+import { articleLd, faqPageLd, jsonLdString } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import { TableOfContents, type Heading } from "./TableOfContents";
 
@@ -12,13 +13,26 @@ export interface MdxMeta {
   toolSlug?: string;
 }
 
+export interface MdxFaq {
+  q: string;
+  a: string;
+}
+
 export interface MdxLayoutProps {
   meta: MdxMeta;
   headings?: Heading[];
+  /** Optional FAQ block rendered after the MDX body and emitted as
+   *  FAQPage JSON-LD alongside the Article schema. */
+  faqs?: MdxFaq[];
   children: React.ReactNode;
 }
 
-export function MdxLayout({ meta, headings = [], children }: MdxLayoutProps) {
+export function MdxLayout({
+  meta,
+  headings = [],
+  faqs,
+  children,
+}: MdxLayoutProps) {
   const url = `${SITE.url}/blog/${meta.slug}`;
   const ld = jsonLdString(
     articleLd({
@@ -28,6 +42,7 @@ export function MdxLayout({ meta, headings = [], children }: MdxLayoutProps) {
       datePublished: meta.datePublished,
       dateModified: meta.dateModified,
     }),
+    ...(faqs && faqs.length > 0 ? [faqPageLd(faqs)] : []),
   );
 
   return (
@@ -50,6 +65,14 @@ export function MdxLayout({ meta, headings = [], children }: MdxLayoutProps) {
                 </p>
               </header>
               <div className="text-[var(--color-ink)]">{children}</div>
+              {faqs && faqs.length > 0 && (
+                <section className="mt-10">
+                  <h2 className="text-3xl">Frequently asked questions</h2>
+                  <div className="mt-6">
+                    <Accordion items={faqs} />
+                  </div>
+                </section>
+              )}
             </div>
             <aside className="hidden lg:block">
               <TableOfContents headings={headings} />

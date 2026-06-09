@@ -1,0 +1,57 @@
+"Edit a PDF" is a request that hides five different operations. Most "how to edit a PDF" results online try to solve all five with one tool — usually a paid suite — and leave you setting up an account before you've even worked out what you actually need.
+
+Here's the practical map: what people mean when they say "edit a PDF", which is the right kind of edit for your case, and the focused tool that does it.
+
+## The five things "edit a PDF" usually means
+
+1. **Fill in form fields.** Someone sent you a PDF with blanks and you need to type your name, tick a box, choose from a dropdown. → [Fill PDF](/fill-pdf).
+2. **Type comments on top of the page.** You're reviewing a document and want to highlight, draw, or write feedback on top of the existing content. → [Annotate PDF](/annotate-pdf).
+3. **Remove something so it's truly gone.** A bank statement has an account number you don't want a recipient to see. The original content must be unrecoverable. → [Redact PDF](/redact-pdf).
+4. **Add a signature.** A contract is ready and just needs your name on the dotted line. → [Sign PDF](/sign-pdf).
+5. **Add a status or label.** "DRAFT", "CONFIDENTIAL", or a logo on every page. → [Add Watermark](/add-watermark-to-pdf).
+
+There's also the rarer sixth case — "change the existing words on the page". That's _PDF authoring_, not editing, and a browser-based tool will not do it well. We'll cover that one below.
+
+## The decision tree
+
+**Does the PDF have form fields you can click into?** Yes → [Fill PDF](/fill-pdf). It's the fastest option and the recipient sees real form values, not floating text.
+
+**Do you need to mark up an existing document for review?** Yes → [Annotate PDF](/annotate-pdf). Highlight, draw, type — all without changing the underlying page.
+
+**Do you need to remove sensitive content irreversibly?** Yes → [Redact PDF](/redact-pdf). Important: the redaction tool rebuilds the affected pages as images so the underlying text is genuinely gone. A black box drawn with the annotate tool is _not_ redaction — see [how to redact a PDF](/blog/how-to-redact-a-pdf) for why.
+
+**Do you need a signature?** Yes → [Sign PDF](/sign-pdf). Draw, type in a handwriting font, or upload a signature image.
+
+**Do you need a stamp, label, or watermark on every page?** Yes → [Add Watermark](/add-watermark-to-pdf). Text or image, opacity, positions, optional diagonal tile.
+
+**Do you need to change the actual words on the page (e.g. fix a typo in the body text)?** Probably not in a browser. See "When you really need a PDF editor" below.
+
+## When you really need a PDF editor
+
+A real PDF editor — Adobe Acrobat, Affinity Publisher, PDFelement — lets you re-type sentences inside the existing layout. Those tools cost money because they're hard to build: they parse fonts, preserve kerning, and rebuild paragraphs as you type. A browser tab won't match them.
+
+If you've been told "you can edit a PDF in your browser", what's almost always meant is one of the five operations above. If you need to actually rewrite a sentence inside the original layout, you have three options:
+
+- **Edit the source document.** If you have the Word file, the Pages file, the Google Doc — open that, edit, re-export as PDF.
+- **Use a desktop PDF editor.** Acrobat Pro is the industry standard; Affinity is a strong one-time-purchase alternative.
+- **OCR + retype.** Run the PDF through [OCR PDF](/ocr-pdf) to make the text selectable, then copy-paste sections into Word/Pages and rewrite them. Not glamorous, but it works.
+
+## What about converting a PDF to Word and editing there?
+
+Possible, often disappointing. PDF-to-Word conversion is roughly accurate for plain prose and a disaster for anything with tables, columns, footnotes, or unusual fonts. If the source is clean enough that conversion works, you might as well save yourself the round trip and edit in Word directly. If the source is messy, conversion will make it messier.
+
+## How browser-based editing protects you
+
+Every operation in the list above runs in your browser tab. The PDF never goes to a server. For sensitive documents — contracts, medical records, tax returns — this matters. For a vacation photo PDF, it doesn't matter. The [Why browser-based is safer than an upload site](/why-browser-based) page has the full architecture story.
+
+## Two tips that save time
+
+**Read the document first.** It's common to start "editing" a PDF only to realize what you actually need is the fillable form fields the author already provided. Click around the form before you start drawing rectangles.
+
+**Make a copy before you redact.** Redaction is irreversible by design. If you might want the original later, save it somewhere safe before running redact.
+
+## Putting it together
+
+For most "edit a PDF" requests, the answer is one of: Fill, Annotate, Redact, Sign, Watermark. Pick the right one from the list above; the tool takes about a minute end-to-end. Nothing uploaded, no signup, no subscription.
+
+If you discover you really do need to rewrite the body text — your situation is the rare case. Take the desktop-editor path or edit the source document.
