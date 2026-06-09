@@ -29,7 +29,7 @@ export function ToolFilter({ tools }: { tools: Tool[] }) {
           stroke="currentColor"
           strokeWidth="1.6"
           aria-hidden="true"
-          className="pointer-events-none absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-[var(--color-ink-muted)]"
+          className="pointer-events-none absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-[var(--color-hero-ink-muted)]"
         >
           <circle cx="11" cy="11" r="7" />
           <path d="M21 21l-4.3-4.3" strokeLinecap="round" />
@@ -40,13 +40,13 @@ export function ToolFilter({ tools }: { tools: Tool[] }) {
           onChange={(e) => setQ(e.target.value)}
           placeholder="Find a tool — e.g. heic, redact, sign, unlock"
           aria-label="Search PDF tools"
-          className="focus-ring h-14 w-full rounded-[var(--radius-xl)] border border-[var(--color-line)] bg-[var(--color-surface)] pr-12 pl-12 text-base shadow-[var(--shadow-sm)] placeholder:text-[var(--color-ink-subtle)]"
+          className="focus-ring h-14 w-full rounded-[var(--radius-xl)] border border-[var(--color-hero-line)] bg-[var(--color-hero-surface)] pr-12 pl-12 text-base text-[var(--color-hero-ink)] placeholder:text-[#6B7494]"
         />
         {q && (
           <button
             type="button"
             onClick={() => setQ("")}
-            className="focus-ring absolute top-1/2 right-3 h-8 w-8 -translate-y-1/2 rounded-full text-[var(--color-ink-muted)] hover:bg-[var(--color-surface-muted)]"
+            className="focus-ring absolute top-1/2 right-3 h-8 w-8 -translate-y-1/2 rounded-full text-[var(--color-hero-ink-muted)] hover:bg-white/8"
             aria-label="Clear search"
           >
             ×
@@ -55,28 +55,28 @@ export function ToolFilter({ tools }: { tools: Tool[] }) {
       </div>
 
       {norm && (
-        <div className="mt-4 rounded-[var(--radius-lg)] border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]">
+        <div className="mt-4 rounded-[var(--radius-lg)] border border-[var(--color-hero-line)] bg-[var(--color-hero-surface)]">
           {results.length === 0 ? (
-            <p className="px-5 py-6 text-sm text-[var(--color-ink-muted)]">
-              No tools match “{q}”.
+            <p className="px-5 py-6 text-sm text-[var(--color-hero-ink-muted)]">
+              No tools match "{q}".
             </p>
           ) : (
-            <ul className="divide-y divide-[var(--color-line)]">
+            <ul className="divide-y divide-[var(--color-hero-line)]">
               {results.slice(0, 8).map((t) => (
                 <li key={t.slug}>
                   <Link
                     href={t.slug}
                     className={cn(
-                      "focus-ring flex items-center justify-between gap-4 px-5 py-3.5 transition-colors hover:bg-[var(--color-surface-muted)]",
+                      "focus-ring flex items-center justify-between gap-4 px-5 py-3.5 transition-colors hover:bg-white/8",
                     )}
                   >
                     <div className="min-w-0">
-                      <p className="font-medium">{t.name}</p>
-                      <p className="truncate text-sm text-[var(--color-ink-muted)]">
+                      <p className="font-medium text-[var(--color-hero-ink)]">{t.name}</p>
+                      <p className="truncate text-sm text-[var(--color-hero-ink-muted)]">
                         {t.shortDescription}
                       </p>
                     </div>
-                    <span className="text-sm text-[var(--color-accent)]">
+                    <span className="text-sm text-[#F0876F]">
                       →
                     </span>
                   </Link>

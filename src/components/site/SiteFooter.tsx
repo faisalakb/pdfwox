@@ -8,7 +8,7 @@ export function SiteFooter() {
 
   return (
     <footer
-      className="mt-24 border-t"
+      className="border-t"
       style={{ background: "#0B0F1F", borderColor: "#1E2640" }}
     >
       <Container className="py-14">

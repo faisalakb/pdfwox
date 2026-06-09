@@ -94,6 +94,12 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -129,6 +135,25 @@ a {
 ::selection {
   background: var(--color-accent);
   color: var(--color-accent-ink);
+}
+
+/* ---------- Hero-dark theme scope ----------
+ * Sections inside .theme-hero-dark live in the PdfHero3D world:
+ * deep navy canvas, warm paper ink, gold eyebrows. Used on the
+ * homepage so the page below the 3D hero is one continuous design. */
+.theme-hero-dark {
+  background: var(--color-hero-bg);
+  color: var(--color-hero-ink-muted);
+}
+.theme-hero-dark h1,
+.theme-hero-dark h2,
+.theme-hero-dark h3,
+.theme-hero-dark h4 {
+  color: var(--color-hero-ink);
+}
+.theme-hero-dark ::selection {
+  background: var(--color-accent);
+  color: #fff7ee;
 }
 
 /* Focus ring utility */
