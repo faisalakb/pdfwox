@@ -14,6 +14,18 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Static chunks are content-addressed (hash in filename) — cache forever.
+        // This ensures CDNs and browsers keep old chunks alive after a redeploy,
+        // preventing 404s for visitors/crawlers who have cached old HTML pages.
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
         // Embed routes: allow framing by any origin (the whole point of embeds)
         source: "/embed/:path*",
         headers: [
