@@ -55,7 +55,7 @@ The output is what's called a "sandwich PDF" — the original page on top (visib
 
 Some documents need more than OCR: handwriting (Tesseract.js does poorly on cursive), high-density text (a 4pt footnote isn't really readable by anyone), or text in unusual fonts.
 
-For these, a cloud OCR service (Google Vision, AWS Textract) gives substantially better results — at the cost of uploading the file to a third party. The [/api/ocr](/api/ocr) endpoint in our codebase is the place that connects to those services if you choose to enable them. The default in-browser path doesn't.
+For these, a cloud OCR service (Google Vision, AWS Textract) gives substantially better results — at the cost of uploading the file to a third party. The `/api/ocr` endpoint in our codebase is the place that connects to those services if you choose to enable them. The default in-browser path doesn't.
 
 ## Frequently asked questions
 
