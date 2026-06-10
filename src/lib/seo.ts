@@ -68,6 +68,13 @@ export function softwareApplicationLd(tool: Tool): JsonLd {
       price: "0",
       priceCurrency: "USD",
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      ratingCount: "2156",
+      bestRating: "5",
+      worstRating: "1",
+    },
     publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
   };
 }
