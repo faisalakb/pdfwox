@@ -59,6 +59,7 @@ const DEMO_TOOL: Tool = {
   ],
   privacyLine:
     "Files are processed entirely in your browser. Nothing is uploaded to any server.",
+  longDescription: [],
 };
 
 export default function DemoMergePage() {

@@ -109,6 +109,20 @@ export function ToolPageLayout({ tool, children, intro }: ToolPageLayoutProps) {
         <Container size="lg">{children}</Container>
       </section>
 
+      {/* About this tool — long-form text for context and SEO */}
+      {tool.longDescription.length > 0 && (
+        <section className="py-12">
+          <Container size="md">
+            <h2 className="text-3xl">About this tool</h2>
+            <div className="mt-4 space-y-4 leading-relaxed text-[var(--color-ink-muted)]">
+              {tool.longDescription.map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
       {/* How-to — rendered as numbered list, visible without JS for SEO */}
       <section className="bg-[var(--color-surface-muted)] py-12">
         <Container size="lg">

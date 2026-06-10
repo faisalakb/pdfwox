@@ -168,6 +168,48 @@ export default function Home() {
           );
         })}
 
+        {/* What is PDFWox — visible text block for text/HTML ratio */}
+        <section className="py-12">
+          <Container size="lg">
+            <div className="max-w-3xl space-y-4 leading-relaxed text-[var(--color-hero-ink-muted)]">
+              <h2 className="text-3xl" style={{ color: "var(--color-hero-ink)" }}>
+                Free PDF tools that work in your browser
+              </h2>
+              <p>
+                PDFWox is a collection of free PDF utilities that run entirely
+                inside your browser tab. Fill out forms, convert images, sign
+                documents, redact sensitive content, add or remove watermarks,
+                protect files with a password, and run OCR on scanned pages —
+                all without uploading anything to a server.
+              </p>
+              <p>
+                Every tool on this site is free, requires no account, and leaves
+                no watermark on your output. Because the work happens locally
+                using WebAssembly and modern browser APIs, your files stay on
+                your device from start to finish. The privacy guarantee is
+                structural, not a policy promise: there is no upload step, so
+                there is nothing to leak.
+              </p>
+              <p>
+                The tools cover the most common everyday PDF tasks: converting
+                iPhone HEIC photos or PNG and JPG images into a PDF, filling in
+                form fields, making a static PDF fillable, signing, annotating,
+                redacting, protecting with AES-256 encryption, unlocking a
+                password you already know, adding or removing watermarks, and
+                extracting text with in-browser OCR. New tools are added
+                regularly — see the{" "}
+                <a
+                  href="/changelog"
+                  className="text-[var(--color-hero-gold)] underline underline-offset-2 hover:opacity-80"
+                >
+                  changelog
+                </a>{" "}
+                for what is live.
+              </p>
+            </div>
+          </Container>
+        </section>
+
         {/* Why-browser-based CTA — a sheet of warm paper on the dark
             canvas, echoing the floating pages in the hero */}
         <section className="py-16 pb-24">

@@ -132,6 +132,15 @@ export default function ChangelogPage() {
           <p className="mt-4 text-lg leading-relaxed text-[var(--color-ink-muted)]">
             New tools, improvements, and fixes — in reverse-chronological order.
           </p>
+          <p className="mt-3 leading-relaxed text-[var(--color-ink-muted)]">
+            PDFWox launches tools in waves. Wave 1 covered the core everyday
+            tasks: filling PDF forms, creating fillable PDFs, signing,
+            protecting with a password, and unlocking. Wave 2 added editing
+            tools — redaction, annotation, and watermarking. Wave 3 brought
+            image-to-PDF converters for every common format, plus OCR and
+            text extraction. Each entry below links to the relevant tool or
+            page where applicable.
+          </p>
         </Container>
       </section>
 
