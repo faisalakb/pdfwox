@@ -202,26 +202,30 @@ export function ImagesToPdfShell({
         onAccepted={onAccepted}
         label={dropzoneLabel}
         hint={dropzoneHint}
+        testId="tool-dropzone"
+        inputTestId="file-upload"
       />
     );
   }
 
   if (phase === "error") {
     return (
-      <ErrorState
-        title="Couldn’t create your PDF"
-        description={errorMsg ?? "Try again with a different file."}
-        action={
-          <Button variant="secondary" onClick={reset}>
-            Try again
-          </Button>
-        }
-      />
+      <div data-testid="error-message">
+        <ErrorState
+          title="Couldn’t create your PDF"
+          description={errorMsg ?? "Try again with a different file."}
+          action={
+            <Button variant="secondary" onClick={reset}>
+              Try again
+            </Button>
+          }
+        />
+      </div>
     );
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5" data-testid="result-panel">
       <Card>
         <div className="mb-3 flex items-center justify-between">
           <h3 className="font-display text-lg">
@@ -335,13 +339,14 @@ export function ImagesToPdfShell({
           <a
             href={downloadUrl}
             download={filename}
+            data-testid="download-button"
             onClick={() => track({ type: "download_clicked", tool: toolSlug })}
             className="focus-ring inline-flex h-11 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 text-base font-medium text-[var(--color-accent-ink)] transition-colors hover:bg-[var(--color-accent-hover)]"
           >
             Download
           </a>
         ) : (
-          <Button onClick={start} disabled={phase === "processing"}>
+          <Button data-testid="convert-button" onClick={start} disabled={phase === "processing"}>
             {phase === "processing" ? "Working…" : "Make PDF"}
           </Button>
         )}

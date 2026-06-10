@@ -14,6 +14,8 @@ export interface DropzoneProps {
   label?: React.ReactNode;
   hint?: React.ReactNode;
   className?: string;
+  testId?: string;
+  inputTestId?: string;
 }
 
 function toAcceptMap(mimes: string[]): Record<string, string[]> {
@@ -30,6 +32,8 @@ export function Dropzone({
   label,
   hint,
   className,
+  testId,
+  inputTestId,
 }: DropzoneProps) {
   const toast = useToast();
   const maxBytes = maxFileSizeMB * 1024 * 1024;
@@ -84,12 +88,13 @@ export function Dropzone({
       ? "dragging"
       : "idle";
 
+  const rootProps = getRootProps() as React.HTMLAttributes<HTMLDivElement>;
+  const inputProps = getInputProps() as React.InputHTMLAttributes<HTMLInputElement>;
+
   return (
     <FileUploader
-      rootProps={getRootProps() as React.HTMLAttributes<HTMLDivElement>}
-      inputProps={
-        getInputProps() as React.InputHTMLAttributes<HTMLInputElement>
-      }
+      rootProps={testId ? { ...rootProps, "data-testid": testId } as React.HTMLAttributes<HTMLDivElement> : rootProps}
+      inputProps={inputTestId ? { ...inputProps, "data-testid": inputTestId } as React.InputHTMLAttributes<HTMLInputElement> : inputProps}
       state={state}
       label={label}
       hint={hint}
