@@ -1,8 +1,13 @@
 import createMDX from "@next/mdx";
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
+  devIndicators: false,
   experimental: {
     optimizePackageImports: ["react-dropzone", "comlink"],
   },
@@ -31,13 +36,7 @@ const nextConfig = {
     ];
   },
   turbopack: {
-    resolve: {
-      alias: {
-        fs: false,
-        path: false,
-        crypto: false,
-      },
-    },
+    root: __dirname,
     rules: {
       // Register the MDX loader for non-page MDX imports
       // (e.g. `import Content from "./content.mdx"`). Page-level MDX
