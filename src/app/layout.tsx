@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ToastProvider } from "@/components/ui/Toast";
 import { SITE } from "@/lib/site";
+import { allCategories, categoryMeta, toolsByCategory } from "@/lib/tools";
 
 const body = Plus_Jakarta_Sans({
   variable: "--font-body",
@@ -54,6 +55,15 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const byCat = toolsByCategory();
+  const navCategories = allCategories
+    .map((c) => ({
+      id: c,
+      label: categoryMeta[c].label,
+      tools: (byCat[c] ?? []).map((t) => ({ slug: t.slug, name: t.name })),
+    }))
+    .filter((c) => c.tools.length > 0);
+
   return (
     <html
       lang="en"
@@ -61,7 +71,7 @@ export default function RootLayout({
     >
       <body className="theme-hero-dark flex min-h-full flex-col">
         <ToastProvider>
-          <SiteHeader />
+          <SiteHeader navCategories={navCategories} />
           <main id="main" className="flex-1">
             {children}
           </main>

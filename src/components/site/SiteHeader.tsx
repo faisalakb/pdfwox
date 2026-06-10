@@ -4,10 +4,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { SITE } from "@/lib/site";
-import { allCategories, categoryMeta, toolsByCategory } from "@/lib/tools";
 
-export function SiteHeader() {
-  const byCat = toolsByCategory();
+export type NavTool = { slug: string; name: string };
+export type NavCategory = { id: string; label: string; tools: NavTool[] };
+
+export function SiteHeader({ navCategories }: { navCategories: NavCategory[] }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -33,18 +34,15 @@ export function SiteHeader() {
           {/* Desktop nav */}
           <nav aria-label="Primary" className="hidden md:block">
             <ul className="flex items-center gap-1 text-sm">
-              {allCategories.map((c) => {
-                const list = byCat[c];
-                if (!list.length) return null;
-                return (
-                  <li key={c} className="group relative">
+              {navCategories.map((c) => (
+                  <li key={c.id} className="group relative">
                     <button
                       type="button"
                       className="focus-ring inline-flex h-9 items-center gap-1 rounded-[var(--radius-sm)] px-3 transition-colors hover:bg-white/8"
                       style={{ color: "#9AA3C4" }}
                       aria-haspopup="true"
                     >
-                      {categoryMeta[c].label}
+                      {c.label}
                       <svg
                         className="h-3.5 w-3.5"
                         viewBox="0 0 24 24"
@@ -73,10 +71,10 @@ export function SiteHeader() {
                           className="px-3 py-1.5 text-xs tracking-wider uppercase"
                           style={{ color: "#C9B87F" }}
                         >
-                          {categoryMeta[c].label}
+                          {c.label}
                         </p>
                         <ul>
-                          {list.map((t) => (
+                          {c.tools.map((t) => (
                             <li key={t.slug}>
                               <Link
                                 href={t.slug}
@@ -91,8 +89,7 @@ export function SiteHeader() {
                       </div>
                     </div>
                   </li>
-                );
-              })}
+              ))}
               <li>
                 <Link
                   href="/blog"
@@ -161,19 +158,16 @@ export function SiteHeader() {
           }}
         >
           <nav aria-label="Mobile navigation" className="p-4">
-            {allCategories.map((c) => {
-              const list = byCat[c];
-              if (!list.length) return null;
-              return (
-                <div key={c} className="mb-6">
+            {navCategories.map((c) => (
+                <div key={c.id} className="mb-6">
                   <p
                     className="mb-2 px-2 text-xs font-medium tracking-wider uppercase"
                     style={{ color: "#C9B87F" }}
                   >
-                    {categoryMeta[c].label}
+                    {c.label}
                   </p>
                   <ul className="space-y-0.5">
-                    {list.map((t) => (
+                    {c.tools.map((t) => (
                       <li key={t.slug}>
                         <Link
                           href={t.slug}
@@ -187,8 +181,7 @@ export function SiteHeader() {
                     ))}
                   </ul>
                 </div>
-              );
-            })}
+            ))}
             <div className="border-t pt-4" style={{ borderColor: "#3A4368" }}>
               <ul className="space-y-0.5">
                 <li>
