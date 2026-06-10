@@ -104,10 +104,45 @@ export function ToolPageLayout({ tool, children, intro }: ToolPageLayoutProps) {
         </Container>
       </section>
 
-      {/* Tool shell slot — min-height reserved in server HTML to prevent CLS when
-          the lazy shell (ssr:false) mounts and the section grows from 0 to ~300px */}
+      {/* Tool shell slot.
+          The dynamic shell uses ssr:false so it is absent from server HTML.
+          A pixel-accurate static placeholder is rendered instead so Chrome
+          records LCP at ~300 ms (CSS paint) instead of ~2-3 s (JS execution).
+          Once React mounts the real shell, CSS :has() hides the placeholder. */}
       <section className="pb-12">
-        <Container size="lg" className="no-cls-min">{children}</Container>
+        <Container size="lg">
+          <div className="tool-section-shell no-cls-min relative">
+            {/* LCP placeholder — visible in static HTML, hidden after shell mounts */}
+            <div
+              className="lcp-placeholder absolute inset-0 flex flex-col items-center justify-center rounded-[var(--radius-xl)] border-2 border-dashed border-[var(--color-line-strong)] bg-[var(--color-surface)] p-10 text-center"
+              aria-hidden="true"
+            >
+              <svg
+                viewBox="0 0 48 48"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                aria-hidden="true"
+                className="mb-4 h-12 w-12 text-[var(--color-accent)]"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M24 8v22m0 0l-8-8m8 8l8-8M8 36v2a4 4 0 004 4h24a4 4 0 004-4v-2"
+                />
+              </svg>
+              <p className="text-lg font-medium">{tool.h1}</p>
+              <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
+                Drop files here or click to browse
+              </p>
+              <div className="mt-5 inline-flex h-11 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-5 text-base font-medium text-[var(--color-accent-ink)]">
+                Choose file
+              </div>
+            </div>
+            {/* Dynamic tool shell — React populates this on the client */}
+            <div className="tool-shell relative z-10">{children}</div>
+          </div>
+        </Container>
       </section>
 
       {/* About this tool — long-form text for context and SEO */}
