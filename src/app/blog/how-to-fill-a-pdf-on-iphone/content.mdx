@@ -35,6 +35,34 @@ Sometimes you're filling out a PDF on behalf of someone else — a parent's medi
 
 **For photos that need to go into the form, take them first.** Some forms expect a photo of an ID or a receipt as an attachment. Take the photo in Camera, then open the PDF in [HEIC to PDF](/heic-to-pdf) — wait, that's for the inverse case. Skip. For ID photos specifically: take the photo, then come back to the PDF, then attach the photo via the form's file-picker if it has one. If the form expects the photo embedded, your easier path is to print, fill by hand, photograph, send.
 
+## Filling PDFs on Android and Chrome
+
+Android users have essentially the same options as iPhone users, with Chrome playing the role that Safari plays on iOS.
+
+1. **Open the PDF.** In Gmail or any email app, tap the PDF attachment. Android opens it in a built-in viewer, or you can tap "Open with Chrome" to use Chrome's PDF renderer.
+2. **Fill the fields.** Chrome on Android supports interactive PDF form fields. Tap a text field, the keyboard appears, type your answer. Checkboxes and radio buttons tap to toggle.
+3. **Save.** Tap the three-dot menu in Chrome, then "Share" or "Download." Save to Files or send via another app.
+
+The Chrome approach works on any Android device running Chrome 87 or later — which covers essentially every Android phone sold in the last several years. Samsung's own browser (Samsung Internet) also supports PDF form filling for Samsung device owners.
+
+The same fallback logic applies: if the PDF doesn't have actual form fields, open [Create Fillable PDF](/create-fillable-pdf) in Chrome on Android, add fields, then fill. If you need to sign, [Sign PDF](/sign-pdf) works on Android Chrome just as well as on mobile Safari — touch drawing is supported.
+
+One difference worth knowing: Android's share sheet for PDFs is more fragmented than iOS's. If "Save" saves a blank unfilled copy, you may need to explicitly choose "Print" and then save as PDF (which bakes in the filled values) rather than using a direct save option. Chrome's "Share → Print → Save as PDF" path reliably preserves filled values.
+
+## Common form types and what to expect
+
+Not all PDFs are made equal. Here is what you can expect from the most common form types you are likely to encounter:
+
+**Tax forms** — Most official government tax forms (W-2, 1040, self-assessment forms) are proper AcroForm PDFs with real form fields. Safari and Chrome fill them without issues. Some older PDF versions of these forms have field validation that triggers warnings in non-Adobe readers; the warnings are usually cosmetic and the values save correctly.
+
+**Government and council forms** — Hit or miss. Newer government portals produce fillable PDFs; older ones produce scanned images of paper forms. If the PDF looks like a photocopy, it's probably a scan with no fillable fields. Use [Create Fillable PDF](/create-fillable-pdf) to add fields, or print and fill by hand.
+
+**Insurance and financial forms** — Usually fillable, because insurance companies process high volumes and benefit from digital data entry. Watch for forms that use JavaScript validation (common in Adobe-created forms) — these sometimes behave unexpectedly in non-Adobe readers on mobile, though the field values still save correctly in most cases.
+
+**Rental agreements and tenancy forms** — Usually fillable. These often include a signature field at the end. Safari and Chrome handle signature fields inconsistently — they may show an empty box that does nothing. Use [Sign PDF](/sign-pdf) to add a proper signature to these.
+
+**Healthcare and medical forms** — Often scanned images. Hospitals and clinics frequently distribute paper forms that someone has scanned and emailed as a PDF, with no actual form fields. Expect to use Create Fillable PDF to add your own fields, or print and fill by hand.
+
 ## When you should still install an app
 
 For people who fill 5+ PDFs a week — accountants, paralegals, anyone in document-heavy work — a real PDF app pays for itself in friction reduction. Adobe Acrobat Mobile, PDF Expert, and PDFelement are the three commonly recommended; pick whichever fits your budget. For the occasional form, Safari is enough.

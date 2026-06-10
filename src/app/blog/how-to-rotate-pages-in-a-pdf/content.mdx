@@ -31,10 +31,39 @@ Some "rotation" problems are actually different problems wearing a costume:
 - **Pages don't match each other in size/orientation.** You combined a portrait letter with a landscape spreadsheet, and the result is jarring. Rotation won't fix the underlying inconsistency — what you need is to consistently use one orientation per document.
 - **The PDF was saved with rotation metadata that some readers respect and others don't.** Older readers sometimes ignore the rotation flag and show the original orientation anyway. The fix is to bake the rotation into the page content rather than rely on metadata.
 - **The page is upside-down because the scanner picked up the page backward.** The text is now mirrored, not just rotated. Rotation doesn't un-mirror; you'd need to rescan or flip horizontally with an image editor.
+- **The content is landscape by design.** A wide spreadsheet or a panoramic photo is meant to be viewed sideways. Don't rotate it to portrait — set the paper size to landscape when you print or share instead.
+
+In all of these cases, reaching for a rotation tool gives you the wrong result. Identify which of these you're actually dealing with before you start.
 
 ## When you'd want to rotate every page
 
 A document that came from a sideways scanner — many older multi-function devices feed pages in landscape orientation by default. The whole document is 90° off. Approach 1 above handles this well: re-export each page as an image, rotate as a batch, rebuild.
+
+## Rotating a single page in an existing multi-page PDF
+
+The trickiest scenario is when only one page in an existing PDF is sideways — the other pages are fine — and you don't have the original source files. Approach 1 (rebuild from images) works page by page:
+
+1. Open the PDF in your browser's built-in viewer (Chrome, Edge, Firefox, Safari).
+2. Navigate to the problem page. Use the browser's print dialog or screenshot tool to capture that page as an image.
+3. Open the captured image in any photo editor (Preview on Mac, Photos on Windows, even Paint) and rotate it to the correct orientation.
+4. Save the rotated image. Now you have the corrected page as a standalone image file.
+5. Use [JPG to PDF](/jpg-to-pdf) or [PNG to PDF](/png-to-pdf) to convert the corrected page back to a single-page PDF.
+
+From here, the challenge is reassembling the original multi-page PDF with the corrected page in the right position. A dedicated merge tool handles this. The workflow is: export each page you want to keep from the original, replace the problem page with your corrected version, then merge everything in order. It is more steps than a dedicated rotate button, but the result is a clean embedded rotation that every reader respects.
+
+## Checking orientation before sharing
+
+A rotation that looks correct on your screen may not look correct on the recipient's device, for two reasons: reader differences (some readers ignore the PDF rotation flag) and OS-level image orientation metadata (phones record EXIF orientation data that some readers handle and others ignore).
+
+Before sharing a rotated PDF, check it in at least two readers:
+
+- **Your primary reader** (whatever you used to do the rotation).
+- **A secondary reader** — open the PDF in Chrome's built-in viewer if your primary reader is Acrobat, or vice versa. Chrome and Firefox both render PDF rotation flags correctly, making them a reliable sanity check.
+- **On mobile** — if the recipient is likely to open it on a phone, AirDrop or email it to yourself and open it on your phone before sending.
+
+If the orientation is correct in Chrome's built-in viewer, it will be correct in virtually every modern PDF reader. Chrome is the most consistent reference point for embedded rotation.
+
+One more thing: if you are sharing the PDF as an email attachment, some email clients show a thumbnail preview of the first page. The thumbnail sometimes ignores rotation metadata even when the actual file is fine. Open the attachment — don't trust the thumbnail.
 
 ## Frequently asked questions
 

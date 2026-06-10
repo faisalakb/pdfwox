@@ -25,6 +25,34 @@ If you fall in one of these cases, don't extract images; do the operation you ac
 
 Worth mentioning: a PDF arrived in your inbox doesn't mean you have the right to redistribute the image inside it. Especially for stock photos, illustrations from books, or branded assets. Extracting is a technical operation; what you do with the extracted image is a legal one.
 
+## Image quality by PDF type
+
+Not all PDFs treat embedded images the same way, and understanding the difference saves time:
+
+**Text PDFs (created from Word, Google Docs, InDesign, etc.)** embed images at whatever resolution the author exported them. A well-authored print-ready PDF typically contains images at 300 DPI or higher — the original pixels are all there. A web-optimised PDF may have had images downsampled to 96–150 DPI to reduce file size. A dedicated extractor gives you exactly what's in the file; if the quality is poor, the issue is in the source, not the extraction method.
+
+**Print-ready PDFs (press-quality, CMYK)** often contain very high-resolution images — sometimes 600 DPI or higher — along with colour profiles and embedded fonts. These are the PDFs where Method 2 (dedicated extraction) matters most, because a screenshot at screen resolution would discard most of that detail. The embedded image objects are the originals; extract them that way.
+
+**Scanned PDFs** are different in kind. Each page is a single large image — typically a JPEG or TIFF of the scanned page — with no separate embedded image objects for individual elements on the page. If you use a dedicated extractor on a scanned PDF, you get the whole page image, not the logo or chart you were after. For scanned PDFs, Method 1 (screenshot the region) or Method 3 (OCR + crop) are your options.
+
+**Web-downloaded PDFs** (from news sites, government portals, etc.) frequently downsample images for bandwidth reasons. What you see is what you get — there are no higher-resolution originals hiding inside the file.
+
+## Batch extraction workflow
+
+If you have a PDF with dozens of embedded images that you all want extracted, doing it one at a time is impractical.
+
+For screenshot-based extraction, the fastest batch path is:
+1. Open the PDF and set the zoom to 150% or higher so images render at good resolution.
+2. Use your OS's scrolling screenshot tool to capture the full page (on Mac: `Cmd+Shift+3` for full screen; on Windows: use the Snipping Tool in "Full-screen snip" mode).
+3. Crop the resulting images in a batch editor.
+
+For dedicated extraction on a large document:
+1. Use the extractor tool, which should present all found image objects in a list.
+2. Select all, or filter by type (JPEG, PNG) or minimum dimensions to skip small decorative elements like bullet icons and rule lines.
+3. Download as a ZIP if the tool supports batch export.
+
+When naming extracted images, include the source document name and page number in the filename before you move on — once they are out of the PDF context, it is easy to lose track of where each one came from.
+
 ## Tips for cleaner extraction
 
 **Use the original PDF, not a print-to-PDF re-export.** Re-exporting a PDF often re-encodes images at lower quality. If you can, work from the original.
@@ -32,6 +60,8 @@ Worth mentioning: a PDF arrived in your inbox doesn't mean you have the right to
 **Check for hidden alpha.** Some PDFs include images with transparency that doesn't render in the PDF reader but is preserved in the embedded image. A dedicated extractor pulls these correctly; screenshots flatten them.
 
 **Match the format to the use.** PNG for icons and screenshots, JPG for photos. The PDF stores whichever was originally embedded — you usually don't get to choose at extraction time.
+
+**Zoom in before screenshotting.** Screen resolution is fixed, but the PDF image data is not. Zooming to 200% before taking a screenshot doubles the pixel count in your capture, which matters if you plan to use the image in print or presentation work.
 
 ## Frequently asked questions
 

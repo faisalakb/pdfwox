@@ -39,6 +39,14 @@ export default function PrivacyPage() {
             two minutes.
           </p>
 
+          <ul className="rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-surface-muted)] p-5 list-none space-y-2 text-sm">
+            <li>✓ <strong>Your PDF files are never uploaded</strong> by any in-browser tool — they stay on your device from start to finish.</li>
+            <li>✓ <strong>No account or signup</strong> is required for any tool on this site.</li>
+            <li>✓ <strong>No tracking cookies.</strong> Analytics are cookieless and record no personal identifiers.</li>
+            <li>✓ <strong>Error reports contain no file data</strong> — only the error message, browser version, and tool name.</li>
+            <li>✓ <strong>Server tools are clearly labelled.</strong> If a tool ever processes your file on a server, it says so on the tool page before you upload.</li>
+          </ul>
+
           <h2 className="pt-4 text-3xl">Your files</h2>
           <p>
             <strong>
@@ -59,6 +67,9 @@ export default function PrivacyPage() {
             page, and we'll never quietly switch an in-browser tool to
             server-side processing.
           </p>
+          <p>
+            The reason in-browser tools can make this guarantee is architectural, not just policy. A WebAssembly module running inside a browser tab is subject to the same browser sandbox as any JavaScript on the page. It cannot open a raw TCP socket. It cannot write to disk. The only way it can send data across the network is through the browser's standard <code>fetch</code> or <code>XMLHttpRequest</code> APIs — and any call made through those APIs appears immediately in the browser's DevTools Network panel. If no outbound request containing your file data appears in that panel while you run a conversion, no file data left your device. This is verifiable by anyone, any time, without trusting our word for it.
+          </p>
 
           <h2 className="pt-4 text-3xl">Analytics we use</h2>
           <p>
@@ -68,6 +79,9 @@ export default function PrivacyPage() {
             fingerprint you. From it we learn things like "which tools are
             getting used" and "which page is broken in Firefox"; we don't learn
             who you are.
+          </p>
+          <p>
+            Privacy-friendly analytics differs from services like Google Analytics in several concrete ways: no cross-site tracking (your activity on this site is not correlated with your activity on other sites), no cookies set in your browser, no storage of IP addresses, and no data sold or shared with advertising networks. The aggregate data we see is page view counts and event counts — numbers, not identities. It is hosted in the EU under GDPR, and we cannot drill down to individual users even if we wanted to. If you use an ad blocker or privacy-focused browser extension, it will likely block the analytics script entirely, which is fine.
           </p>
           <p>The specific events we record about tool usage:</p>
           <ul className="list-disc space-y-1.5 pl-6">

@@ -167,6 +167,25 @@ export default function BestFreePdfToolsPage() {
         </Container>
       </section>
 
+      <section className="pb-4">
+        <Container size="lg">
+          <div className="space-y-4 leading-relaxed text-[var(--color-ink-muted)]">
+            <p>
+              The phrase "free PDF tool" covers a wide range of things. At one end of the spectrum sits software that is genuinely free in every meaningful sense — no account required, no output watermark, no daily task limit, no file uploaded to anyone's server. At the other end sit tools that call themselves free but gate every useful feature behind a paid plan, add a watermark to the output, or limit you to two tasks per day. The table below tries to map exactly where each tool sits on that spectrum.
+            </p>
+            <p>
+              The most consequential question — one that most comparison pages don't highlight clearly — is whether the tool uploads your file to a server. For routine PDFs this doesn't matter much. For sensitive documents it matters a great deal. Tax returns, medical records, signed contracts, bank statements: these are the PDFs people most commonly need to process, and they are also the ones where uploading to a third-party server creates real risk. A tool that never receives your file eliminates that risk structurally, not just by policy.
+            </p>
+            <p>
+              Each column in the table reflects a question a careful user should ask before choosing a tool. "Files stay local?" tells you whether the file leaves your device. "Free without signup?" tells you whether you need an account before you can do anything. "Watermark on free?" tells you whether the output is usable. "File-size limit" tells you whether your document will be accepted. "OCR included?" covers the common need to make scanned documents searchable. "Works offline?" matters when you are on a plane, in a hospital, or on a spotty connection.
+            </p>
+            <p>
+              This comparison was produced by direct testing, not marketing materials. Each tool was loaded in a fresh browser session, a test PDF was processed through the relevant feature, and the result was checked against what the tool claimed. No affiliate relationship exists with any tool listed here. If a tool has improved or degraded since {LAST_CHECKED}, the table will be updated on the next quarterly review.
+            </p>
+          </div>
+        </Container>
+      </section>
+
       <section className="pb-12">
         <Container size="lg">
           <div className="overflow-x-auto">
@@ -266,6 +285,23 @@ export default function BestFreePdfToolsPage() {
                 OCR path for lower-volume use, and clearly labels when a server path is used.
               </p>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-12">
+        <Container size="lg">
+          <h2 className="text-3xl">What the comparison shows</h2>
+          <div className="mt-6 space-y-4 leading-relaxed text-[var(--color-ink-muted)]">
+            <p>
+              The clearest finding from the table is that browser-based tools and upload-based tools optimise for different things. Browser-based tools eliminate file exposure entirely — the trade-off is that heavy computation (large-model OCR, batch processing at scale) either runs slowly or isn't available. Upload-based tools handle heavy computation well — the trade-off is that your file spends time on a server you don't control, subject to that provider's security posture, retention policy, and legal jurisdiction.
+            </p>
+            <p>
+              For most everyday PDF tasks — filling a form, signing a document, combining photos, adding a password — browser-based tools are both sufficient and more private. For high-volume OCR, converting hundreds of files, or processing documents that require server-side language models, upload-based tools currently have an edge on performance. The right choice depends on what you are processing, not on which tool has the best marketing page.
+            </p>
+            <p>
+              When evaluating any free PDF tool, the three things most worth checking are: whether there is a watermark on the output (easily missed until after you have processed the document), whether there is a daily task limit that will stop you mid-project, and whether the signup requirement is upfront or hidden behind the first useful action. Some tools present as entirely free and then reveal the signup gate only after you have uploaded your file and gone through the conversion — a pattern that is worth knowing about before you start.
+            </p>
           </div>
         </Container>
       </section>
