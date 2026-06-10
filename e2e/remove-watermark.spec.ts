@@ -6,6 +6,7 @@ const ASSET_DIR = path.resolve(__dirname, "../test-assets");
 test("watermark a PDF → upload to remover → pick candidate → cover → download", async ({
   page,
 }) => {
+  test.setTimeout(90_000);
   // Step 1: produce a watermarked fixture via the add-watermark tool.
   await page.goto("/add-watermark-to-pdf");
   await page

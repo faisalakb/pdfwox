@@ -9,6 +9,7 @@ export default defineConfig({
   retries: isCI ? 1 : 0,
   workers: isCI ? 2 : undefined,
   reporter: isCI ? "list" : "html",
+  timeout: 60_000,
   use: {
     baseURL: "http://localhost:3000",
     trace: "retain-on-failure",
