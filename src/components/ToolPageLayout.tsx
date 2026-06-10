@@ -104,9 +104,10 @@ export function ToolPageLayout({ tool, children, intro }: ToolPageLayoutProps) {
         </Container>
       </section>
 
-      {/* Tool shell slot */}
+      {/* Tool shell slot — min-height reserved in server HTML to prevent CLS when
+          the lazy shell (ssr:false) mounts and the section grows from 0 to ~300px */}
       <section className="pb-12">
-        <Container size="lg">{children}</Container>
+        <Container size="lg" className="no-cls-min">{children}</Container>
       </section>
 
       {/* About this tool — long-form text for context and SEO */}

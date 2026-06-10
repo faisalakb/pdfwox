@@ -191,9 +191,12 @@ a {
   }
 }
 
-/* Reserve space for drop-zone-like elements to prevent CLS */
+/* Reserve space for drop-zone-like elements to prevent CLS.
+   320px matches the rendered FileUploader height (p-10 + icon + text + button).
+   The tool shell container in ToolPageLayout also gets this class so the
+   server-rendered HTML pre-allocates space before the ssr:false shell mounts. */
 .no-cls-min {
-  min-height: 280px;
+  min-height: 320px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -10,6 +10,7 @@ const body = Plus_Jakarta_Sans({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 const display = Fraunces({
@@ -17,6 +18,7 @@ const display = Fraunces({
   subsets: ["latin"],
   display: "swap",
   axes: ["opsz"],
+  preload: true,
 });
 
 export const metadata: Metadata = {
