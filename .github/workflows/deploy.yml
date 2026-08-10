@@ -21,4 +21,4 @@ jobs:
           port: ${{ secrets.PORT }}
           debug: true
           script: |
-            /var/www/deploy-pdfwox.sh
+            /home/deploy/deploy-pdfwox.sh
