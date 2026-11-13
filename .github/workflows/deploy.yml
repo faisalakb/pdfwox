@@ -2,23 +2,35 @@ name: Deploy PDFWox to Contabo
 
 "on":
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.repository }}-production
+  cancel-in-progress: false
 
 jobs:
   deploy:
-    name: Deploy on Contabo
+    if: github.ref == 'refs/heads/main'
+    name: Deploy PDFWox on Contabo
     runs-on: ubuntu-latest
-
+    timeout-minutes: 75
     steps:
+      - name: Verify deployment repository
+        env:
+          ACTUAL_REPOSITORY: ${{ github.repository }}
+        run: test "$ACTUAL_REPOSITORY" = 'faisalakb/pdfwox'
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.PORT }}
-          debug: true
+          port: ${{ secrets.PORT || 22 }}
+          script_stop: true
+          command_timeout: 65m
           script: |
-            /home/deploy/deploy-pdfwox.sh
+            bash /home/deploy/deploy-pdfwox.sh '${{ github.repository }}' '${{ github.sha }}'
